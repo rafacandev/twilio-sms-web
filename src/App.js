@@ -7,12 +7,14 @@ import {
   Route
 } from "react-router-dom";
 
+import {AuthenticationProvider} from "./context/AuthenticationProvider";
 import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
 import PhoneNumbersPage from "./component/PhoneNumbersPage/PhoneNumbersPage"
 
 const App = () => {
   return (
     <div className="App">
+      <AuthenticationProvider>
       <Router>
         <Switch>
           <Route exact path="/" component={AuthenticationPage}/>
@@ -20,6 +22,7 @@ const App = () => {
           <Route path="/phone-numbers" component={PhoneNumbersPage}/>
         </Switch>
       </Router>
+      </AuthenticationProvider>
     </div>
   )
 }
