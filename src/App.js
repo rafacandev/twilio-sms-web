@@ -1,11 +1,7 @@
 import './App.css'
 
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
 
 import {AuthenticationProvider} from "./context/AuthenticationProvider";
 import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
@@ -15,13 +11,13 @@ const App = () => {
   return (
     <div className="App">
       <AuthenticationProvider>
-      <Router>
+      <HashRouter>
         <Switch>
           <Route exact path="/" component={AuthenticationPage}/>
           <Route path="/authentication" component={AuthenticationPage}/>
           <Route path="/phone-numbers" component={PhoneNumbersPage}/>
         </Switch>
-      </Router>
+      </HashRouter>
       </AuthenticationProvider>
     </div>
   )
