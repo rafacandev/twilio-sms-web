@@ -2,7 +2,7 @@ import {useHistory} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthenticationProvider";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
 
-const PhoneNumbersPage = () => {
+const MessagesPage = () => {
   const history = useHistory()
   const [authentication] = useAuthentication()
   const navigateToAuthenticationPage = () => history.push('/authentication')
@@ -13,4 +13,4 @@ const PhoneNumbersPage = () => {
   </DefaultLayout>
 }
 
-export default PhoneNumbersPage
+export default MessagesPage

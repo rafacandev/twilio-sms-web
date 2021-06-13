@@ -5,7 +5,7 @@ import {HashRouter, Route, Switch} from "react-router-dom";
 
 import {AuthenticationProvider} from "./context/AuthenticationProvider";
 import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
-import PhoneNumbersPage from "./component/PhoneNumbersPage/PhoneNumbersPage"
+import MessagesPage from "./component/MessagesPage/MessagesPage"
 
 /*
  * Spectre CSS Imports
@@ -23,7 +23,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={AuthenticationPage}/>
             <Route path="/authentication" component={AuthenticationPage}/>
-            <Route path="/phone-numbers" component={PhoneNumbersPage}/>
+            <Route path="/phone-numbers" component={MessagesPage}/>
           </Switch>
         </HashRouter>
       </AuthenticationProvider>
