@@ -23,7 +23,7 @@ const DefaultLayout = ({children}) => {
             <span className="h5">Twilio SMS Web</span>
           </section>
           <section className="navbar-section">
-            <a className="btn btn-link text-light" href="https://github.com/rafasantos/twilio-sms-web" target="_blank">
+            <a className="btn btn-link text-light" href="https://github.com/rafasantos/twilio-sms-web" target="_blank" rel="noreferrer">
               GitHub <GithubOutlined/>
             </a>
           </section>

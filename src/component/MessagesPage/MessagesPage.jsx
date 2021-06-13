@@ -8,7 +8,9 @@ const MessagesPage = () => {
   const navigateToAuthenticationPage = () => history.push('/authentication')
 
   return <DefaultLayout>
-    Phone Numbers using Account SID: {authentication.accountSid} and Auth Token: {authentication.authToken}
+    Account SID: {authentication.accountSid}<br/>
+    Auth Token: {authentication.authToken}<br/>
+    Info: {authentication.accountInfo?.name}<br/>
     <button onClick={navigateToAuthenticationPage}>Authenticate</button>
   </DefaultLayout>
 }

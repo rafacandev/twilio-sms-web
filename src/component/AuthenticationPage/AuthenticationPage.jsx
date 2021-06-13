@@ -4,8 +4,8 @@ import useGetTwilioAccount from "../../hook/useGetTwilioAccount";
 import AuthenticationPageView from "./AuthenticationPageView";
 
 const AuthenticationPage = () => {
-  const [accountInfo, setAccountInfo] = useState({})
   const [authentication, setAuthentication] = useAuthentication()
+  const [accountInfo, setAccountInfo] = useState(authentication.accountInfo)
   const [accountSid, setAccountSid] = useState(authentication.accountSid)
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [loading, setLoading] = useState(false)
@@ -20,6 +20,7 @@ const AuthenticationPage = () => {
       dateUpdated: response.data.date_updated,
     }
     setAccountInfo(info)
+    setAuthentication({accountSid, authToken, accountInfo: info})
   }
 
   const handleGetAccountsComplete = () => {
@@ -33,7 +34,6 @@ const AuthenticationPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     setLoading(true)
-    setAuthentication({accountSid, authToken})
     getTwilioAccount({accountSid, authToken})
   }
 

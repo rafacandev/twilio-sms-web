@@ -13,12 +13,13 @@ const AuthenticationPageView = ({ accountInfo = {},
   const AccountDetails = () => {
     if (Object.keys(accountInfo).length === 0) return null
     return (
-      <div className="flex-centered">
+      <div className="flex-centered" style={{marginTop: '2em'}}>
         <div className="card">
-          <div className="card-header bg-success">
+          <div className="card-header bg-success text-center">
             <h6>Authentication Success</h6>
           </div>
           <div className="card-body">
+            <p className="text-small" style={{marginBottom: '.5em'}}>You are authenticated with the following account:</p>
             <span className="text-bold">Name: </span>{accountInfo.name}<br/>
             <span className="text-bold">Type: </span>{accountInfo.type}<br/>
             <span className="text-bold">Status: </span>{accountInfo.status}<br/>
@@ -51,7 +52,9 @@ const AuthenticationPageView = ({ accountInfo = {},
                  disabled={loading} placeholder="See Twilio console 'Auth Token'"
           />
         </label>
-        <button className={`btn btn-primary m-2 ${loadingClass}`} type="submit">Authenticate</button>
+        <div className="text-center m-2">
+          <button className={`btn btn-primary ${loadingClass}`} type="submit">Authenticate</button>
+        </div>
       </form>
       <AccountDetails/>
     </DefaultLayout>
