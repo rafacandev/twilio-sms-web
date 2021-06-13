@@ -1,7 +1,7 @@
 import {useHistory} from "react-router-dom";
 import {useAuthentication} from "../../context/AuthenticationProvider";
 import {useState} from "react";
-import useGetTwilioAccounts from "../../hook/useGetTwilioAccounts";
+import useGetTwilioAccount from "../../hook/useGetTwilioAccount";
 import ErrorHeader from "../ErrorHeader/ErrorHeader";
 import LoadingHeader from "../LoadingHeader/LoadingHeader";
 
@@ -20,13 +20,12 @@ const AuthenticationPage = () => {
   }
 
   const handleGetAccountsSuccess = (response) => {
-    const account = response.data.accounts.find(element => element.sid === accountSid)
     const info = {
-      name: account.friendly_name,
-      type: account.type,
-      status: account.status,
-      dateCreated: account.date_created,
-      dateUpdated: account.date_updated,
+      name: response.data.friendly_name,
+      type: response.data.type,
+      status: response.data.status,
+      dateCreated: response.data.date_created,
+      dateUpdated: response.data.date_updated,
     }
     setAccountInfo(info)
   }
@@ -43,10 +42,10 @@ const AuthenticationPage = () => {
     event.preventDefault()
     setLoading(true)
     setAuthentication({accountSid, authToken})
-    getTwilioAccounts({accountSid, authToken})
+    getTwilioAccount({accountSid, authToken})
   }
 
-  const getTwilioAccounts = useGetTwilioAccounts({
+  const getTwilioAccount = useGetTwilioAccount({
     onSuccess: handleGetAccountsSuccess,
     onError: handleError,
     onComplete: handleGetAccountsComplete

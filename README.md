@@ -8,7 +8,6 @@ A version of this application is deployed to GitHub Pages:
 
 https://rafasantos.github.io/twilio-sms-web
 
-
 Development
 ===========
 ## Available Scripts

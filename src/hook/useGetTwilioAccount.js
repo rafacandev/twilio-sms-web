@@ -1,11 +1,12 @@
 import axios from "axios";
 
-const useGetTwilioAccounts = ({onSuccess = () => {},
+const useGetTwilioAccount = ({onSuccess = () => {},
                                 onError = () => {},
                                 onComplete = () => {}
                               }) => {
-  const getAccounts = ({accountSid, authToken}) => {
-    axios.get('https://api.twilio.com/2010-04-01/Accounts.json',
+  const getAccount = ({accountSid, authToken}) => {
+    const url = `https://api.twilio.com/2010-04-01/Accounts/${accountSid}.json`
+    axios.get(url,
       {
         auth: { username: accountSid, password: authToken }
       })
@@ -14,7 +15,7 @@ const useGetTwilioAccounts = ({onSuccess = () => {},
       .then(() => onComplete())
   }
 
-  return getAccounts
+  return getAccount
 }
 
-export default useGetTwilioAccounts
+export default useGetTwilioAccount
