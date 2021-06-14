@@ -2,6 +2,7 @@ const style = {
   phoneNumberContainer: {
     display: 'flex',
     justifyContent: 'center',
+    height: '10em',
   },
   phoneNumberLabel: {
     alignItems: 'center',
@@ -10,6 +11,12 @@ const style = {
   },
   phoneNumberSelect: {
     width: '100%',
+  },
+  loadingPhoneNumbers: {
+    display: 'flex',
+    height: '10em',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }
 

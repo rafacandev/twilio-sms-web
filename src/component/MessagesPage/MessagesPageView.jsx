@@ -4,6 +4,7 @@ import style from "./MessagesPageStyle";
 
 const MessagesPageView = ({ error = null,
                             accountName = 'Unknown account',
+                            loadingPhoneNumbers = true,
                             phoneNumbers = []}) => {
 
   const PhoneNumberSelector = () => (
@@ -24,11 +25,20 @@ const MessagesPageView = ({ error = null,
     </div>
   )
 
+  const LoadingPhoneNumbers = () => (
+    <div style={style.loadingPhoneNumbers}>
+      <div>
+        <div className="loading loading-lg"/>
+        <div className="text-center text-small">Loading phone numbers...</div>
+      </div>
+    </div>
+  )
+
   return (
     <DefaultLayout>
       <h4>Messages</h4>
       <ErrorLabel error={error}/>
-      <PhoneNumberSelector/>
+      {loadingPhoneNumbers ? <LoadingPhoneNumbers/> : <PhoneNumberSelector/>}
     </DefaultLayout>
   )
 }
