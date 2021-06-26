@@ -1,0 +1,22 @@
+.message-list-header {
+    display: flex;
+    flex-wrap: wrap;
+}
+.message-list-header div {
+    margin-right: 1em;
+}
+.message-list-panel {
+    margin: .5em 0 .5em 0;
+}
+.message-list-loading-container {
+    margin: 5em 0 0 0;
+}
+.message-list-loading {
+    font-size: 5em;
+}
+.text-code {
+    font-family: source-code-pro, Monaco, Consolas, 'Courier New', monospace;
+}
+.panel {
+    box-shadow: 1px 1px 3px 2px hsla(240, 60%, 50%, 0.06);
+}

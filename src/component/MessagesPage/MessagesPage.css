@@ -1,0 +1,7 @@
+.middle-tabs {
+  display: flex;
+  justify-content: center;
+}
+.middle-tabs-content {
+  min-width: 70%;
+}

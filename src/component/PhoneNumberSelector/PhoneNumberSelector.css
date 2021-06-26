@@ -1,0 +1,20 @@
+.loading-phone-number {
+    font-size: 3em;
+}
+.loading-phone-number-container {
+    height: 10em;
+    padding: 3em;
+}
+.phone-number-container {
+    display: flex;
+    justify-content: center;
+    height: 10em;
+}
+.phone-number-label {
+    align-items: center;
+    display: flex;
+    padding: 0em 1em 0em 0em;
+}
+.phone-number-select {
+    width: 100%;
+}

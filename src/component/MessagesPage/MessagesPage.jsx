@@ -1,41 +1,30 @@
-import {useAuthentication} from "../../context/AuthenticationProvider";
-import useGetTwilioPhoneNumbers from "../../hook/useGetTwilioPhoneNumbers";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import MessagesPageView from "./MessagesPageView";
+import {useAuthentication} from "../../context/AuthenticationProvider";
+import {useHistory} from "react-router-dom";
 
 const MessagesPage = () => {
-  const [authentication] = useAuthentication()
   const [error, setError] = useState(null)
-  const [loadingPhoneNumbers, setLoadingPhoneNumbers] = useState(true)
-  const [phoneNumbers, setPhoneNumbers] = useState([])
+  const [fromPhoneNumber, setFromPhoneNumber] = useState('')
+  const [authentication] = useAuthentication()
+  const history = useHistory()
 
   const handleError = (err) => setError(err)
 
-  const handleGetPhoneNumberComplete = () => setLoadingPhoneNumbers(false)
+  const handlePhoneNumberChange = (v) => setFromPhoneNumber(v)
 
-  const handleGetPhoneNumberSuccess = (response) => {
-    const result = response.data.incoming_phone_numbers
-      .filter(pn => pn.capabilities.sms)
-      .map(pn => pn.phone_number)
-      .sort()
-    setPhoneNumbers(result)
+  // TODO: Move this to a router guard
+  if (!authentication?.accountSid) {
+    history.push('/authentication')
+    return null
   }
 
-  const getPhoneNumbers = useGetTwilioPhoneNumbers({
-    onSuccess: handleGetPhoneNumberSuccess,
-    onError: handleError,
-    onComplete: handleGetPhoneNumberComplete
-  })
-
-  useEffect(() => {
-    getPhoneNumbers()
-  }, [])
-
   return <MessagesPageView
-    accountName={authentication?.accountInfo?.name}
     error={error}
-    phoneNumbers={phoneNumbers}
-    loadingPhoneNumbers={loadingPhoneNumbers}
+    fromPhoneNumber={fromPhoneNumber}
+    loadingPhoneNumbers={fromPhoneNumber.length === 0}
+    onError={handleError}
+    onPhoneNumberChange={handlePhoneNumberChange}
   />
 }
 
