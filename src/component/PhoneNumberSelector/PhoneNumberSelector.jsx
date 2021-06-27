@@ -1,20 +1,12 @@
+import Select from 'react-select'
 import {useEffect, useState} from "react";
-import {LoadingOutlined} from "@ant-design/icons";
 import useGetTwilioPhoneNumbers from "../../hook/useGetTwilioPhoneNumbers";
 import "./PhoneNumberSelector.css"
-
-const Loading = () => <>
-  <div className="text-center loading-phone-number-container">
-    <LoadingOutlined
-      className="text-primary loading-phone-number"/>
-  </div>
-</>
 
 const PhoneNumberSelector = ({ onError = () => {},
                                onComplete = () => {},
                                onPhoneNumberChange = () => {}}) => {
   const [loading, setLoading] = useState(true);
-  const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneNumbers, setPhoneNumbers] = useState([])
 
   const handleOnComplete = () => {
@@ -23,8 +15,7 @@ const PhoneNumberSelector = ({ onError = () => {},
   }
 
   const handleOnChange = (event) => {
-    setPhoneNumber(event.target.value)
-    onPhoneNumberChange(event.target.value)
+    onPhoneNumberChange(event.value)
   }
 
   const handleGetPhoneNumberSuccess = (response) => {
@@ -41,37 +32,32 @@ const PhoneNumberSelector = ({ onError = () => {},
     onComplete: handleOnComplete
   })
 
+  // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
+  const maskPhoneNumber = v => {
+    let result = v.substr(0, 2)
+    result += ' ' + v.substr(2, 3)
+    result += ' ' + v.substr(5, 3)
+    result += ' ' + v.substr(8)
+    return result
+  }
+
+  const phoneNumberOptions = phoneNumbers.map(v => ({value: v, label: maskPhoneNumber(v)}))
+
+  const placeHolderText = loading ? 'Loading phone numbers...' : 'Select (or type) a phone number...'
+
+  // Get available phone number on first render
   useEffect(() => {
     if (phoneNumbers.length === 0) {
       getPhoneNumbers()
     }
   }, [getPhoneNumbers, phoneNumbers])
 
-  const Content = () => <>
-    <div className="phone-number-container">
-      <div className="text-center phone-number-label">
-        Phone numbers:
-      </div>
-      <div className="form-group">
-        <div>
-          <select
-            className="form-select phone-number-select"
-            size="5"
-            value={phoneNumber}
-            onChange={handleOnChange}>
-            <option value="" hidden>Select a phone number</option>
-            {phoneNumbers.map(ph => <option key={ph}>{ph}</option>)}
-          </select>
-          <div className="text-small text-center">Total: {phoneNumbers.length}</div>
-        </div>
-      </div>
-    </div>
-  </>
-
-  return <>
-    {loading && <Loading/>}
-    {!loading && <Content/>}
-  </>
+  return <Select
+      placeholder={placeHolderText}
+      isLoading={loading}
+      options={phoneNumberOptions}
+      onChange={handleOnChange}
+  />
 }
 
 export default PhoneNumberSelector
