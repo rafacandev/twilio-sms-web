@@ -5,13 +5,13 @@ import {useHistory} from "react-router-dom";
 
 const MessagesPage = () => {
   const [error, setError] = useState(null)
-  const [fromPhoneNumber, setFromPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [authentication] = useAuthentication()
   const history = useHistory()
 
   const handleError = (err) => setError(err)
 
-  const handlePhoneNumberChange = (v) => setFromPhoneNumber(v)
+  const handlePhoneNumberChange = (v) => setPhoneNumber(v)
 
   // TODO: Move this to a router guard
   if (!authentication?.accountSid) {
@@ -21,8 +21,8 @@ const MessagesPage = () => {
 
   return <MessagesPageView
     error={error}
-    loadingPhoneNumbers={fromPhoneNumber.length === 0}
-    phoneNumber={fromPhoneNumber}
+    loadingPhoneNumbers={phoneNumber.length === 0}
+    phoneNumber={phoneNumber}
     onError={handleError}
     onPhoneNumberChange={handlePhoneNumberChange}
   />
