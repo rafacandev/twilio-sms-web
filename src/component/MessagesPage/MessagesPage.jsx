@@ -1,5 +1,5 @@
 import {useState} from "react";
-import MessagesPageView, {Tabs} from "./MessagesPageView";
+import {Tabs} from "./MessagesPageView";
 import {useAuthentication} from "../../context/AuthenticationProvider";
 import {useHistory} from "react-router-dom";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
