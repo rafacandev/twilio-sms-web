@@ -19,9 +19,9 @@ const Tabs = () => (
   </div>
 )
 
-const MessagesPageView = ({ fromPhoneNumber = '',
+const MessagesPageView = ({ error = null,
                             loadingPhoneNumbers = true,
-                            error = null,
+                            phoneNumber = '',
                             onError = () => {},
                             onPhoneNumberChange = () =>{}}) => (
   <DefaultLayout>
@@ -29,7 +29,7 @@ const MessagesPageView = ({ fromPhoneNumber = '',
     <ErrorLabel error={error}/>
     <PhoneNumberSelector onError={onError} onPhoneNumberChange={onPhoneNumberChange}/>
     {!loadingPhoneNumbers && <Tabs/>}
-    {!loadingPhoneNumbers && <MessageList fromPhoneNumber={fromPhoneNumber}/>}
+    {!loadingPhoneNumbers && <MessageList phoneNumber={phoneNumber}/>}
   </DefaultLayout>
 )
 

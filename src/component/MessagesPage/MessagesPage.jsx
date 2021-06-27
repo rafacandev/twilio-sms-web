@@ -21,8 +21,8 @@ const MessagesPage = () => {
 
   return <MessagesPageView
     error={error}
-    fromPhoneNumber={fromPhoneNumber}
     loadingPhoneNumbers={fromPhoneNumber.length === 0}
+    phoneNumber={fromPhoneNumber}
     onError={handleError}
     onPhoneNumberChange={handlePhoneNumberChange}
   />

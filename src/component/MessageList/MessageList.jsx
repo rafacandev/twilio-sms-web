@@ -9,7 +9,7 @@ const Loading = () => <>
   </div>
 </>
 
-const MessageList = ({fromPhoneNumber = null, onComplete = () => {}, onError = () => {}}) => {
+const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {}}) => {
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [hasMounted, setHasMounted] = useState(false)
@@ -41,12 +41,12 @@ const MessageList = ({fromPhoneNumber = null, onComplete = () => {}, onError = (
   }, [setHasMounted])
 
   useEffect(() => {
-    if (hasMounted && (fromPhoneNumber?.length > 0 && previousPhoneNumber !== fromPhoneNumber)) {
-      getMessages({from: fromPhoneNumber})
-      setPreviousPhoneNumber(fromPhoneNumber)
+    if (hasMounted && (phoneNumber?.length > 0 && previousPhoneNumber !== phoneNumber)) {
+      getMessages({from: phoneNumber})
+      setPreviousPhoneNumber(phoneNumber)
       setLoading(true)
     }
-  }, [messages, hasMounted, getMessages, previousPhoneNumber, fromPhoneNumber, setLoading])
+  }, [messages, hasMounted, getMessages, previousPhoneNumber, phoneNumber, setLoading])
 
   const MessagePanel = ({message}) => (
     <div className="panel message-list-panel">
