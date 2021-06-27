@@ -1,7 +1,9 @@
 import {useAuthentication} from "../../context/AuthenticationProvider";
 import {useState} from "react";
 import useGetTwilioAccount from "../../hook/useGetTwilioAccount";
-import AuthenticationPageView from "./AuthenticationPageView";
+import {AccountDetails, AuthenticateForm} from "./AuthenticationPageView";
+import DefaultLayout from "../DefaultLayout/DefaultLayout";
+import ErrorLabel from "../ErrorLabel/ErrorLabel";
 
 const AuthenticationPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -43,16 +45,18 @@ const AuthenticationPage = () => {
     onComplete: handleGetAccountsComplete
   })
 
-  return <AuthenticationPageView
-    accountInfo={accountInfo}
-    accountSid={accountSid}
-    authToken={authToken}
-    error={error}
-    loading={loading}
-    onAccountSidChange={v => setAccountSid(v)}
-    onAuthTokenChange={v => setAuthToken(v)}
-    onSubmit={handleSubmit}
-  />
+  return <DefaultLayout>
+    <h4>Authentication</h4>
+    <ErrorLabel error={error}/>
+    <AuthenticateForm
+      accountSid={accountSid}
+      authToken={authToken}
+      loading={loading}
+      onAccountSidChange={v => setAccountSid(v)}
+      onAuthTokenChange={v => setAuthToken(v)}
+      onSubmit={handleSubmit} />
+    <AccountDetails accountInfo={accountInfo}/>
+  </DefaultLayout>
 }
 
 export default AuthenticationPage
