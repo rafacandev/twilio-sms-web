@@ -1,9 +1,13 @@
 import {useState} from "react";
 import "./MessageComposer.css"
 import useSendTwilioMessage from "../../hook/useSendTwilioMessage";
+import SuccessLabel from "../SuccessLabel/SuccessLabel";
+import ErrorLabel from "../ErrorLabel/ErrorLabel";
 
 const MessageComposer = ({phoneNumber = ''}) => {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [isMessageSent, setMessageSent] = useState(false)
   const [to, setTo] = useState('+')
   const [isToPristine, setIsToPristine] = useState(true)
   const [message, setMessage] = useState('')
@@ -11,26 +15,24 @@ const MessageComposer = ({phoneNumber = ''}) => {
   const toValidationPattern = '^\\+\\d{11}'
   const messageValidationPattern = '[\\w\\d]{3,}'
 
-  const handleSendMessageNumberSuccess = (response) => {
-    console.log('success', response)
+  const handleSendMessageSuccess = (response) => {
+    setMessageSent(true)
+    setTimeout(()=> setMessageSent(false), 5000)
   }
 
   const handleError = (err) => {
-    console.log(err)
+    setError(err)
   }
 
   const handleMessageSentComplete = () => {
-    console.log('complete')
     setLoading(false)
   }
 
-
   const sendMessage = useSendTwilioMessage({
-    onSuccess: handleSendMessageNumberSuccess,
+    onSuccess: handleSendMessageSuccess,
     onError: handleError,
     onComplete: handleMessageSentComplete
   })
-
 
   const handleOnSubmit = (event) => {
     event.preventDefault()
@@ -67,6 +69,7 @@ const MessageComposer = ({phoneNumber = ''}) => {
   }
 
   return <div>
+    <ErrorLabel error={error}/>
     <form className="form-group" onSubmit={handleOnSubmit}>
       <fieldset disabled={loading}>
         <label className={`form-label ${isValidTo?'':'has-error'}`}>To:
@@ -97,6 +100,9 @@ const MessageComposer = ({phoneNumber = ''}) => {
         <button className={`message-composer-submit btn btn-primary ${loading ? 'loading' : ''}`} type="submit">Send</button>
       </div>
     </form>
+    <div className="text-center">
+      {isMessageSent && <SuccessLabel text="Message sent successfully."/>}
+    </div>
   </div>
 }
 

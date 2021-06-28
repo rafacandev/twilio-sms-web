@@ -13,8 +13,8 @@ export const Tabs = ({phoneNumber=''}) => {
   const composerTabClass = `tab-item messages-page-tabs-area ${isComposerActive ? 'active' : ''}`
 
   return <>
-    <div className="middle-tabs">
-      <div className="middle-tabs-content">
+    <div className="messages-page-tabs-container">
+      <div className="messages-page-tabs-content">
         <ul className="tab tab-block">
           <li className={messagesTabClass} onClick={handleActivateMessages}>
             Messages
