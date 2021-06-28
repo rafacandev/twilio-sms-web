@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import useGetTwilioMessages from "../../hook/useGetTwilioMessages";
 import "./MessageList.css";
 import {LoadingOutlined} from "@ant-design/icons";
@@ -15,8 +15,8 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
   const [hasMounted, setHasMounted] = useState(false)
   const [previousPhoneNumber, setPreviousPhoneNumber] = useState(null);
 
-  const handleSuccess = (response) => {
-    const messagesMapped = response?.data?.messages
+  const handleSuccess = useCallback((response) => {
+    const messagesMapped = response
       .map(v => ({
         messageSid: v.sid,
         direction: v.direction,
@@ -28,7 +28,7 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
       }))
     setMessages(messagesMapped)
     setLoading(false)
-  }
+  }, [setMessages, setLoading])
 
   const getMessages = useGetTwilioMessages({
     onSuccess: handleSuccess,
@@ -42,11 +42,11 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
 
   useEffect(() => {
     if (hasMounted && (phoneNumber?.length > 0 && previousPhoneNumber !== phoneNumber)) {
-      getMessages({from: phoneNumber})
+      getMessages({phoneNumber: phoneNumber}).then(handleSuccess).catch(onError).then(onComplete)
       setPreviousPhoneNumber(phoneNumber)
       setLoading(true)
     }
-  }, [messages, hasMounted, getMessages, previousPhoneNumber, phoneNumber, setLoading])
+  }, [hasMounted, phoneNumber, previousPhoneNumber, getMessages, messages, handleSuccess, onError, onComplete, setPreviousPhoneNumber, setLoading])
 
   const MessagePanel = ({message}) => (
     <div className="panel message-list-panel">
