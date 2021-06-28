@@ -4,4 +4,17 @@
 }
 .middle-tabs-content {
   min-width: 70%;
+  margin: 1em 0 .5em 0;
+}
+.messages-page-tabs-area {
+  cursor: pointer;
+  border-bottom: solid 2px lightgray;
+}
+.messages-page-tabs-area:hover {
+  cursor: pointer;
+  color: #5755d9;
+}
+.messages-page-tabs-area.active {
+  border-bottom: solid 2px #5755d9;
+  color: #5755d9;
 }
