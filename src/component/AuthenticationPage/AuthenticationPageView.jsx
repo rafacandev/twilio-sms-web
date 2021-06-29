@@ -1,3 +1,5 @@
+import InputField from "../InputField/InputField";
+
 export const AuthenticateForm = ({ accountSid = '',
                                    authToken = '',
                                    loading = true,
@@ -6,20 +8,23 @@ export const AuthenticateForm = ({ accountSid = '',
                                    onSubmit = () => {}}) => (
   <>
     <form onSubmit={onSubmit}>
-      <label className="form-label">Account SID
-        <input className="form-input" type="text" name="AccountSid"
-               value={accountSid}
-               onChange={e => onAccountSidChange(e.target.value)}
-               disabled={loading} placeholder="See Twilio console 'Account SID' "
-        />
-      </label>
-      <label className="form-label">Auth Token
-        <input className="form-input" type="password" name="AuthToken"
-               value={authToken}
-               onChange={e => onAuthTokenChange(e.target.value)}
-               disabled={loading} placeholder="See Twilio console 'Auth Token'"
-        />
-      </label>
+      <InputField
+        type="text"
+        name="AccountSid"
+        label="Account SID"
+        value={accountSid}
+        placeholder="Enter your Twilio 'Account SID' located at your Twilio Console"
+        isEnabled={!loading}
+        onChange={onAccountSidChange}
+      />
+      <InputField
+        type="password"
+        name="AuthToken"
+        placeholder="Enter your Twilio 'Auth Token' located at your Twilio Console"
+        value={authToken}
+        isEnabled={!loading}
+        onChange={onAuthTokenChange}
+      />
       <div className="text-center m-2">
         <button className={`btn btn-primary ${loading ? 'loading' : ''}`} type="submit">Authenticate</button>
       </div>

@@ -1,12 +1,14 @@
 import {useState} from "react";
 
 const InputField = ({ type='text',
+                      name='',
                       value='',
                       placeholder='Placeholder',
                       label='Label',
                       validation=()=>{},
                       invalidHint='Invalid value',
                       isRequired=false,
+                      isEnabled=true,
                       onChange=()=>{}}) => {
   const [isPristine, setPristine] = useState(true);
   const isValid = () => {
@@ -21,10 +23,12 @@ const InputField = ({ type='text',
   return <label className={labelClass}>{label}:{isRequired && <sup className="text-error">&lowast; </sup>}
     <input
       type={type}
+      name={name}
       className="form-input"
       placeholder={placeholder}
       required={isRequired}
       value={value}
+      disabled={!isEnabled}
       onChange={(event) => onChange(event.target.value)}
       onBlur={() => setPristine(false)}/>
     {showInvalid && <span className="form-input-hint">{invalidHint}</span>}
