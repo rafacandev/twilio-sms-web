@@ -3,15 +3,15 @@ import "./MessageComposer.css"
 import useSendTwilioMessage from "../../hook/useSendTwilioMessage";
 import SuccessLabel from "../SuccessLabel/SuccessLabel";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
+import InputField from "../InputField/InputField";
+import TextAreaField from "../TextAreaField/TextAreaField";
 
 const MessageComposer = ({phoneNumber = ''}) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [isMessageSent, setMessageSent] = useState(false)
   const [to, setTo] = useState('+')
-  const [isToPristine, setIsToPristine] = useState(true)
   const [message, setMessage] = useState('')
-  const [isMessagePristine, setIsMessagePristine] = useState(true);
   const toValidationPattern = '^\\+\\d{11}'
   const messageValidationPattern = '[\\w\\d]{3,}'
 
@@ -54,47 +54,34 @@ const MessageComposer = ({phoneNumber = ''}) => {
     }
   }
 
-  const isValidTo = isToPristine || to.match(toValidationPattern)
-  const toHint = () => {
-    if (isToPristine) return 'Enter a phone number'
-    if (isValidTo) return 'Valid phone number'
-    return 'Phone number is invalid. It must contain the country followed by 10 digits'
-  }
-
-  const isValidMessage = isMessagePristine || message.match(messageValidationPattern)
-  const messageHint = () => {
-    if (isMessagePristine) return 'Enter a message'
-    if (isValidMessage) return 'Valid message'
-    return 'Min of 3 characters'
-  }
-
   return <div>
     <ErrorLabel error={error}/>
     <form className="form-group" onSubmit={handleOnSubmit}>
       <fieldset disabled={loading}>
-        <label className={`form-label ${isValidTo?'':'has-error'}`}>To:
-          <input
-            type="tel"
-            className="form-input"
-            placeholder="To phone number"
-            required
-            value={to}
-            onChange={handleToChange}
-            onBlur={() => setIsToPristine(false)}/>
-          <span className="form-input-hint">{toHint()}</span>
-        </label>
-
-        <label className={`form-label ${isValidMessage?'':'has-error'}`}>From: {phoneNumber}
-          <textarea
-            className="form-input"
-            placeholder="Message..."
-            required
-            rows="5"
-            value={message}
-            onChange={handleMessageChange}
-            onBlur={() => setIsMessagePristine(false)}/>
-          <span className="form-input-hint">{messageHint()}</span>
-        </label>
+        <InputField
+          label="To"
+          type='tel'
+          value={to}
+          onChange={handleToChange}
+          validation={v => v.match(toValidationPattern)}
+          placeholder="Enter the recipient's phone number"
+          pristineHint="Enter the recipient's phone number"
+          invalidHint="Phone number is invalid, it must contain the country followed by 10 digits"
+          validHint="Phone number is valid"
+          isRequired={true}
+        />
+        <TextAreaField
+          label="Message"
+          value={message}
+          isRequired={true}
+          placeholder={`Enter the message to sent to: ${to} from: ${phoneNumber}`}
+          pristineHint={`Enter the message to sent to: ${to} from: ${phoneNumber}`}
+          validHint={`This message is going to be sent to: ${to} from: ${phoneNumber}`}
+          invalidHint="Invalid message, it must be between 3 and 200 characters"
+          rows='3'
+          validation={v => v.match(messageValidationPattern)}
+          onChange={handleMessageChange}
+        />
       </fieldset>
       <div className="text-center m-2">
         <button className={`message-composer-submit btn btn-primary ${loading ? 'loading' : ''}`} type="submit">Send</button>
