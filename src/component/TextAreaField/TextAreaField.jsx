@@ -1,21 +1,23 @@
 import {useState} from "react";
 
 const TextAreaField = ({ value='',
-                         label='Label',
-                         pristineHint='Enter a value',
-                         invalidHint='Invalid value',
-                         validHint='',
-                         validation=()=>null,
-                         placeholder='Input placeholder',
-                         isRequired=false,
-                         rows=5,
-                         onChange=()=>{}}) => {
+                      placeholder='Placeholder',
+                      label='Label',
+                      validation=()=>{},
+                      invalidHint='Invalid value',
+                      isRequired=false,
+                      rows = 3,
+                      onChange=()=>{}}) => {
   const [isPristine, setPristine] = useState(true);
-  const validationValue = validation(value)
-  const isValid = validationValue === null ? false : validationValue
-  const labelClass = `form-label ${ isPristine || isValid ? '' : 'has-error'}`
-  const showInvalid = !isPristine && !isValid
-  const showValid = !isPristine && isValid
+  const isValid = () => {
+    try {
+      return validation(value) !== null
+    } catch (err) {
+      return false
+    }
+  }
+  const labelClass = `form-label ${ isPristine || isValid() ? '' : 'has-error'}`
+  const showInvalid = !isPristine && !isValid()
   return <label className={labelClass}>{label}:{isRequired && <sup className="text-error">&lowast; </sup>}
     <textarea
       className="form-input"
@@ -23,12 +25,11 @@ const TextAreaField = ({ value='',
       required={isRequired}
       value={value}
       rows={rows}
-      onChange={onChange}
+      onChange={(event) => onChange(event.target.value)}
       onBlur={() => setPristine(false)}>
     </textarea>
-    {showValid && <span className="form-input-hint">{validHint}</span>}
     {showInvalid && <span className="form-input-hint">{invalidHint}</span>}
-    {isPristine && <span className="form-input-hint">{pristineHint}</span>}
+    {!showInvalid && <span className="form-input-hint">{placeholder}</span>}
   </label>
 }
 

@@ -49,8 +49,7 @@ const MessageComposer = ({phoneNumber = ''}) => {
     }
   }
 
-  const handleMessageChange = (event) => {
-    const v = event.target.value
+  const handleMessageChange = (v) => {
     if (v.length < 200) {
       setMessage(v)
     }
@@ -88,7 +87,6 @@ const MessageComposer = ({phoneNumber = ''}) => {
     </form>
     <div className="text-center">
       {isMessageSent && <SuccessLabel text="Message sent successfully."/>}
-      to:{to}
     </div>
   </div>
 }

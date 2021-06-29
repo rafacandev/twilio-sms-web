@@ -1,12 +1,12 @@
 import {useState} from "react";
 
-const InputField = ({ value='',
-                      placeholder='Input placeholder',
+const InputField = ({ type='text',
+                      value='',
+                      placeholder='Placeholder',
                       label='Label',
-                      validation=()=>null,
+                      validation=()=>{},
                       invalidHint='Invalid value',
                       isRequired=false,
-                      type='text',
                       onChange=()=>{}}) => {
   const [isPristine, setPristine] = useState(true);
   const isValid = () => {
