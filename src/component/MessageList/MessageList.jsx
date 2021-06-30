@@ -1,13 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
 import useGetTwilioMessages from "../../hook/useGetTwilioMessages";
 import "./MessageList.css";
-import {LoadingOutlined} from "@ant-design/icons";
-
-const Loading = () => <>
-  <div className="text-center message-list-loading-container">
-    <LoadingOutlined className="message-list-loading text-primary" />
-  </div>
-</>
+import {Loading, MessagePanel} from "./MessageListView";
 
 const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {}}) => {
   const [loading, setLoading] = useState(true)
@@ -47,25 +41,6 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
       setLoading(true)
     }
   }, [hasMounted, phoneNumber, previousPhoneNumber, getMessages, messages, handleSuccess, onError, onComplete, setPreviousPhoneNumber, setLoading])
-
-  const MessagePanel = ({message}) => (
-    <div className="panel message-list-panel">
-      <div className="panel-header text-small">
-        <div className="message-list-header">
-          <div><strong>from:</strong> {message.from}</div>
-          <div><strong>To:</strong> {message.to}</div>
-          <div><strong>Direction:</strong> {message.direction}</div>
-          <div><strong>Status:</strong> {message.status}</div>
-        </div>
-      </div>
-      <div className="panel-body text-code">
-        {message.body}
-      </div>
-      <div className="panel-footer text-small text-gray">
-        Date: {new Date(message.date)?.toLocaleString()}
-      </div>
-    </div>
-  )
 
   if (loading) return <Loading/>
 

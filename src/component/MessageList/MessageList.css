@@ -1,22 +1,38 @@
-.message-list-header {
-    display: flex;
-    flex-wrap: wrap;
-}
-.message-list-header div {
-    margin-right: 1em;
-}
-.message-list-panel {
-    margin: .5em 0 .5em 0;
-}
 .message-list-loading-container {
     margin: 5em 0 0 0;
 }
 .message-list-loading {
     font-size: 5em;
 }
-.text-code {
-    font-family: source-code-pro, Monaco, Consolas, 'Courier New', monospace;
-}
-.panel {
+.message-list-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: .5em 0 .5em 0;
     box-shadow: 1px 1px 3px 2px hsla(240, 60%, 50%, 0.06);
+    border: solid lightgrey 1px;
+}
+.message-list-card-label {
+    align-self: stretch;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 0 0;
+    min-width: 1.5em;
+    color: white;
+}
+.message-list-card-label.inbound {
+    background-color: #b83285;
+}
+.message-list-card-label.outbound {
+    background-color: #5755d9;
+}
+.message-list-card-header {
+    padding: .5em 0 0 0;
+}
+.message-list-card-header spam {
+    padding: 0 1em 0 1em;
+}
+.message-list-card-body {
+    padding: 1em 1em 1em 1em;
 }
