@@ -1,3 +1,9 @@
+@media only screen and (max-width: 840px) {
+    .message-list-card-header spam {
+        display: block;
+    }
+}
+
 .message-list-loading-container {
     margin: 5em 0 0 0;
 }
@@ -29,10 +35,19 @@
 }
 .message-list-card-header {
     padding: .5em 0 0 0;
+    color: grey;
 }
-.message-list-card-header spam {
+.message-list-card-header span {
+    display: inline-block;
     padding: 0 1em 0 1em;
 }
 .message-list-card-body {
     padding: 1em 1em 1em 1em;
+}
+.message-list-card-header-status {
+    width: 11em;
+}
+.message-list-card-footer {
+    padding: 0 1em .5em 1em;
+    color: grey;
 }
