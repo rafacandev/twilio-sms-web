@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/twilio-sms-web/static/css/main.329e87c6.chunk.css",
-    "main.js": "/twilio-sms-web/static/js/main.5bf772e2.chunk.js",
-    "main.js.map": "/twilio-sms-web/static/js/main.5bf772e2.chunk.js.map",
-    "runtime-main.js": "/twilio-sms-web/static/js/runtime-main.b2151bc9.js",
-    "runtime-main.js.map": "/twilio-sms-web/static/js/runtime-main.b2151bc9.js.map",
+    "main.css": "/twilio-sms-web/static/css/main.71a1be87.chunk.css",
+    "main.js": "/twilio-sms-web/static/js/main.5ea4b1a9.chunk.js",
+    "main.js.map": "/twilio-sms-web/static/js/main.5ea4b1a9.chunk.js.map",
+    "runtime-main.js": "/twilio-sms-web/static/js/runtime-main.477b57a2.js",
+    "runtime-main.js.map": "/twilio-sms-web/static/js/runtime-main.477b57a2.js.map",
     "static/css/2.f1982013.chunk.css": "/twilio-sms-web/static/css/2.f1982013.chunk.css",
-    "static/js/2.4ebb6dc9.chunk.js": "/twilio-sms-web/static/js/2.4ebb6dc9.chunk.js",
-    "static/js/2.4ebb6dc9.chunk.js.map": "/twilio-sms-web/static/js/2.4ebb6dc9.chunk.js.map",
-    "static/js/3.03a7e3dc.chunk.js": "/twilio-sms-web/static/js/3.03a7e3dc.chunk.js",
-    "static/js/3.03a7e3dc.chunk.js.map": "/twilio-sms-web/static/js/3.03a7e3dc.chunk.js.map",
+    "static/js/2.0b16c41d.chunk.js": "/twilio-sms-web/static/js/2.0b16c41d.chunk.js",
+    "static/js/2.0b16c41d.chunk.js.map": "/twilio-sms-web/static/js/2.0b16c41d.chunk.js.map",
+    "static/js/3.915c22d9.chunk.js": "/twilio-sms-web/static/js/3.915c22d9.chunk.js",
+    "static/js/3.915c22d9.chunk.js.map": "/twilio-sms-web/static/js/3.915c22d9.chunk.js.map",
     "index.html": "/twilio-sms-web/index.html",
     "static/css/2.f1982013.chunk.css.map": "/twilio-sms-web/static/css/2.f1982013.chunk.css.map",
-    "static/css/main.329e87c6.chunk.css.map": "/twilio-sms-web/static/css/main.329e87c6.chunk.css.map",
-    "static/js/2.4ebb6dc9.chunk.js.LICENSE.txt": "/twilio-sms-web/static/js/2.4ebb6dc9.chunk.js.LICENSE.txt"
+    "static/css/main.71a1be87.chunk.css.map": "/twilio-sms-web/static/css/main.71a1be87.chunk.css.map",
+    "static/js/2.0b16c41d.chunk.js.LICENSE.txt": "/twilio-sms-web/static/js/2.0b16c41d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b2151bc9.js",
+    "static/js/runtime-main.477b57a2.js",
     "static/css/2.f1982013.chunk.css",
-    "static/js/2.4ebb6dc9.chunk.js",
-    "static/css/main.329e87c6.chunk.css",
-    "static/js/main.5bf772e2.chunk.js"
+    "static/js/2.0b16c41d.chunk.js",
+    "static/css/main.71a1be87.chunk.css",
+    "static/js/main.5ea4b1a9.chunk.js"
   ]
 }
