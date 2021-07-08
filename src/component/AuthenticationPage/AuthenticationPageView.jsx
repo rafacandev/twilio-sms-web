@@ -20,7 +20,8 @@ export const AuthenticateForm = ({ accountSid = '',
       <InputField
         type="password"
         name="AuthToken"
-        placeholder="Enter your Twilio 'Auth Token' located at your Twilio Console"
+        label="Auth Token"
+        placeholder="Enter your Twilio 'Auth Token' located in your Twilio Console"
         value={authToken}
         isEnabled={!loading}
         onChange={onAuthTokenChange}
