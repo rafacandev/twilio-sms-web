@@ -22,7 +22,7 @@ const MessagesPage = () => {
 
   const handlePhoneNumberChange = (v) => setPhoneNumber(v)
 
-  const isPhoneNumberSelected = phoneNumber.length === 12
+  const isPhoneNumberSelected = phoneNumber.length === 14
 
   return <DefaultLayout>
     <h4>Messages</h4>
