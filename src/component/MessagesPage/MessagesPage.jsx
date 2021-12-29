@@ -6,9 +6,11 @@ import DefaultLayout from "../DefaultLayout/DefaultLayout";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
 import PhoneNumberSelector from "../PhoneNumberSelector/PhoneNumberSelector";
 
+const EMPTY_PHONE_NUMBER = ''
+
 const MessagesPage = () => {
   const [error, setError] = useState(null)
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState(EMPTY_PHONE_NUMBER)
   const [authentication] = useAuthentication()
   const history = useHistory()
 
@@ -22,7 +24,7 @@ const MessagesPage = () => {
 
   const handlePhoneNumberChange = (v) => setPhoneNumber(v)
 
-  const isPhoneNumberSelected = phoneNumber.length === 12
+  const isPhoneNumberSelected = phoneNumber !== EMPTY_PHONE_NUMBER
 
   return <DefaultLayout>
     <h4>Messages</h4>
