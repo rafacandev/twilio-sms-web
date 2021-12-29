@@ -1,13 +1,13 @@
 import {useCallback, useEffect, useState} from "react";
 import useGetTwilioMessages from "../../hook/useGetTwilioMessages";
-import "./MessageList.css";
-import {Loading, MessagePanel} from "./MessageListView";
+import {Loading} from "./MessageListView";
+import MessageCard from "../MessageCard/MessageCard";
 
 const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {}}) => {
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [hasMounted, setHasMounted] = useState(false)
-  const [previousPhoneNumber, setPreviousPhoneNumber] = useState(null);
+  const [previousPhoneNumber, setPreviousPhoneNumber] = useState(null)
 
   const handleSuccess = useCallback((response) => {
     const messagesMapped = response
@@ -44,7 +44,17 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
 
   if (loading) return <Loading/>
 
-  return messages.map(v => <MessagePanel key={v.messageSid}  message={v}/> )
+  return messages.map(v =>
+    <MessageCard
+      key={v.messageSid}
+      messageSid={v.messageSid}
+      from={v.from}
+      to={v.to}
+      body={v.body}
+      direction={v.direction}
+      status={v.status}
+      date={v.date}
+    />)
 }
 
 export default MessageList
