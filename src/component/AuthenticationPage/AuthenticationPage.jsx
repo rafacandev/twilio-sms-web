@@ -1,6 +1,6 @@
 import {useAuthentication} from "../../context/AuthenticationProvider";
 import {useState} from "react";
-import useGetTwilioAccount from "../../hook/useGetTwilioAccount";
+import useGetTwilioAccount, {AccountInfo} from "../../hook/useGetTwilioAccount";
 import {AccountDetails, AuthenticateForm} from "./AuthenticationPageView";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
@@ -14,13 +14,13 @@ const AuthenticationPage = () => {
   const [error, setError] = useState(null)
 
   const handleGetAccountsSuccess = (response) => {
-    const info = {
-      name: response.data.friendly_name,
-      type: response.data.type,
-      status: response.data.status,
-      dateCreated: response.data.date_created,
-      dateUpdated: response.data.date_updated,
-    }
+    const info = new AccountInfo(
+      response.data.friendly_name,
+      response.data.type,
+      response.data.status,
+      response.data.date_created,
+      response.data.date_updated,
+    )
     setAccountInfo(info)
     setAuthentication({accountSid, authToken})
   }
