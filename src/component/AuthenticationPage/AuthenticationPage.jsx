@@ -1,5 +1,5 @@
-import {useAuthentication} from "../../context/AuthenticationProvider";
-import {useState} from "react";
+import {Authentication, AuthenticationType, useAuthentication} from "../../context/AuthenticationProvider";
+import {useRef, useState} from "react";
 import useGetTwilioAccount, {AccountInfo} from "../../hook/useGetTwilioAccount";
 import {AccountDetails, AuthenticateForm} from "./AuthenticationPageView";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
@@ -7,9 +7,12 @@ import ErrorLabel from "../ErrorLabel/ErrorLabel";
 
 const AuthenticationPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
+  const authenticationRef = useRef(new Authentication())
   const [accountInfo, setAccountInfo] = useState(authentication.accountInfo)
   const [accountSid, setAccountSid] = useState(authentication.accountSid)
   const [authToken, setAuthToken] = useState(authentication.authToken)
+  const [apiKey, setApiKey] = useState(authentication.apiKey)
+  const [apiSecret, setApiSecret] = useState(authentication.apiSecret)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -22,11 +25,11 @@ const AuthenticationPage = () => {
       response.data.date_updated,
     )
     setAccountInfo(info)
-    setAuthentication({accountSid, authToken})
   }
 
   const handleGetAccountsComplete = () => {
     setLoading(false)
+    setAuthentication({...authenticationRef.current})
   }
 
   const handleError = (err) => {
@@ -34,8 +37,8 @@ const AuthenticationPage = () => {
     setLoading(false)
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = (type = AuthenticationType.NONE) => {
+    authenticationRef.current = (new Authentication(accountSid, authToken, apiKey, apiSecret, type))
     setLoading(true)
     getTwilioAccount({accountSid, authToken})
   }
@@ -52,9 +55,13 @@ const AuthenticationPage = () => {
     <AuthenticateForm
       accountSid={accountSid}
       authToken={authToken}
+      apiKey={apiKey}
+      apiSecret={apiSecret}
       loading={loading}
       onAccountSidChange={v => setAccountSid(v)}
       onAuthTokenChange={v => setAuthToken(v)}
+      onApiKeyChange={v => setApiKey(v)}
+      onApiSecretChange={v => setApiSecret(v)}
       onSubmit={handleSubmit} />
     <AccountDetails accountInfo={accountInfo}/>
   </DefaultLayout>
