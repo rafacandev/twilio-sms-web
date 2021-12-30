@@ -22,7 +22,7 @@ const AuthenticationPage = () => {
       dateUpdated: response.data.date_updated,
     }
     setAccountInfo(info)
-    setAuthentication({accountSid, authToken, accountInfo: info})
+    setAuthentication({accountSid, authToken})
   }
 
   const handleGetAccountsComplete = () => {
@@ -31,6 +31,7 @@ const AuthenticationPage = () => {
 
   const handleError = (err) => {
     setError(err)
+    setLoading(false)
   }
 
   const handleSubmit = (event) => {
