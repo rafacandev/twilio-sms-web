@@ -38,9 +38,10 @@ const AuthenticationPage = () => {
   }
 
   const handleSubmit = (type = AuthenticationType.NONE) => {
-    authenticationRef.current = (new Authentication(accountSid, authToken, apiKey, apiSecret, type))
+    const auth = new Authentication(accountSid, authToken, apiKey, apiSecret, type)
+    authenticationRef.current = auth
     setLoading(true)
-    getTwilioAccount({accountSid, authToken})
+    getTwilioAccount(auth)
   }
 
   const getTwilioAccount = useGetTwilioAccount({

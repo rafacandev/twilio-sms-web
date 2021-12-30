@@ -34,6 +34,20 @@ export class Authentication {
   }
 }
 
+/**
+ * @param {Authentication} authentication
+ */
+export const toCredentials = (authentication) => {
+  switch (authentication.type) {
+    case AuthenticationType.API_KEY:
+      return {username: authentication.apiKey, password: authentication.apiSecret}
+    case AuthenticationType.AUTH_TOKEN:
+      return {username: authentication.accountSid, password: authentication.authToken}
+    default:
+      return {username: '', password: ''}
+  }
+}
+
 const AuthenticationReadContext = React.createContext({})
 const AuthenticationWriteContext = React.createContext(p => {})
 
