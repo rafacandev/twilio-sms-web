@@ -11,9 +11,10 @@ const toDateString = (date) => {
   return `${d.toDateString()} ${d.toLocaleTimeString()}`
 }
 
-const copyToClipboard = (s) => {
-  navigator.clipboard.writeText(s).then(() => console.log('msg copied')).catch(() => console.log('meh'))
-}
+const copyToClipboard = (s) =>
+  navigator.clipboard.writeText(s)
+    .then(() => console.log('Text copied', s))
+    .catch(() => console.log('Unable to copy to clipboard'))
 
 const CopyToClipboard = ({txt}) => <>
   <div className="tooltip message-card-copy-btn" data-tooltip="Copy to clipboard" onClick={() => copyToClipboard(txt)}>

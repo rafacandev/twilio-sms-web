@@ -28,7 +28,6 @@ const useGetTwilioAccount = ({onSuccess=()=>{}, onError=()=>{}, onComplete=()=>{
    */
   const getAccount = (authentication) => {
     const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}.json`
-    console.log(authentication, toCredentials(authentication))
     axios.get(url,
       {
         auth: toCredentials(authentication)

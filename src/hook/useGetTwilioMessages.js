@@ -16,7 +16,7 @@ const useGetTwilioMessages = () => {
         })
       const toResult = await axios.get(url,
         {
-          auth: { username: authentication.accountSid, password: authentication.authToken },
+          auth: credentials,
           params: {To: phoneNumber}
         })
       result = result
