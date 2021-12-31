@@ -1,0 +1,22 @@
+.authentication-method-card-header {
+  margin: 0 0 2em 0;
+}
+
+.authentication-method-card-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: silver;
+}
+
+.authentication-method-card-divider hr {
+  width: 10em;
+  border-top: 1px solid silver;
+  border-bottom: 0;
+  margin: 0 .5em 0 .5em;
+}
+
+.authentication-method-card-method-btn {
+  width: 15em;
+  margin: 1em 0 1em 0;
+}

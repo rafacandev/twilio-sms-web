@@ -3,6 +3,7 @@ import {useState} from "react";
 const InputField = ({ type='text',
                       name='',
                       value='',
+                      autoComplete = '',
                       placeholder='Placeholder',
                       label='Label',
                       validation=()=>{},
@@ -28,6 +29,7 @@ const InputField = ({ type='text',
       placeholder={placeholder}
       required={isRequired}
       value={value}
+      autoComplete={autoComplete}
       disabled={!isEnabled}
       onChange={(event) => onChange(event.target.value)}
       onBlur={() => setPristine(false)}/>

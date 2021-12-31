@@ -13,6 +13,7 @@ const AuthenticationPage = () => {
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [apiKey, setApiKey] = useState(authentication.apiKey)
   const [apiSecret, setApiSecret] = useState(authentication.apiSecret)
+  const [authType, setAuthType] = useState(AuthenticationType.NONE)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -41,6 +42,7 @@ const AuthenticationPage = () => {
     const auth = new Authentication(accountSid, authToken, apiKey, apiSecret, type)
     authenticationRef.current = auth
     setLoading(true)
+    setAuthentication({...authenticationRef.current})
     getTwilioAccount(auth)
   }
 
@@ -58,11 +60,13 @@ const AuthenticationPage = () => {
       authToken={authToken}
       apiKey={apiKey}
       apiSecret={apiSecret}
+      authType={authType}
       loading={loading}
       onAccountSidChange={v => setAccountSid(v)}
       onAuthTokenChange={v => setAuthToken(v)}
       onApiKeyChange={v => setApiKey(v)}
       onApiSecretChange={v => setApiSecret(v)}
+      onAuthTypeChange={v => setAuthType(v)}
       onSubmit={handleSubmit} />
     <AccountDetails accountInfo={accountInfo}/>
   </DefaultLayout>
