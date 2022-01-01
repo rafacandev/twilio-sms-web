@@ -1,5 +1,5 @@
 import {Authentication, AuthenticationMethod, useAuthentication} from "../../context/AuthenticationProvider";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import useGetTwilioAccount, {AccountInfo} from "../../hook/useGetTwilioAccount";
 import {AuthenticateForm} from "./AuthenticationPageView";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
@@ -8,7 +8,6 @@ import AccountDetails from "../AccountDetailsCard/AccountDetailsCardView";
 
 const AuthenticationPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
-  const authenticationRef = useRef(new Authentication())
   const [accountInfo, setAccountInfo] = useState(authentication.accountInfo)
   const [accountSid, setAccountSid] = useState(authentication.accountSid)
   const [authToken, setAuthToken] = useState(authentication.authToken)
@@ -31,7 +30,6 @@ const AuthenticationPage = () => {
 
   const handleGetAccountsComplete = () => {
     setLoading(false)
-    setAuthentication({...authenticationRef.current})
   }
 
   const handleError = (err) => {
@@ -41,15 +39,14 @@ const AuthenticationPage = () => {
 
   const handleSignIn = (type = AuthenticationMethod.NONE) => {
     const auth = new Authentication(accountSid, authToken, apiKey, apiSecret, type)
-    authenticationRef.current = auth
     setLoading(true)
-    setAuthentication({...authenticationRef.current})
+    setAuthentication(auth)
     getTwilioAccount(auth)
   }
 
   const getTwilioAccount = useGetTwilioAccount({
-    onSuccess: handleGetAccountsSuccess,
     onError: handleError,
+    onSuccess: handleGetAccountsSuccess,
     onComplete: handleGetAccountsComplete
   })
 
@@ -63,11 +60,11 @@ const AuthenticationPage = () => {
       apiSecret={apiSecret}
       authMethod={authMethod}
       loading={loading}
-      onAccountSidChange={v => setAccountSid(v)}
-      onAuthTokenChange={v => setAuthToken(v)}
-      onApiKeyChange={v => setApiKey(v)}
-      onApiSecretChange={v => setApiSecret(v)}
-      onAuthTypeChange={v => setAuthMethod(v)}
+      onAccountSidChange={setAccountSid}
+      onAuthTokenChange={setAuthToken}
+      onApiKeyChange={setApiKey}
+      onApiSecretChange={setApiSecret}
+      onAuthTypeChange={setAuthMethod}
       onSignIn={handleSignIn}/>
     <AccountDetails accountInfo={accountInfo}/>
   </DefaultLayout>

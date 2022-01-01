@@ -2,7 +2,10 @@ import InputField from "../InputField/InputField";
 
 const AuthenticationTokenForm = ({ accountSid='', authToken='', loading=false,
                          onAccountSidChange=()=>{}, onAuthTokenChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form onSubmit={onSignIn}>
+  <form onSubmit={e => {
+    e.preventDefault()
+    onSignIn()
+  }}>
     <InputField
       type="text"
       name="AccountSid"

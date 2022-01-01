@@ -2,7 +2,10 @@ import InputField from "../InputField/InputField";
 
 const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
                       onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form onSubmit={onSignIn}>
+  <form onSubmit={e => {
+    e.preventDefault()
+    onSignIn()
+  }}>
     <InputField
       type="text"
       name="AccountSid"
