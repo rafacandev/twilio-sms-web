@@ -1,9 +1,10 @@
 import {Authentication, AuthenticationMethod, useAuthentication} from "../../context/AuthenticationProvider";
 import {useRef, useState} from "react";
 import useGetTwilioAccount, {AccountInfo} from "../../hook/useGetTwilioAccount";
-import {AccountDetails, AuthenticateForm} from "./AuthenticationPageView";
+import {AuthenticateForm} from "./AuthenticationPageView";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
+import AccountDetails from "../AccountDetailsCard/AccountDetailsCardView";
 
 const AuthenticationPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -13,7 +14,7 @@ const AuthenticationPage = () => {
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [apiKey, setApiKey] = useState(authentication.apiKey)
   const [apiSecret, setApiSecret] = useState(authentication.apiSecret)
-  const [authType, setAuthType] = useState(AuthenticationMethod.NONE)
+  const [authMethod, setAuthMethod] = useState(AuthenticationMethod.NONE)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -38,7 +39,7 @@ const AuthenticationPage = () => {
     setLoading(false)
   }
 
-  const handleSubmit = (type = AuthenticationMethod.NONE) => {
+  const handleSignIn = (type = AuthenticationMethod.NONE) => {
     const auth = new Authentication(accountSid, authToken, apiKey, apiSecret, type)
     authenticationRef.current = auth
     setLoading(true)
@@ -60,14 +61,14 @@ const AuthenticationPage = () => {
       authToken={authToken}
       apiKey={apiKey}
       apiSecret={apiSecret}
-      authType={authType}
+      authMethod={authMethod}
       loading={loading}
       onAccountSidChange={v => setAccountSid(v)}
       onAuthTokenChange={v => setAuthToken(v)}
       onApiKeyChange={v => setApiKey(v)}
       onApiSecretChange={v => setApiSecret(v)}
-      onAuthTypeChange={v => setAuthType(v)}
-      onSubmit={handleSubmit} />
+      onAuthTypeChange={v => setAuthMethod(v)}
+      onSignIn={handleSignIn}/>
     <AccountDetails accountInfo={accountInfo}/>
   </DefaultLayout>
 }
