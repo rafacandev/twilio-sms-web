@@ -16,3 +16,13 @@ code {
 .text-code {
   font-family: source-code-pro, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.buttons-container {
+  display: flex;
+  justify-content: right;
+}
+
+.buttons-container button {
+  margin-left: 1.5em;
+  min-width: 8em;
+}

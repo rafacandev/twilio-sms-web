@@ -42,7 +42,7 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
     }
   }, [hasMounted, phoneNumber, previousPhoneNumber, getMessages, messages, handleSuccess, onError, onComplete, setPreviousPhoneNumber, setLoading])
 
-  if (loading) return <Loading/>
+  if (loading) return <Loading className="h1 m-2"/>
 
   return messages.map(v =>
     <MessageCard

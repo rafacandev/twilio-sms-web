@@ -3,38 +3,7 @@ import {AuthenticationMethod} from "../../context/AuthenticationProvider";
 import {AccountInfo} from "../../hook/useGetTwilioAccount";
 import './AuthenticationPage.css'
 import AuthenticationMethodCard from "../AuthenticationMethodCard/AuthenticationMethodCard";
-
-const AuthTokenForm = ({ accountSid='', authToken='', loading=false,
-                         onAccountSidChange=()=>{}, onAuthTokenChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form onSubmit={onSignIn}>
-    <InputField
-      type="text"
-      name="AccountSid"
-      label="Account SID"
-      value={accountSid}
-      autoComplete="account-sid"
-      placeholder="Account SID located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onAccountSidChange}
-    />
-    <InputField
-      type="password"
-      name="AuthToken"
-      label="Auth Token"
-      value={authToken}
-      autoComplete="auth-token"
-      placeholder="Auth Token located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onAuthTokenChange}
-    />
-    <div className="buttons-container">
-      <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" type="submit">Sing-in</button>
-    </div>
-  </form>
-)
+import AuthenticationTokenForm from "../AuthenticationAuthTokenForm/AuthenticationAuthTokenFormView";
 
 const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
                       onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
@@ -97,7 +66,7 @@ export const AuthenticateForm = ({ accountSid = '',
     }
 
     {authType === AuthenticationMethod.AUTH_TOKEN &&
-      <AuthTokenForm
+      <AuthenticationTokenForm
         accountSid={accountSid}
         authToken={authToken}
         loading={loading}

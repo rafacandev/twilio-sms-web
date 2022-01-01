@@ -5,13 +5,3 @@
 .authentication-page-vertical-divider {
   margin: 0 2em 0 2em;
 }
-
-.buttons-container {
-  display: flex;
-  justify-content: right;
-}
-
-.buttons-container button {
-  margin-left: 1.5em;
-  min-width: 8em;
-}
