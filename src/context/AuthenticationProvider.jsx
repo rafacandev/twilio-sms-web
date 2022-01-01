@@ -4,7 +4,7 @@ import React, {useContext, useState} from "react";
  * Types of authentication
  * @enum {string}
  */
-export const AuthenticationType = {
+export const AuthenticationMethod = {
   AUTH_TOKEN: 'auth-token',
   API_KEY: 'api-key',
   NONE: ''
@@ -19,13 +19,13 @@ export class Authentication {
    * @param {string} authToken
    * @param {string} apiKey
    * @param {string} apiSecret
-   * @param {AuthenticationType} type
+   * @param {AuthenticationMethod} type
    */
   constructor(accountSid='',
               authToken='',
               apiKey='',
               apiSecret='',
-              type= AuthenticationType.NONE) {
+              type= AuthenticationMethod.NONE) {
     this.accountSid = accountSid
     this.authToken = authToken
     this.apiKey = apiKey
@@ -39,9 +39,9 @@ export class Authentication {
  */
 export const toCredentials = (authentication) => {
   switch (authentication.type) {
-    case AuthenticationType.API_KEY:
+    case AuthenticationMethod.API_KEY:
       return {username: authentication.apiKey, password: authentication.apiSecret}
-    case AuthenticationType.AUTH_TOKEN:
+    case AuthenticationMethod.AUTH_TOKEN:
       return {username: authentication.accountSid, password: authentication.authToken}
     default:
       return {username: '', password: ''}

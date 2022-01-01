@@ -1,4 +1,4 @@
-import {Authentication, AuthenticationType, useAuthentication} from "../../context/AuthenticationProvider";
+import {Authentication, AuthenticationMethod, useAuthentication} from "../../context/AuthenticationProvider";
 import {useRef, useState} from "react";
 import useGetTwilioAccount, {AccountInfo} from "../../hook/useGetTwilioAccount";
 import {AccountDetails, AuthenticateForm} from "./AuthenticationPageView";
@@ -13,7 +13,7 @@ const AuthenticationPage = () => {
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [apiKey, setApiKey] = useState(authentication.apiKey)
   const [apiSecret, setApiSecret] = useState(authentication.apiSecret)
-  const [authType, setAuthType] = useState(AuthenticationType.NONE)
+  const [authType, setAuthType] = useState(AuthenticationMethod.NONE)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -38,7 +38,7 @@ const AuthenticationPage = () => {
     setLoading(false)
   }
 
-  const handleSubmit = (type = AuthenticationType.NONE) => {
+  const handleSubmit = (type = AuthenticationMethod.NONE) => {
     const auth = new Authentication(accountSid, authToken, apiKey, apiSecret, type)
     authenticationRef.current = auth
     setLoading(true)

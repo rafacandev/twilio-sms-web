@@ -1,12 +1,12 @@
 import InputField from "../InputField/InputField";
-import {AuthenticationType} from "../../context/AuthenticationProvider";
+import {AuthenticationMethod} from "../../context/AuthenticationProvider";
 import {AccountInfo} from "../../hook/useGetTwilioAccount";
 import './AuthenticationPage.css'
 import AuthenticationMethodCard from "../AuthenticationMethodCard/AuthenticationMethodCard";
 
 const AuthTokenForm = ({ accountSid='', authToken='', loading=false,
                          onAccountSidChange=()=>{}, onAuthTokenChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form>
+  <form onSubmit={onSignIn}>
     <InputField
       type="text"
       name="AccountSid"
@@ -31,20 +31,20 @@ const AuthTokenForm = ({ accountSid='', authToken='', loading=false,
     />
     <div className="buttons-container">
       <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" type="button" onClick={onSignIn}>Sing-in</button>
+      <button className="btn btn-primary" type="submit">Sing-in</button>
     </div>
   </form>
 )
 
 const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
                       onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form>
+  <form onSubmit={onSignIn}>
     <InputField
       type="text"
       name="AccountSid"
       label="Account SID"
-      autoComplete="account-sid"
       value={accountSid}
+      autoComplete="account-sid"
       placeholder="Account SID located at your Twilio Console"
       isRequired={true}
       isEnabled={!loading}
@@ -57,22 +57,24 @@ const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
       value={apiKey}
       autoComplete="api-key"
       placeholder="API Key located at your Twilio Console"
+      isRequired={true}
       isEnabled={!loading}
       onChange={onApiKeyChange}
     />
     <InputField
       type="password"
       name="ApiSecret"
-      autoComplete='api-secret'
       label="API Secret"
-      placeholder="API Secret for your API Key"
       value={apiSecret}
+      autoComplete='api-secret'
+      placeholder="API Secret for your API Key"
+      isRequired={true}
       isEnabled={!loading}
       onChange={onApiSecretChange}
     />
     <div className="buttons-container">
       <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" type="button" onClick={onSignIn}>Sing-in</button>
+      <button className="btn btn-primary" type="submit">Sing-in</button>
     </div>
   </form>
 )
@@ -81,7 +83,7 @@ export const AuthenticateForm = ({ accountSid = '',
                                    authToken = '',
                                    apiKey = '',
                                    apiSecret = '',
-                                   authType= AuthenticationType.NONE,
+                                   authType= AuthenticationMethod.NONE,
                                    loading = true,
                                    onAccountSidChange = () => {},
                                    onAuthTokenChange = () => {},
@@ -90,31 +92,32 @@ export const AuthenticateForm = ({ accountSid = '',
                                    onAuthTypeChange = () => {},
                                    onSubmit = () => {}}) => (
   <>
-    {authType === AuthenticationType.NONE &&
+    {authType === AuthenticationMethod.NONE &&
       <AuthenticationMethodCard onChange={onAuthTypeChange}/>
     }
 
-    {authType === AuthenticationType.AUTH_TOKEN &&
+    {authType === AuthenticationMethod.AUTH_TOKEN &&
       <AuthTokenForm
         accountSid={accountSid}
         authToken={authToken}
         loading={loading}
         onAccountSidChange={onAccountSidChange}
         onAuthTokenChange={onAuthTokenChange}
-        onCancel={() => onAuthTypeChange(AuthenticationType.NONE)}
-        onSignIn={() => onSubmit(AuthenticationType.AUTH_TOKEN)} />
+        onCancel={() => onAuthTypeChange(AuthenticationMethod.NONE)}
+        onSignIn={() => onSubmit(AuthenticationMethod.AUTH_TOKEN)} />
     }
 
-    {authType === AuthenticationType.API_KEY &&
+    {authType === AuthenticationMethod.API_KEY &&
       <ApiKeyForm
         accountSid={accountSid}
         apiKey={apiKey}
         apiSecret={apiSecret}
-        onApiKeyChange={onApiKeyChange}
         loading={loading}
+        onAccountSidChange={onAccountSidChange}
+        onApiKeyChange={onApiKeyChange}
         onApiSecretChange={onApiSecretChange}
-        onCancel={() => onAuthTypeChange(AuthenticationType.NONE)}
-        onSignIn={() => onSubmit(AuthenticationType.API_KEY)} />
+        onCancel={() => onAuthTypeChange(AuthenticationMethod.NONE)}
+        onSignIn={() => onSubmit(AuthenticationMethod.API_KEY)} />
     }
   </>
 )
