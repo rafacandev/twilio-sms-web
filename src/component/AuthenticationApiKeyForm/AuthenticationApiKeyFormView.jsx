@@ -1,0 +1,46 @@
+import InputField from "../InputField/InputField";
+
+const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
+                      onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
+  <form onSubmit={onSignIn}>
+    <InputField
+      type="text"
+      name="AccountSid"
+      label="Account SID"
+      value={accountSid}
+      autoComplete="account-sid"
+      placeholder="Account SID located at your Twilio Console"
+      isRequired={true}
+      isEnabled={!loading}
+      onChange={onAccountSidChange}
+    />
+    <InputField
+      type="text"
+      name="ApiKey"
+      label="API Key"
+      value={apiKey}
+      autoComplete="api-key"
+      placeholder="API Key located at your Twilio Console"
+      isRequired={true}
+      isEnabled={!loading}
+      onChange={onApiKeyChange}
+    />
+    <InputField
+      type="password"
+      name="ApiSecret"
+      label="API Secret"
+      value={apiSecret}
+      autoComplete='api-secret'
+      placeholder="API Secret for your API Key"
+      isRequired={true}
+      isEnabled={!loading}
+      onChange={onApiSecretChange}
+    />
+    <div className="buttons-container">
+      <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
+      <button className="btn btn-primary" type="submit">Sing-in</button>
+    </div>
+  </form>
+)
+
+export default ApiKeyForm
