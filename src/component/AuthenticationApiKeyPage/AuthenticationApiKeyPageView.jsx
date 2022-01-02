@@ -1,6 +1,6 @@
 import InputField from "../InputField/InputField";
 
-const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
+const AuthenticationApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
                       onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
   <form onSubmit={e => {
     e.preventDefault()
@@ -46,4 +46,4 @@ const ApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
   </form>
 )
 
-export default ApiKeyForm
+export default AuthenticationApiKeyForm

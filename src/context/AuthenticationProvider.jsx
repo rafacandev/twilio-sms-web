@@ -48,6 +48,17 @@ export const toCredentials = (authentication) => {
   }
 }
 
+export const mapAuthenticationError = (err) => {
+  if (err instanceof Error && err.message === 'Network Error') {
+    return new Error('Incorrect credentials or unable to access your Twilio account')
+  } else if (err instanceof Error && err.message === 'Request failed with status code 401') {
+    return new Error('Incorrect credentials')
+  } else {
+    return err
+  }
+}
+
+
 const AuthenticationReadContext = React.createContext({})
 const AuthenticationWriteContext = React.createContext(p => {})
 

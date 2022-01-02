@@ -2,10 +2,12 @@ import Select from 'react-select'
 import {useEffect, useState} from "react";
 import useGetTwilioPhoneNumbers from "../../hook/useGetTwilioPhoneNumbers";
 import "./PhoneNumberSelector.css"
+import {useAuthentication} from "../../context/AuthenticationProvider";
 
 const PhoneNumberSelector = ({ onError = () => {},
                                onComplete = () => {},
                                onPhoneNumberChange = () => {}}) => {
+  const [authentication] = useAuthentication()
   const [loading, setLoading] = useState(true);
   const [phoneNumbers, setPhoneNumbers] = useState([])
 
@@ -48,9 +50,9 @@ const PhoneNumberSelector = ({ onError = () => {},
   // Get available phone number on first render
   useEffect(() => {
     if (phoneNumbers.length === 0) {
-      getPhoneNumbers()
+      getPhoneNumbers(authentication)
     }
-  }, [getPhoneNumbers, phoneNumbers])
+  }, [getPhoneNumbers, phoneNumbers, authentication])
 
   return <Select
       placeholder={placeHolderText}

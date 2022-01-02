@@ -14,6 +14,8 @@ import {HashRouter, Route, Switch} from "react-router-dom";
 import {AuthenticationProvider} from "./context/AuthenticationProvider";
 import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
 import MessagesPage from "./component/MessagesPage/MessagesPage"
+import AuthenticationAuthTokenPage from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage";
+import AuthenticationApiKeyPage from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage";
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={AuthenticationPage}/>
             <Route path="/authentication" component={AuthenticationPage}/>
+            <Route path="/authentication-token" component={AuthenticationAuthTokenPage}/>
+            <Route path="/authentication-api-key" component={AuthenticationApiKeyPage}/>
             <Route path="/phone-numbers" component={MessagesPage}/>
           </Switch>
         </HashRouter>

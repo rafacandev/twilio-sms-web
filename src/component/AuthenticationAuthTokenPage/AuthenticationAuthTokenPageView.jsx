@@ -1,6 +1,8 @@
 import InputField from "../InputField/InputField";
 
-const AuthenticationTokenForm = ({ accountSid='', authToken='', loading=false,
+const loadingClassName = (loading = false) => loading ? 'loading' : ''
+
+const AuthenticationAuthTokenForm = ({ accountSid='', authToken='', loading=false,
                          onAccountSidChange=()=>{}, onAuthTokenChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
   <form onSubmit={e => {
     e.preventDefault()
@@ -30,9 +32,9 @@ const AuthenticationTokenForm = ({ accountSid='', authToken='', loading=false,
     />
     <div className="buttons-container">
       <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" type="submit">Sing-in</button>
+      <button className={`btn btn-primary ${loadingClassName(loading)}`} type="submit">Sing-in</button>
     </div>
   </form>
 )
 
-export default AuthenticationTokenForm
+export default AuthenticationAuthTokenForm

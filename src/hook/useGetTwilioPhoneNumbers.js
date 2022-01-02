@@ -1,15 +1,13 @@
 import axios from "axios";
-import {toCredentials, useAuthentication} from "../context/AuthenticationProvider";
+import {Authentication, toCredentials} from "../context/AuthenticationProvider";
 
 const useGetTwilioPhoneNumbers = ({onSuccess = () => {},
                                 onError = () => {},
                                 onComplete = () => {}
                               }) => {
 
-  const [authentication] = useAuthentication()
-  const credentials = toCredentials(authentication)
-
-  const getPhoneNumbers = () => {
+  const getPhoneNumbers = (authentication = new Authentication()) => {
+    const credentials = toCredentials(authentication)
     const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/IncomingPhoneNumbers.json?Beta=false`
     axios.get(url,
       {
