@@ -3,7 +3,7 @@ import useGetTwilioMessages from "../../hook/useGetTwilioMessages";
 import {Loading} from "./MessageListView";
 import MessageCard from "../MessageCard/MessageCard";
 
-const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {}}) => {
+const MessageList = ({phoneNumber = '', onActionClick=()=>{}, onComplete = () => {}, onError = () => {}}) => {
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [hasMounted, setHasMounted] = useState(false)
@@ -54,6 +54,7 @@ const MessageList = ({phoneNumber = '', onComplete = () => {}, onError = () => {
       direction={v.direction}
       status={v.status}
       date={v.date}
+      onActionClick={onActionClick}
     />)
 }
 

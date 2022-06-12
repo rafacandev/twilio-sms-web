@@ -1,5 +1,7 @@
 import {CopyTwoTone, RightCircleFilled} from "@ant-design/icons";
 import "./MessageCard.css";
+import MessageAction from "../MessageAction/MessageAction";
+import {useComposerContext} from "../../context/ComposerProvider"
 
 const toBaseDirection = direction => direction.includes('inbound') ? 'inbound' : 'outbound'
 const messageLabelClass = direction => `message-card-label text-code text-small ${toBaseDirection(direction)}`
@@ -22,15 +24,27 @@ const CopyToClipboard = ({txt}) => <>
   </div>
 </>
 
+const messageActionOnClick = (baseDirection, from, to, setComposerContext, onActionClick) => {
+  if (baseDirection === 'inbound') {
+    setComposerContext(from)
+  } else {
+    setComposerContext(to)
+  }
+  onActionClick()
+}
+
 const MessageCard = ({messageSid='', direction='', from='', to='',
-                      date=new Date(), status='', body=''}) => {
+                      date=new Date(), status='', body='', onActionClick=()=>{}}) => {
+
+  const [ , setComposerContext] = useComposerContext()
+  const baseDirection = toBaseDirection(direction)
 
   return <>
     <div className="message-card">
       <div className={messageLabelClass(direction)}>
         <RightCircleFilled rotate={messageLabelRotation(direction)} />
       </div>
-      <div>
+      <div className="message-card-main-container">
         <div className="message-card-header text-tiny">
         <span>
           <CopyToClipboard txt={from}/>
@@ -55,6 +69,12 @@ const MessageCard = ({messageSid='', direction='', from='', to='',
           <span>
             <strong>MessageSid: </strong>{messageSid}
           </span>
+        </div>
+        <div className="message-card-action-container">
+          <MessageAction
+            direction={baseDirection}
+            onClick={() => messageActionOnClick(baseDirection, from, to, setComposerContext, onActionClick)}
+          />
         </div>
       </div>
     </div>

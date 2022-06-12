@@ -12,6 +12,7 @@ import React from "react";
 import {HashRouter, Route, Switch} from "react-router-dom";
 
 import {AuthenticationProvider} from "./context/AuthenticationProvider";
+import {ComposerProvider} from "./context/ComposerProvider";
 import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
 import MessagesPage from "./component/MessagesPage/MessagesPage"
 import AuthenticationAuthTokenPage from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage";
@@ -20,7 +21,7 @@ import AuthenticationApiKeyPage from "./component/AuthenticationApiKeyPage/Authe
 const App = () => {
   return (
     <div className="App">
-      <AuthenticationProvider>
+      <AuthenticationProvider><ComposerProvider>
         <HashRouter>
           <Switch>
             <Route exact path="/" component={AuthenticationPage}/>
@@ -30,7 +31,7 @@ const App = () => {
             <Route path="/phone-numbers" component={MessagesPage}/>
           </Switch>
         </HashRouter>
-      </AuthenticationProvider>
+      </ComposerProvider></AuthenticationProvider>
     </div>
   )
 }

@@ -1,0 +1,11 @@
+.message-action-button {
+  width: 8em;
+}
+.message-action-button.inbound {
+  background-color: #b83285;
+  border: solid 1px #91316d;
+}
+button.message-action-button.btn.btn-primary.inbound:hover {
+  background-color: #91316d;
+  border: solid 1px #91316d;
+}

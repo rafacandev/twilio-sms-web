@@ -1,16 +1,19 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import "./MessageComposer.css"
 import useSendTwilioMessage from "../../hook/useSendTwilioMessage";
 import SuccessLabel from "../SuccessLabel/SuccessLabel";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
 import InputField from "../InputField/InputField";
 import TextAreaField from "../TextAreaField/TextAreaField";
+import {useComposerContext} from "../../context/ComposerProvider"
 
 const MessageComposer = ({phoneNumber = ''}) => {
+  const [composerContext, setComposerContext] = useComposerContext()
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [isMessageSent, setMessageSent] = useState(false)
-  const [to, setTo] = useState('')
+  const [to, setTo] = useState(composerContext)
   const [message, setMessage] = useState('')
   const toValidationPattern = '^\\+\\d{11}'
   const messageValidationPattern = '[\\w\\d]{3,}'
@@ -38,6 +41,7 @@ const MessageComposer = ({phoneNumber = ''}) => {
     event.preventDefault()
     setLoading(true)
     sendMessage({to: to, from: phoneNumber, body: message})
+    setComposerContext(to)
   }
 
   const handleToChange = (v) => {
@@ -46,6 +50,7 @@ const MessageComposer = ({phoneNumber = ''}) => {
     }
     if (v.length < 13) {
       setTo(v)
+      setComposerContext(v)
     }
   }
 
@@ -54,6 +59,10 @@ const MessageComposer = ({phoneNumber = ''}) => {
       setMessage(v)
     }
   }
+
+  useEffect(()=> {
+    setComposerContext('')
+  }, [setComposerContext])
 
   return <div>
     <ErrorLabel error={error}/>

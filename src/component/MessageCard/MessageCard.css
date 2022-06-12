@@ -3,7 +3,6 @@
         display: block;
     }
 }
-
 .message-loading-container {
     margin: 5em 0 0 0;
 }
@@ -17,6 +16,11 @@
     margin: .5em 0 .5em 0;
     box-shadow: 1px 1px 3px 2px hsla(240, 60%, 50%, 0.06);
     border: solid lightgrey 1px;
+}
+.message-card-action-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 .5em 0;
 }
 .message-card-label {
     align-self: stretch;
@@ -40,6 +44,9 @@
 .message-card-header span {
     display: inline-block;
     padding: 0 1em 0 1em;
+}
+.message-card-main-container {
+    width: 100%;
 }
 .message-card-body {
     padding: 1em 1em 1em 1em;

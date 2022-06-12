@@ -25,7 +25,7 @@ export const Tabs = ({phoneNumber=''}) => {
         </ul>
       </div>
     </div>
-    {isMessagesActive && <MessageList phoneNumber={phoneNumber}/>}
+    {isMessagesActive && <MessageList phoneNumber={phoneNumber} onActionClick={handleActivateComposer}/>}
     {isComposerActive && <MessageComposer phoneNumber={phoneNumber}/>}
   </>
 }
