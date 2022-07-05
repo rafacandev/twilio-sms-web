@@ -39,28 +39,42 @@ Compose messages:
 
 Development
 ===========
-## Available Scripts
+
+Available Scripts
+-----------------
 In the project directory, you can run:
 
-### `npm start`
-Runs the app in the development mode.\
+`npm start`
+----------
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `npm run build`
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm run build`
+---------------
+It bundles React in production mode and optimizes the build for the best performance in the `build` folder.
 
-The build is minified and the filenames include the hashes.\
+A varient `npm run build:prod` is also available which is going to override the `.env` file with the values from a `.env-prod`.
 
-### `npm run deploy`
-Builds and deploy the application to: https://rafasantos.github.io/twilio-sms-web/
+`npm run deploy`
+----------------
+Intended to be used after `npm run build:prod`.
+It deploys the content from the `/build` folder to: https://rafasantos.github.io/twilio-sms-web/
 
+Environment Variables
+---------------------
+This project uses [dotenv](https://github.com/motdotla/dotenv) to manage environment variables.
+Developers can change these values according to their needs via environment variables or editing the `.env` file.
 
-### Environment Variables
-This project uses [dotenv](https://github.com/motdotla/dotenv) to manage environment variables. When using `npm start` the environment variables are loaded from `.env.local`. When using `npm run build` the environment variables are loaded from `env.production`.
+Sample `.env` file:
+```
+# When this value is populated, then Google Tag Manager is going to be enabled with this publicId, i.e: GTM-0000000
+REACT_APP_GOOGLE_TAG_MANAGER_ID=GTM-0000000
+```
+
+`.env` files should be managed independently and they should not be pushed to the codebase repository.
 
 
 [HostedDemo]: https://rafasantos.github.io/twilio-sms-web
