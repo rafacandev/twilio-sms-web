@@ -58,6 +58,11 @@ The build is minified and the filenames include the hashes.\
 ### `npm run deploy`
 Builds and deploy the application to: https://rafasantos.github.io/twilio-sms-web/
 
+
+### Environment Variables
+This project uses [dotenv](https://github.com/motdotla/dotenv) to manage environment variables. When using `npm start` the environment variables are loaded from `.env.local`. When using `npm run build` the environment variables are loaded from `env.production`.
+
+
 [HostedDemo]: https://rafasantos.github.io/twilio-sms-web
 [TwilioConsole]: https://www.twilio.com/console?
 [TwilioFreeTrial]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account 
