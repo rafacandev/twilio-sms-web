@@ -40,8 +40,8 @@ const AuthenticationApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', load
       onChange={onApiSecretChange}
     />
     <div className="buttons-container">
-      <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" type="submit">Sing-in</button>
+      <button className="btn btn-secondary" id="AUTHENTICATION-API-KEY-CANCEL" type="button" onClick={onCancel}>Cancel</button>
+      <button className="btn btn-primary" id="AUTHENTICATION-API-KEY-SIGN-IN" type="submit">Sign-in</button>
     </div>
   </form>
 )

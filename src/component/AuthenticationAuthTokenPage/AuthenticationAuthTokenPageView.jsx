@@ -31,8 +31,8 @@ const AuthenticationAuthTokenForm = ({ accountSid='', authToken='', loading=fals
       onChange={onAuthTokenChange}
     />
     <div className="buttons-container">
-      <button className="btn btn-secondary" type="button" onClick={onCancel}>Cancel</button>
-      <button className={`btn btn-primary ${loadingClassName(loading)}`} type="submit">Sing-in</button>
+      <button className="btn btn-secondary" id="AUTHENTICATION-TOKEN-CANCEL" type="button" onClick={onCancel}>Cancel</button>
+      <button className={`btn btn-primary ${loadingClassName(loading)}`} id="AUTHENTICATION-TOKEN-SIGN-IN" type="submit">Sign-in</button>
     </div>
   </form>
 )
