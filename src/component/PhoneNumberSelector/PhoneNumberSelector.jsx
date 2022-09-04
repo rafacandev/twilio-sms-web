@@ -5,15 +5,14 @@ import "./PhoneNumberSelector.css"
 import {useAuthentication} from "../../context/AuthenticationProvider";
 
 const PhoneNumberSelector = ({ onError = () => {},
-                               onComplete = () => {},
                                onPhoneNumberChange = () => {}}) => {
   const [authentication] = useAuthentication()
   const [loading, setLoading] = useState(true);
   const [phoneNumbers, setPhoneNumbers] = useState([])
 
-  const handleOnComplete = () => {
+  const handleOnError = () => {
     setLoading(false)
-    onComplete()
+    onError()
   }
 
   const handleOnChange = (event) => {
@@ -26,12 +25,12 @@ const PhoneNumberSelector = ({ onError = () => {},
       .map(pn => pn.phone_number)
       .sort()
     setPhoneNumbers(result)
+    setLoading(false)
   }
 
   const getPhoneNumbers = useGetTwilioPhoneNumbers({
     onSuccess: handleGetPhoneNumberSuccess,
-    onError: onError,
-    onComplete: handleOnComplete
+    onError: handleOnError
   })
 
   // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
