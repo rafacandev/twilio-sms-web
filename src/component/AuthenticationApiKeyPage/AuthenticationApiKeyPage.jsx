@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 import DefaultLayout from "../DefaultLayout/DefaultLayout";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
 import AuthenticationApiKeyForm from "./AuthenticationApiKeyPageView";
-import useGetTwilioPhoneNumbers from "../../hook/useGetTwilioPhoneNumbers";
+import { getTwilioPhoneNumbers } from "../../hook/getTwilioPhoneNumbers";
 
 const AuthenticationApiKeyPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -40,15 +40,13 @@ const AuthenticationApiKeyPage = () => {
     /*
      * We want to get phone numbers after sign-in because at minimum we want to know
      * if the credentials have permissions for it before moving forward
+     * 
+     * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
      */
-    getPhoneNumbers(auth)
+    getTwilioPhoneNumbers(auth, 1)
+      .then(handlePhoneNumbersSuccess)
+      .catch(handleError)
   }
-
-  const getPhoneNumbers = useGetTwilioPhoneNumbers({
-    onError: handleError,
-    onSuccess: handlePhoneNumbersSuccess,
-  })
-
 
   return <DefaultLayout>
     <h4>Authentication with Api Key</h4>
