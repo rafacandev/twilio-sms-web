@@ -1,6 +1,6 @@
 Twilio SMS Web
 ==============
-A minimalist web application to send and receive SMS with Twilio.
+A minimalist web application to send and read SMS messages via Twilio.
 
 Hosted Application
 ==================
@@ -80,5 +80,5 @@ REACT_APP_GOOGLE_TAG_MANAGER_ID=GTM-0000000
 [HostedDemo]: https://rafasantos.github.io/twilio-sms-web
 [TwilioConsole]: https://www.twilio.com/console?
 [TwilioFreeTrial]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account 
-[TwilioVerifyPersonalPhoneNumber]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account
+[TwilioVerifyPersonalPhoneNumber]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#verify-your-personal-phone-number
 [TwilioGetPhoneNumber]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#get-your-first-twilio-phone-number
