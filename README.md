@@ -61,7 +61,7 @@ A varient `npm run build:prod` is also available which is going to override the 
 `npm run deploy`
 ----------------
 Intended to be used after `npm run build:prod`.
-It deploys the content from the `/build` folder to: https://rafasantos.github.io/twilio-sms-web/
+It deploys the content from the `/build` folder to: https://rafacandev.github.io/twilio-sms-web/
 
 Environment Variables
 ---------------------
@@ -77,7 +77,7 @@ REACT_APP_GOOGLE_TAG_MANAGER_ID=GTM-0000000
 `.env` files should be managed independently and they should not be pushed to the codebase repository.
 
 
-[HostedDemo]: https://rafasantos.github.io/twilio-sms-web
+[HostedDemo]: https://rafacandev.github.io/twilio-sms-web/#/
 [TwilioConsole]: https://www.twilio.com/console?
 [TwilioFreeTrial]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account 
 [TwilioVerifyPersonalPhoneNumber]: https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#verify-your-personal-phone-number
