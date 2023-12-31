@@ -36,7 +36,10 @@ const MessageList = ({phoneNumber = '', onActionClick=()=>{}, onComplete = () =>
 
   useEffect(() => {
     if (hasMounted && (phoneNumber?.length > 0 && previousPhoneNumber !== phoneNumber)) {
-      getMessages({phoneNumber: phoneNumber}).then(handleSuccess).catch(onError).then(onComplete)
+      getMessages({phoneNumber: phoneNumber})
+        .then(handleSuccess)
+        .catch(onError)
+        .then(onComplete)
       setPreviousPhoneNumber(phoneNumber)
       setLoading(true)
     }

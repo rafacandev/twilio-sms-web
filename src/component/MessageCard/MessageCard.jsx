@@ -2,6 +2,7 @@ import {CopyTwoTone, RightCircleFilled} from "@ant-design/icons";
 import "./MessageCard.css";
 import MessageAction from "../MessageAction/MessageAction";
 import {useComposerContext} from "../../context/ComposerProvider"
+import MediaViewer from "../MediaViewer/MediaViewer";
 
 const toBaseDirection = direction => direction.includes('inbound') ? 'inbound' : 'outbound'
 const messageLabelClass = direction => `message-card-label text-code text-small ${toBaseDirection(direction)}`
@@ -70,6 +71,11 @@ const MessageCard = ({messageSid='', direction='', from='', to='',
             <strong>MessageSid: </strong>{messageSid}
           </span>
         </div>
+
+        <div className="message-card-action-container">
+          <MediaViewer messageSid={messageSid}></MediaViewer>
+        </div>
+
         <div className="message-card-action-container">
           <MessageAction
             direction={baseDirection}

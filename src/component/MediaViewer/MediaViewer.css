@@ -1,0 +1,18 @@
+.message-viewer {
+  max-width: 50%;
+}
+
+.message-viewer-content {
+  width: 100%;
+  border: 2px solid silver;
+}
+
+.message-viewer-loading {
+  display: flex;
+}
+
+.message-viewer-loading-text {
+  display: block;
+  font-size: xx-small;
+  margin-left: 1em;
+}
