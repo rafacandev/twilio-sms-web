@@ -13,7 +13,7 @@ const Loading = () => (
 const MediaContent = ({ media = [] }) => (
   <div className="message-viewer">
     {media.map(m => <img
-      class="message-viewer-content"
+      className="message-viewer-content"
       key={m}
       src={m}
       alt="Attached media file (MMS)" />)}
