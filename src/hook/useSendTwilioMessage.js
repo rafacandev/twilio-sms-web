@@ -1,7 +1,7 @@
 import axios from "axios";
 import {toCredentials, useAuthentication} from "../context/AuthenticationProvider";
 
-const useSendTwilioMessage = ({ onSuccess = () => {},
+export const useSendTwilioMessage = ({ onSuccess = () => {},
                                 onError = () => {},
                                 onComplete = () => {}
                               }) => {
@@ -29,5 +29,3 @@ const useSendTwilioMessage = ({ onSuccess = () => {},
 
   return request
 }
-
-export default useSendTwilioMessage

@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import "./MessageComposer.css"
-import useSendTwilioMessage from "../../hook/useSendTwilioMessage";
+import { useSendTwilioMessage } from "../../hook/useSendTwilioMessage";
 import SuccessLabel from "../SuccessLabel/SuccessLabel";
 import ErrorLabel from "../ErrorLabel/ErrorLabel";
 import InputField from "../InputField/InputField";
