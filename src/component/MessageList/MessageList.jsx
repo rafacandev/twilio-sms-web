@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import useGetTwilioMessages from "../../hook/useGetTwilioMessages";
+import {useGetTwilioMessages} from "../../hook/useGetTwilioMessages";
 import {Loading} from "./MessageListView";
 import MessageCard from "../MessageCard/MessageCard";
 
@@ -24,11 +24,7 @@ const MessageList = ({phoneNumber = '', onActionClick=()=>{}, onComplete = () =>
     setLoading(false)
   }, [setMessages, setLoading])
 
-  const getMessages = useGetTwilioMessages({
-    onSuccess: handleSuccess,
-    onComplete: onComplete,
-    onError: onError
-  })
+  const getMessages = useGetTwilioMessages()
 
   useEffect(() => {
     setHasMounted(true)
