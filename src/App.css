@@ -3,3 +3,7 @@
   background-color: #fafafa;
   height: 100%;
 }
+
+.form-input-hint {
+  color: gray;
+}
