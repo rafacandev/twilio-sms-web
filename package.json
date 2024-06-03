@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "build:prod": "cp .env-prod .env && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier . --write"
   },
   "eslintConfig": {
     "extends": [
