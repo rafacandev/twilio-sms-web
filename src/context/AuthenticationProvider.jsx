@@ -10,9 +10,6 @@ export const AuthenticationMethod = {
   NONE: "",
 }
 
-/**
- * Authentication data
- */
 export class Authentication {
   /**
    * @param {string} accountSid
@@ -71,6 +68,9 @@ export const mapAuthenticationError = err => {
 const AuthenticationReadContext = React.createContext({})
 const AuthenticationWriteContext = React.createContext(p => {})
 
+/**
+ * @returns {[Authentication, function(Authentication)]}
+ */
 export const useAuthentication = () => {
   const value = useContext(AuthenticationReadContext)
   const setValue = useContext(AuthenticationWriteContext)
