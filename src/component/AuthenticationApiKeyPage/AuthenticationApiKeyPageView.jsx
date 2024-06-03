@@ -1,11 +1,22 @@
-import InputField from "../InputField/InputField";
+import InputField from "../InputField/InputField"
 
-const AuthenticationApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', loading=false,
-                      onAccountSidChange=()=>{}, onApiKeyChange=()=>{}, onApiSecretChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form onSubmit={e => {
-    e.preventDefault()
-    onSignIn()
-  }}>
+const AuthenticationApiKeyForm = ({
+  accountSid = "",
+  apiKey = "",
+  apiSecret = "",
+  loading = false,
+  onAccountSidChange = () => {},
+  onApiKeyChange = () => {},
+  onApiSecretChange = () => {},
+  onCancel = () => {},
+  onSignIn = () => {},
+}) => (
+  <form
+    onSubmit={e => {
+      e.preventDefault()
+      onSignIn()
+    }}
+  >
     <InputField
       type="text"
       name="AccountSid"
@@ -33,15 +44,19 @@ const AuthenticationApiKeyForm = ({ accountSid='', apiKey='', apiSecret='', load
       name="ApiSecret"
       label="API Secret"
       value={apiSecret}
-      autoComplete='api-secret'
+      autoComplete="api-secret"
       placeholder="API Secret for your API Key"
       isRequired={true}
       isEnabled={!loading}
       onChange={onApiSecretChange}
     />
     <div className="buttons-container">
-      <button className="btn btn-secondary" id="AUTHENTICATION-API-KEY-CANCEL" type="button" onClick={onCancel}>Cancel</button>
-      <button className="btn btn-primary" id="AUTHENTICATION-API-KEY-SIGN-IN" type="submit">Sign-in</button>
+      <button className="btn btn-secondary" id="AUTHENTICATION-API-KEY-CANCEL" type="button" onClick={onCancel}>
+        Cancel
+      </button>
+      <button className="btn btn-primary" id="AUTHENTICATION-API-KEY-SIGN-IN" type="submit">
+        Sign-in
+      </button>
     </div>
   </form>
 )

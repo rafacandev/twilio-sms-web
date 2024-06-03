@@ -1,73 +1,73 @@
 @media only screen and (max-width: 840px) {
-    .message-card-header spam {
-        display: block;
-    }
+  .message-card-header spam {
+    display: block;
+  }
 }
 .message-loading-container {
-    margin: 5em 0 0 0;
+  margin: 5em 0 0 0;
 }
 .message-loading {
-    font-size: 5em;
+  font-size: 5em;
 }
 .message-card {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: .5em 0 .5em 0;
-    box-shadow: 1px 1px 3px 2px hsla(240, 60%, 50%, 0.06);
-    background-color: white;
-    border: solid lightgrey 1px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0.5em 0 0.5em 0;
+  box-shadow: 1px 1px 3px 2px hsla(240, 60%, 50%, 0.06);
+  background-color: white;
+  border: solid lightgrey 1px;
 }
 .message-card-action-container {
   display: flex;
   justify-content: center;
-  margin: 0 0 .5em 0;
+  margin: 0 0 0.5em 0;
 }
 .message-card-label {
-    align-self: stretch;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex: 0 0;
-    min-width: 1.5em;
-    color: white;
+  align-self: stretch;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex: 0 0;
+  min-width: 1.5em;
+  color: white;
 }
 .message-card-label.inbound {
-    background-color: #b83285;
+  background-color: #b83285;
 }
 .message-card-label.outbound {
-    background-color: #5755d9;
+  background-color: #5755d9;
 }
 .message-card-header {
-    padding: .5em 0 0 0;
-    color: grey;
+  padding: 0.5em 0 0 0;
+  color: grey;
 }
 .message-card-header span {
-    display: inline-block;
-    padding: 0 1em 0 1em;
+  display: inline-block;
+  padding: 0 1em 0 1em;
 }
 .message-card-main-container {
-    width: 100%;
+  width: 100%;
 }
 .message-card-body {
-    padding: 1em 1em 1em 1em;
+  padding: 1em 1em 1em 1em;
 }
 .message-card-header-status {
-    width: 11em;
+  width: 11em;
 }
 .message-card-footer {
-    padding: 0 1em .5em 1em;
-    color: grey;
+  padding: 0 1em 0.5em 1em;
+  color: grey;
 }
 .message-card-footer span {
-    display: inline-block;
-    padding: 0 1em 0 1em;
+  display: inline-block;
+  padding: 0 1em 0 1em;
 }
 .message-card-copy-btn {
-    padding: 0 .5em 0 0;
-    display: inline;
-    cursor: pointer;
+  padding: 0 0.5em 0 0;
+  display: inline;
+  cursor: pointer;
 }
-.message-card-copy-btn:active{
-    cursor: cell;
+.message-card-copy-btn:active {
+  cursor: cell;
 }

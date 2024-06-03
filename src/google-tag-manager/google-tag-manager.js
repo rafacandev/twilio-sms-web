@@ -1,15 +1,15 @@
-import TagManager from 'react-gtm-module'
+import TagManager from "react-gtm-module"
 
 const initializeGoogleTagManager = () => {
   const googleTagManagerId = process.env.REACT_APP_GOOGLE_TAG_MANAGER_ID
-  
-  if (googleTagManagerId === undefined || googleTagManagerId === null || googleTagManagerId === '') return
+
+  if (googleTagManagerId === undefined || googleTagManagerId === null || googleTagManagerId === "") return
 
   const tagManagerArgs = {
-    gtmId: googleTagManagerId
+    gtmId: googleTagManagerId,
   }
 
-  console.log('Initializing Google Tag Manager:', tagManagerArgs)
+  console.log("Initializing Google Tag Manager:", tagManagerArgs)
   TagManager.initialize(tagManagerArgs)
 }
 

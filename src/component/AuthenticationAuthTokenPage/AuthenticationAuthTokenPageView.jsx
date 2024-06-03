@@ -1,13 +1,22 @@
-import InputField from "../InputField/InputField";
+import InputField from "../InputField/InputField"
 
-const loadingClassName = (loading = false) => loading ? 'loading' : ''
+const loadingClassName = (loading = false) => (loading ? "loading" : "")
 
-const AuthenticationAuthTokenForm = ({ accountSid='', authToken='', loading=false,
-                         onAccountSidChange=()=>{}, onAuthTokenChange=()=>{}, onCancel=()=>{}, onSignIn=()=>{} }) => (
-  <form onSubmit={e => {
-    e.preventDefault()
-    onSignIn()
-  }}>
+const AuthenticationAuthTokenForm = ({
+  accountSid = "",
+  authToken = "",
+  loading = false,
+  onAccountSidChange = () => {},
+  onAuthTokenChange = () => {},
+  onCancel = () => {},
+  onSignIn = () => {},
+}) => (
+  <form
+    onSubmit={e => {
+      e.preventDefault()
+      onSignIn()
+    }}
+  >
     <InputField
       type="text"
       name="AccountSid"
@@ -31,8 +40,16 @@ const AuthenticationAuthTokenForm = ({ accountSid='', authToken='', loading=fals
       onChange={onAuthTokenChange}
     />
     <div className="buttons-container">
-      <button className="btn btn-secondary" id="AUTHENTICATION-TOKEN-CANCEL" type="button" onClick={onCancel}>Cancel</button>
-      <button className={`btn btn-primary ${loadingClassName(loading)}`} id="AUTHENTICATION-TOKEN-SIGN-IN" type="submit">Sign-in</button>
+      <button className="btn btn-secondary" id="AUTHENTICATION-TOKEN-CANCEL" type="button" onClick={onCancel}>
+        Cancel
+      </button>
+      <button
+        className={`btn btn-primary ${loadingClassName(loading)}`}
+        id="AUTHENTICATION-TOKEN-SIGN-IN"
+        type="submit"
+      >
+        Sign-in
+      </button>
     </div>
   </form>
 )
