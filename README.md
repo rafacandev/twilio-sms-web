@@ -40,6 +40,16 @@ Compose messages:
 Development
 ===========
 
+NodeJs
+------
+We recommend using Node Version Manager that we can consistently align versions.
+```
+# On the first time
+nvm install
+# On subsequent times
+nvm use
+```
+
 Available Scripts
 -----------------
 In the project directory, you can run:
