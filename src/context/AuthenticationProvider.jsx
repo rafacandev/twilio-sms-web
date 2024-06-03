@@ -36,13 +36,13 @@ export const toCredentials = authentication => {
       return {
         username: authentication.apiKey,
         password: authentication.apiSecret,
-        type: authentication.method,
+        method: authentication.method,
       }
     case AuthenticationMethod.AUTH_TOKEN:
       return {
         username: authentication.accountSid,
         password: authentication.authToken,
-        type: authentication.method,
+        method: authentication.method,
       }
     default:
       return new Authentication()
