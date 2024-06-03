@@ -7,13 +7,12 @@ import {
   mapAuthenticationError,
   useAuthentication,
 } from "../../context/AuthenticationProvider"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { getTwilioPhoneNumbers } from "../../hook/getTwilioPhoneNumbers"
 
 const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
-  const authenticationRef = useRef(authentication)
   const [accountSid, setAccountSid] = useState(authentication.accountSid)
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [loading, setLoading] = useState(false)
@@ -28,13 +27,16 @@ const AuthenticationAuthTokenPage = () => {
   const handleCancel = () => history.push("/authentication")
 
   const handlePhoneNumbersSuccess = () => {
-    setAuthentication(authenticationRef.current)
+    setAuthentication({
+      accountSid,
+      authToken,
+      method: AuthenticationMethod.AUTH_TOKEN
+    })
     history.push("/phone-numbers")
   }
 
   const handleSignIn = () => {
     const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
-    authenticationRef.current = auth
     setLoading(true)
     /*
      * We want to get phone numbers after sign-in because at minimum we want to know

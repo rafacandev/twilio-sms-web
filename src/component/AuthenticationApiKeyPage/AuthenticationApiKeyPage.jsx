@@ -30,7 +30,6 @@ const AuthenticationApiKeyPage = () => {
   const handlePhoneNumbersSuccess = () => {
     setAuthentication({
       accountSid,
-      authToken: "",
       apiKey,
       apiSecret,
       method: AuthenticationMethod.API_KEY,
