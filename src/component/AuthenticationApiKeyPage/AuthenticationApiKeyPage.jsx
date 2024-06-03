@@ -33,7 +33,7 @@ const AuthenticationApiKeyPage = () => {
       authToken: "",
       apiKey,
       apiSecret,
-      type: AuthenticationMethod.API_KEY,
+      method: AuthenticationMethod.API_KEY,
     })
     history.push("/phone-numbers")
   }

@@ -16,14 +16,14 @@ export class Authentication {
    * @param {string} authToken
    * @param {string} apiKey
    * @param {string} apiSecret
-   * @param {AuthenticationMethod} type
+   * @param {AuthenticationMethod} method
    */
-  constructor(accountSid = "", authToken = "", apiKey = "", apiSecret = "", type = AuthenticationMethod.NONE) {
+  constructor(accountSid = "", authToken = "", apiKey = "", apiSecret = "", method = AuthenticationMethod.NONE) {
     this.accountSid = accountSid
     this.authToken = authToken
     this.apiKey = apiKey
     this.apiSecret = apiSecret
-    this.type = type
+    this.method = method
   }
 }
 
@@ -31,18 +31,18 @@ export class Authentication {
  * @param {Authentication} authentication
  */
 export const toCredentials = authentication => {
-  switch (authentication.type) {
+  switch (authentication.method) {
     case AuthenticationMethod.API_KEY:
       return {
         username: authentication.apiKey,
         password: authentication.apiSecret,
-        type: authentication.type,
+        type: authentication.method,
       }
     case AuthenticationMethod.AUTH_TOKEN:
       return {
         username: authentication.accountSid,
         password: authentication.authToken,
-        type: authentication.type,
+        type: authentication.method,
       }
     default:
       return new Authentication()
