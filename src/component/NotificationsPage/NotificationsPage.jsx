@@ -2,7 +2,7 @@ import DefaultLayout from '../DefaultLayout/DefaultLayout'
 import { useAuthentication } from "../../context/AuthenticationProvider"
 import { useHistory } from "react-router-dom"
 import axios from "axios";
-import { Authentication, toCredentials } from "../../context/AuthenticationProvider"
+import { toCredentials } from "../../context/AuthenticationProvider"
 
 export const NotificationsPage = () => {
   const [authentication] = useAuthentication()
