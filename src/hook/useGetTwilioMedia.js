@@ -6,7 +6,7 @@ const cache = new Map()
 const useGetTwilioMedia = () => {
   const [authentication] = useAuthentication()
 
-  const request = async (messageSid) => {
+  const request = async messageSid => {
     if (cache.has(messageSid)) {
       return cache.get(messageSid)
     }
