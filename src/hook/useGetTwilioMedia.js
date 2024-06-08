@@ -1,21 +1,20 @@
 import axios from "axios"
 import { toCredentials, useAuthentication } from "../context/AuthenticationProvider"
 
-const cash = new Map()
+const cache = new Map()
 
 const useGetTwilioMedia = () => {
   const [authentication] = useAuthentication()
-  const credentials = toCredentials(authentication)
 
-  const request = async messageSid => {
-    if (cash.has(messageSid)) {
-      return cash.get(messageSid)
+  const request = async (messageSid) => {
+    if (cache.has(messageSid)) {
+      return cache.get(messageSid)
     }
 
     const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages/${messageSid}/Media.json`
     const response = await axios
       .get(url, {
-        auth: credentials,
+        auth: toCredentials(authentication),
       })
       .then(mediaResponse => {
         if (mediaResponse?.data?.media_list?.length > 0) {
@@ -27,7 +26,7 @@ const useGetTwilioMedia = () => {
         }
       })
 
-    cash.set(messageSid, response)
+    cache.set(messageSid, response)
     return response
   }
 

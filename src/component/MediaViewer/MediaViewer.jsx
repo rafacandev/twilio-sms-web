@@ -35,7 +35,7 @@ const MediaViewer = ({ messageSid = "" }) => {
   }
 
   if (media.length === 0) {
-    return <></>
+    return null
   }
 
   return <MediaContent media={media} />

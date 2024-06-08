@@ -21,7 +21,7 @@ const buttonText = direction => {
 
 const MessageAction = ({ direction = "none", onClick = () => {} }) => {
   if (direction === "none") {
-    return <></>
+    return null
   } else {
     return <DirectionalButton className={buttonClass(direction)} text={buttonText(direction)} onClick={onClick} />
   }

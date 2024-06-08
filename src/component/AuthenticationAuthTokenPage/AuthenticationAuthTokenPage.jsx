@@ -30,7 +30,7 @@ const AuthenticationAuthTokenPage = () => {
     setAuthentication({
       accountSid,
       authToken,
-      method: AuthenticationMethod.AUTH_TOKEN
+      method: AuthenticationMethod.AUTH_TOKEN,
     })
     history.push("/phone-numbers")
   }
