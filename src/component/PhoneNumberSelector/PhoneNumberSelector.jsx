@@ -16,16 +16,16 @@ const maskPhoneNumber = v => {
 const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {} }) => {
   const [authentication] = useAuthentication()
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const [phoneNumbers, setPhoneNumbers] = useState([])
+  const [isError, setError] = useState(false)
 
   const handleOnError = useCallback(
     err => {
       setLoading(false)
-      setError(err)
+      setError(true)
       onError(err)
     },
-    [setLoading, onError, setError],
+    [setLoading, onError],
   )
 
   const handleOnChange = event => {
@@ -50,15 +50,14 @@ const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {
     label: maskPhoneNumber(v),
   }))
 
-  const placeHolderText = loading ? "Loading phone numbers..." : "Select (or type) a phone number..."
-
   // Get available phone number on first render
   useEffect(() => {
-    if (phoneNumbers.length === 0 && error == null) {
+    if (!isError) {
       getAllTwilioPhoneNumbers(authentication, 50).then(handleGetPhoneNumberSuccess).catch(handleOnError)
     }
-  }, [phoneNumbers, authentication, error, handleGetPhoneNumberSuccess, handleOnError])
+  }, [isError, authentication, handleGetPhoneNumberSuccess, handleOnError])
 
+  const placeHolderText = isError ? "Error loading phone number" : loading ? "Loading phone numbers..." : "Select (or type) a phone number..."
   return (
     <Select placeholder={placeHolderText} isLoading={loading} options={phoneNumberOptions} onChange={handleOnChange} />
   )
