@@ -1,6 +1,58 @@
-@media only screen and (max-width: 480px) {
-  .default-layout-container {
+.default-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.default-layout-item {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 1em 0 1em;
+}
+
+@media only screen and (max-width: 960px) {
+  .default-layout-item {
     padding: 0 0 0 0;
-    margin: 0 0 0 0;
   }
+}
+
+.error-banner {
+  background-color: lightcoral;
+}
+
+.default-layout-nav-bar-container {
+  display: flex;
+  justify-content: center;
+  max-width: 2200px;
+  width: 100%;
+}
+
+.default-layout-nav-bar {
+  height: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.default-layout-nav-bar-center {
+  display: flex;
+  justify-content: center;
+}
+
+.default-layout-nav-bar-btn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: 0;
+  padding: 1em;
+}
+
+.default-layout-nav-bar-btn:hover {
+  background-color: green;
+}
+
+.default-layout-nav-bar-btn-spacer {
+  width: 1em;
 }

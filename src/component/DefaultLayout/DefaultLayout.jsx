@@ -2,7 +2,7 @@ import { GithubOutlined } from "@ant-design/icons"
 import { useHistory } from "react-router-dom"
 import "./DefaultLayout.css"
 
-const DefaultLayout = ({ children }) => {
+const NavBar = () => {
   const history = useHistory()
 
   const navigateToAuthenticationPage = () => {
@@ -16,39 +16,52 @@ const DefaultLayout = ({ children }) => {
   }
 
   return (
-    <>
-      <div className="default-layout-container container grid-lg">
-        <header className="navbar bg-primary" style={{ padding: ".5em" }}>
-          <section className="navbar-section">
-            <span className="btn btn-link text-light" onClick={navigateToAuthenticationPage}>
-              Authentication
-            </span>
-            <span className="btn btn-link text-light" onClick={navigateToPhoneNumbersPage}>
-              Messages
-            </span>
-          </section>
-          <section className="navbar-center hide-xs">
-            <span className="h5">Twilio SMS Web</span>
-          </section>
-          <section className="navbar-section">
-            <span className="btn btn-link text-light" onClick={navigateToNotificationsPage}>
-              Notifications
-            </span>
-            <a
-              className="btn btn-link text-light"
-              href="https://github.com/rafasantos/twilio-sms-web"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub <GithubOutlined />
-            </a>
-          </section>
-        </header>
+    <div className="default-layout-nav-bar-container bg-primary">
+      <div className="default-layout-nav-bar">
+        <div className="default-layout-nav-bar-btn-spacer"></div>
+        <div className="default-layout-nav-bar-btn text-light" onClick={navigateToAuthenticationPage}>
+          Authentication
+        </div>
+        <div className="default-layout-nav-bar-btn-spacer"></div>
+        <div className="default-layout-nav-bar-btn text-light" onClick={navigateToPhoneNumbersPage}>
+          Messages
+        </div>
+
+        <div className="default-layout-item default-layout-nav-bar-center hide-sm">
+          <span className="h5">Twilio SMS Web</span>
+        </div>
+        <div className="default-layout-nav-bar-btn text-light" onClick={navigateToNotificationsPage}>
+          Notifications
+        </div>
+        <div className="default-layout-nav-bar-btn-spacer"></div>
+        <div className="default-layout-nav-bar-btn text-light hide-md">
+          <a
+            className="btn btn-link text-light"
+            href="https://github.com/rafasantos/twilio-sms-web"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub <GithubOutlined />
+          </a>
+        </div>
       </div>
-      <div className="default-layout-container container grid-lg text-left" style={{ marginTop: "1em" }}>
+    </div>
+  )
+}
+
+const ErrorBanner = () => {
+  return <div className="default-layout-item error-banner">Error message</div>
+}
+
+const DefaultLayout = ({ children }) => {
+  return (
+    <div className="default-layout-container">
+      <NavBar />
+      <ErrorBanner />
+      <div className="default-layout-item text-left" style={{ marginTop: "1em" }}>
         {children}
       </div>
-    </>
+    </div>
   )
 }
 
