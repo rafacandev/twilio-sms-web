@@ -57,7 +57,11 @@ const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {
     }
   }, [isError, authentication, handleGetPhoneNumberSuccess, handleOnError])
 
-  const placeHolderText = isError ? "Error loading phone number" : loading ? "Loading phone numbers..." : "Select (or type) a phone number..."
+  const placeHolderText = isError
+    ? "Error loading phone number"
+    : loading
+      ? "Loading phone numbers..."
+      : "Select (or type) a phone number..."
   return (
     <Select placeholder={placeHolderText} isLoading={loading} options={phoneNumberOptions} onChange={handleOnChange} />
   )
