@@ -10,7 +10,7 @@
   padding: 0 1em 0 1em;
 }
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 600px) {
   .default-layout-item {
     padding: 0 0 0 0;
   }
@@ -50,7 +50,8 @@
 }
 
 .default-layout-nav-bar-btn:hover {
-  background-color: green;
+  background-color: rgb(255,255,255, 0.1);
+  cursor: pointer;
 }
 
 .default-layout-nav-bar-btn-spacer {
