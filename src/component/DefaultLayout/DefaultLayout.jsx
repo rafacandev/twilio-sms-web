@@ -57,7 +57,6 @@ const DefaultLayout = ({ children }) => {
   return (
     <div className="default-layout-container">
       <NavBar />
-      <ErrorBanner />
       <div className="default-layout-item text-left" style={{ marginTop: "1em" }}>
         {children}
       </div>

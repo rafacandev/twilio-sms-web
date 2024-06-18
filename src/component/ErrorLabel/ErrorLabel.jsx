@@ -1,4 +1,6 @@
-const ErrorLabel = ({ error }) => {
+import "./ErrorLabel.css"
+
+export const ErrorLabel = ({ error }) => {
   const toString = () => {
     if (error instanceof Error) {
       return `${error.name}: ${error.message}`
@@ -8,7 +10,7 @@ const ErrorLabel = ({ error }) => {
 
   if (error) {
     return (
-      <span className="label label-error" style={{ padding: ".5em", margin: ".5em 0em .5em 0em" }}>
+      <span className="label label-error error-label">
         {toString(error)}
       </span>
     )
