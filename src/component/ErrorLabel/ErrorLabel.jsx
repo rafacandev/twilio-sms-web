@@ -9,11 +9,7 @@ export const ErrorLabel = ({ error }) => {
   }
 
   if (error) {
-    return (
-      <span className="label label-error error-label">
-        {toString(error)}
-      </span>
-    )
+    return <span className="label label-error error-label">{toString(error)}</span>
   }
 
   return null
