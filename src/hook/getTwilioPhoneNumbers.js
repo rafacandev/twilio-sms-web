@@ -46,7 +46,7 @@ export const getTwilioPhoneNumbers = async (authentication = new Authentication(
  * @param {Array<string>} [accumulator]
  * @returns {Promise<Array<TwilioPhoneNumberResponse>>}
  */
-export const getAllTwilioPhoneNumbers = async (
+const getAllTwilioPhoneNumbers = async (
   authentication = new Authentication(),
   pageSize = 50,
   accumulator = [],
