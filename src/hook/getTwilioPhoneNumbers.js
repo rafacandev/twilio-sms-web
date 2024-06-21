@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Authentication, toCredentials } from "../context/AuthenticationProvider"
+import { Authentication, toCredentials, useAuthentication } from "../context/AuthenticationProvider"
 
 const buildUrl = (accountSid = "", pageSize = 8, pageNumber = 0) =>
   `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/IncomingPhoneNumbers.json?Beta=false&PageSize=${pageSize}&Page=${pageNumber}`
@@ -44,7 +44,7 @@ export const getTwilioPhoneNumbers = async (authentication = new Authentication(
  * @param {Authentication} [authentication]
  * @param {Number} [pageSize]
  * @param {Array<string>} [accumulator]
- * @returns {Array<Promise<TwilioPhoneNumberResponse>>}
+ * @returns {Promise<Array<TwilioPhoneNumberResponse>>}
  */
 export const getAllTwilioPhoneNumbers = async (
   authentication = new Authentication(),
@@ -59,4 +59,25 @@ export const getAllTwilioPhoneNumbers = async (
   }
 
   return accumulatedPages
+}
+
+let cacheAllPhoneNumbers = []
+/**
+ * @returns {function():Promise<Array<string>>}
+ */
+export const useGetAllPhoneNumbers = () => {
+  const [authentication] = useAuthentication()
+
+  return async () => {
+    if (cacheAllPhoneNumbers.length === 0) {
+      const response = await getAllTwilioPhoneNumbers(authentication)
+      cacheAllPhoneNumbers = response
+        .flatMap(r => r?.data?.incoming_phone_numbers)
+        .filter(pn => pn?.capabilities?.sms)
+        .map(pn => pn?.phone_number)
+        .sort()
+      return cacheAllPhoneNumbers
+    }
+    return cacheAllPhoneNumbers
+  }
 }

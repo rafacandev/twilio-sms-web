@@ -1,8 +1,7 @@
 import Select from "react-select"
-import { useEffect, useState, useCallback } from "react"
+import { useState } from "react"
 import "./PhoneNumberSelector.css"
-import { useAuthentication } from "../../context/AuthenticationProvider"
-import { getAllTwilioPhoneNumbers } from "../../hook/getTwilioPhoneNumbers"
+import { useGetAllPhoneNumbers } from "../../hook/getTwilioPhoneNumbers"
 
 // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
 const maskPhoneNumber = v => {
@@ -14,48 +13,32 @@ const maskPhoneNumber = v => {
 }
 
 const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {} }) => {
-  const [authentication] = useAuthentication()
   const [loading, setLoading] = useState(true)
   const [phoneNumbers, setPhoneNumbers] = useState([])
   const [isError, setError] = useState(false)
+  const getPhones = useGetAllPhoneNumbers()
 
-  const handleOnError = useCallback(
-    err => {
-      setLoading(false)
-      setError(true)
-      onError(err)
-    },
-    [setLoading, onError],
-  )
+  const handleOnError = err => {
+    setError(true)
+    onError(err)
+    setLoading(false)
+  }
 
   const handleOnChange = event => {
     onPhoneNumberChange(event.value)
   }
 
-  const handleGetPhoneNumberSuccess = useCallback(
-    response => {
-      const retrievedNumbers = response
-        .flatMap(r => r?.data?.incoming_phone_numbers)
-        .filter(pn => pn?.capabilities?.sms)
-        .map(pn => pn?.phone_number)
-        .sort()
-      setPhoneNumbers(retrievedNumbers)
-      setLoading(false)
-    },
-    [setPhoneNumbers, setLoading],
-  )
+  const handleLoadPhoneNumbers = pn => {
+    setPhoneNumbers(pn)
+    setLoading(false)
+  }
+
+  getPhones().then(handleLoadPhoneNumbers).catch(handleOnError)
 
   const phoneNumberOptions = phoneNumbers.map(v => ({
     value: v,
     label: maskPhoneNumber(v),
   }))
-
-  // Get available phone number on first render
-  useEffect(() => {
-    if (!isError) {
-      getAllTwilioPhoneNumbers(authentication, 50).then(handleGetPhoneNumberSuccess).catch(handleOnError)
-    }
-  }, [isError, authentication, handleGetPhoneNumberSuccess, handleOnError])
 
   const placeHolderText = isError
     ? "Error loading phone number"
