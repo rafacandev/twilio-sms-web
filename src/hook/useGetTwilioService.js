@@ -23,10 +23,13 @@ const getService = async authentication => {
   return serviceCache
 }
 
+export const getOrCreate = authentication => getService(authentication) ?? createService(authentication)
+
 /**
  * @typedef {Object} TwilioService
  * @property {string} friendly_name - The string that you assigned to describe the resource.
  * @property {string} account_sid - The SID of the Account that created the Service resource.
+ * @property {string} sid - The unique string that we created to identify the Service resource.
  */
 
 /**
@@ -34,8 +37,5 @@ const getService = async authentication => {
  */
 export const useGetTwilioService = () => {
   const [authentication] = useAuthentication()
-  if (serviceCache) {
-    return serviceCache
-  }
-  return async () => getService(authentication) ?? createService(authentication)
+  return () => getOrCreate(authentication)
 }
