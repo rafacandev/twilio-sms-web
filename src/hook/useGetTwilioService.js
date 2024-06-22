@@ -11,11 +11,16 @@ const createService = authentication => {
   })
 }
 
+let serviceCache = undefined
 const getService = async authentication => {
+  if (serviceCache) {
+    return serviceCache
+  }
   const services = await axios.get("https://sync.twilio.com/v1/Services?PageSize=50", {
     auth: toCredentials(authentication),
   })
-  return services.data.services.filter(s => s.friendly_name === "twilio_sms_web")[0]
+  serviceCache = services.data.services.filter(s => s.friendly_name === "twilio_sms_web")[0]
+  return serviceCache
 }
 
 /**
@@ -29,5 +34,8 @@ const getService = async authentication => {
  */
 export const useGetTwilioService = () => {
   const [authentication] = useAuthentication()
+  if (serviceCache) {
+    return serviceCache
+  }
   return async () => getService(authentication) ?? createService(authentication)
 }
