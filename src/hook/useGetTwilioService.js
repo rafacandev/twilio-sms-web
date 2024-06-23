@@ -23,7 +23,7 @@ const getService = async authentication => {
   return serviceCache
 }
 
-export const getOrCreate = authentication => getService(authentication) ?? createService(authentication)
+export const getOrCreateService = authentication => getService(authentication) ?? createService(authentication)
 
 /**
  * @typedef {Object} TwilioService
@@ -37,5 +37,5 @@ export const getOrCreate = authentication => getService(authentication) ?? creat
  */
 export const useGetTwilioService = () => {
   const [authentication] = useAuthentication()
-  return () => getOrCreate(authentication)
+  return () => getOrCreateService(authentication)
 }
