@@ -33,6 +33,28 @@ const getOrCreateDocument = async (authentication, serviceSid) => {
   }
 }
 
+/**
+ * A Sync Document is an object with these characteristics:
+ * It's a single JSON object, up to 16KiB in size.
+ * Its modification history is not maintained; however, documents are assigned a new revision number after each modification.
+ * Its concurrency control is based on an 'eventual' model and it uses revision numbers for conditional updates.
+ * It expires and is deleted automatically if its eviction is configured by setting the ttl parameter. By default, it is persisted permanently.
+ * @typedef {Object} TwilioDocument
+ * @property {string} account_sid - The account SID.
+ * @property {string} created_by - The creator of the document.
+ * @property {Object} data - The data contained in the document.
+ * @property {string} date_expires - The expiration date of the document in ISO 8601 format.
+ * @property {string} date_created - The creation date of the document in ISO 8601 format.
+ * @property {string} date_updated - The last update date of the document in ISO 8601 format.
+ * @property {string} revision - The revision of the document.
+ * @property {string} service_sid - The service SID.
+ * @property {string} sid - The SID of the document.
+ * @property {string} unique_name - The unique name of the document.
+ */
+
+/**
+ * @returns {TwilioDocument}
+ */
 export const useGetOrCreateTwilioDocument = () => {
   const [authentication] = useAuthentication()
   return async () => {
