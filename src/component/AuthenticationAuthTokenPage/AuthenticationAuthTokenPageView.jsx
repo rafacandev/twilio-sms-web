@@ -2,7 +2,7 @@ import InputField from "../InputField/InputField"
 
 const loadingClassName = (loading = false) => (loading ? "loading" : "")
 
-const AuthenticationAuthTokenForm = ({
+const AuthenticationAuthTokenView = ({
   accountSid = "",
   authToken = "",
   loading = false,
@@ -54,4 +54,4 @@ const AuthenticationAuthTokenForm = ({
   </form>
 )
 
-export default AuthenticationAuthTokenForm
+export default AuthenticationAuthTokenView

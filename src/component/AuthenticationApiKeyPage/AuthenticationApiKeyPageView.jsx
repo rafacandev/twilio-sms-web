@@ -1,6 +1,6 @@
 import InputField from "../InputField/InputField"
 
-const AuthenticationApiKeyForm = ({
+const AuthenticationApiKeyView = ({
   accountSid = "",
   apiKey = "",
   apiSecret = "",
@@ -61,4 +61,4 @@ const AuthenticationApiKeyForm = ({
   </form>
 )
 
-export default AuthenticationApiKeyForm
+export default AuthenticationApiKeyView

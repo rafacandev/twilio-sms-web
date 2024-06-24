@@ -49,10 +49,6 @@ const NavBar = () => {
   )
 }
 
-const ErrorBanner = () => {
-  return <div className="default-layout-item error-banner">Error message</div>
-}
-
 const DefaultLayout = ({ children }) => {
   return (
     <div className="default-layout-container">

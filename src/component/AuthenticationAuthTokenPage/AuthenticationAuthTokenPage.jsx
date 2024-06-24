@@ -1,6 +1,6 @@
 import ErrorLabel from "../ErrorLabel/ErrorLabel"
 import DefaultLayout from "../DefaultLayout/DefaultLayout"
-import AuthenticationAuthTokenForm from "./AuthenticationAuthTokenPageView"
+import AuthenticationAuthTokenView from "./AuthenticationAuthTokenPageView"
 import {
   Authentication,
   AuthenticationMethod,
@@ -36,14 +36,14 @@ const AuthenticationAuthTokenPage = () => {
   }
 
   const handleSignIn = () => {
-    const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
     setLoading(true)
     /*
-     * We want to get phone numbers after sign-in because at minimum we want to know
-     * if the credentials have permissions for it before moving forward
-     *
-     * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
-     */
+    * We want to get phone numbers after sign-in because at minimum we want to know
+    * if the credentials have permissions for it before moving forward
+    *
+    * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
+    */
+    const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
     getTwilioPhoneNumbers(auth, 1).then(handlePhoneNumbersSuccess).catch(handleError)
   }
 
@@ -51,7 +51,7 @@ const AuthenticationAuthTokenPage = () => {
     <DefaultLayout>
       <h4>Authentication with Auth Token</h4>
       <ErrorLabel error={error} />
-      <AuthenticationAuthTokenForm
+      <AuthenticationAuthTokenView
         accountSid={accountSid}
         authToken={authToken}
         onAccountSidChange={setAccountSid}
