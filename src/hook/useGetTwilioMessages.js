@@ -7,7 +7,7 @@ export const useGetTwilioMessages = () => {
   const [authentication] = useAuthentication()
   const credentials = toCredentials(authentication)
 
-  const request = async ({ phoneNumber }) => {
+  return async ({ phoneNumber }) => {
     const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
     const fromResult = await axios.get(url, {
       auth: credentials,
@@ -20,6 +20,4 @@ export const useGetTwilioMessages = () => {
     const result = [].concat(fromResult.data.messages).concat(toResult.data.messages)
     return result.sort(sortByDate)
   }
-
-  return request
 }
