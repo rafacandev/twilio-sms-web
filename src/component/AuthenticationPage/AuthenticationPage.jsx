@@ -1,9 +1,9 @@
 import { AuthenticationMethod } from "../../context/AuthenticationProvider"
-import DefaultLayout from "../DefaultLayout/DefaultLayout"
 import { useHistory } from "react-router-dom"
-import AuthenticationMethodCard from "../AuthenticationMethodCard/AuthenticationMethodCard"
+import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
+import { AuthenticationMethodCard } from "../AuthenticationMethodCard/AuthenticationMethodCard"
 
-const AuthenticationPage = () => {
+export const AuthenticationPage = () => {
   const history = useHistory()
 
   const handleAuthMethod = (method = AuthenticationMethod.NONE) => {
@@ -21,5 +21,3 @@ const AuthenticationPage = () => {
     </DefaultLayout>
   )
 }
-
-export default AuthenticationPage

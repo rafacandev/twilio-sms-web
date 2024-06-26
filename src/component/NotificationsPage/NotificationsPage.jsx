@@ -1,4 +1,4 @@
-import DefaultLayout from "../DefaultLayout/DefaultLayout"
+import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 import { useHistory } from "react-router-dom"
 import { useGetOrCreateTwilioDocument } from "../../hook/useCreateTwilioDocument"

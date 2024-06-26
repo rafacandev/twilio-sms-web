@@ -1,6 +1,6 @@
 import "./MessagesPage.css"
-import MessageList from "../MessageList/MessageList"
-import MessageComposer from "../MessageComposer/MessageComposer"
+import { MessageList } from "../MessageList/MessageList"
+import { MessageComposer } from "../MessageComposer/MessageComposer"
 import { useState } from "react"
 
 export const Tabs = ({ phoneNumber = "" }) => {

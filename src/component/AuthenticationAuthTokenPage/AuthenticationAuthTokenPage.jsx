@@ -1,6 +1,6 @@
-import ErrorLabel from "../ErrorLabel/ErrorLabel"
-import DefaultLayout from "../DefaultLayout/DefaultLayout"
-import AuthenticationAuthTokenView from "./AuthenticationAuthTokenPageView"
+import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
+import { AuthenticationAuthTokenView } from "./AuthenticationAuthTokenPageView"
 import {
   Authentication,
   AuthenticationMethod,
@@ -11,7 +11,7 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { getTwilioPhoneNumbers } from "../../hook/usetGetTwilioPhoneNumbers"
 
-const AuthenticationAuthTokenPage = () => {
+export const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
   const [accountSid, setAccountSid] = useState(authentication.accountSid)
   const [authToken, setAuthToken] = useState(authentication.authToken)
@@ -38,11 +38,11 @@ const AuthenticationAuthTokenPage = () => {
   const handleSignIn = () => {
     setLoading(true)
     /*
-    * We want to get phone numbers after sign-in because at minimum we want to know
-    * if the credentials have permissions for it before moving forward
-    *
-    * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
-    */
+     * We want to get phone numbers after sign-in because at minimum we want to know
+     * if the credentials have permissions for it before moving forward
+     *
+     * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
+     */
     const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
     getTwilioPhoneNumbers(auth, 1).then(handlePhoneNumbersSuccess).catch(handleError)
   }
@@ -63,5 +63,3 @@ const AuthenticationAuthTokenPage = () => {
     </DefaultLayout>
   )
 }
-
-export default AuthenticationAuthTokenPage

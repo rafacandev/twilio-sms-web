@@ -2,13 +2,13 @@ import { useState } from "react"
 import { Tabs } from "./MessagesPageView"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 import { useHistory } from "react-router-dom"
-import DefaultLayout from "../DefaultLayout/DefaultLayout"
-import ErrorLabel from "../ErrorLabel/ErrorLabel"
-import PhoneNumberSelector from "../PhoneNumberSelector/PhoneNumberSelector"
+import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
+import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { PhoneNumberSelector } from "../PhoneNumberSelector/PhoneNumberSelector"
 
 const EMPTY_PHONE_NUMBER = ""
 
-const MessagesPage = () => {
+export const MessagesPage = () => {
   const [error, setError] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState(EMPTY_PHONE_NUMBER)
   const [authentication] = useAuthentication()
@@ -35,5 +35,3 @@ const MessagesPage = () => {
     </DefaultLayout>
   )
 }
-
-export default MessagesPage

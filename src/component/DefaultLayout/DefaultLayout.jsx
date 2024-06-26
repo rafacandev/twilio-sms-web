@@ -49,7 +49,7 @@ const NavBar = () => {
   )
 }
 
-const DefaultLayout = ({ children }) => {
+export const DefaultLayout = ({ children }) => {
   return (
     <div className="default-layout-container">
       <NavBar />
@@ -59,5 +59,3 @@ const DefaultLayout = ({ children }) => {
     </div>
   )
 }
-
-export default DefaultLayout

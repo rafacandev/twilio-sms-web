@@ -1,7 +1,7 @@
 import "./AuthenticationMethodCard.css"
 import { AuthenticationMethod } from "../../context/AuthenticationProvider"
 
-const AuthenticationMethodCard = ({ onChange = () => {} }) => (
+export const AuthenticationMethodCard = ({ onChange = () => {} }) => (
   <div className="text-center">
     <div className="authentication-method-card-header">Choose your Twilio authentication method:</div>
     <button
@@ -27,5 +27,3 @@ const AuthenticationMethodCard = ({ onChange = () => {} }) => (
     </button>
   </div>
 )
-
-export default AuthenticationMethodCard

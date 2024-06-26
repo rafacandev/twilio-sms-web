@@ -19,12 +19,10 @@ const buttonText = direction => {
   }
 }
 
-const MessageAction = ({ direction = "none", onClick = () => {} }) => {
+export const MessageAction = ({ direction = "none", onClick = () => {} }) => {
   if (direction === "none") {
     return null
   } else {
     return <DirectionalButton className={buttonClass(direction)} text={buttonText(direction)} onClick={onClick} />
   }
 }
-
-export default MessageAction

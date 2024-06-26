@@ -1,4 +1,4 @@
-const SuccessLabel = ({ text }) => {
+export const SuccessLabel = ({ text }) => {
   if (text !== null && text.length > 0) {
     return (
       <span className="label label-success" style={{ padding: ".5em", margin: ".5em 0em .5em 0em" }}>
@@ -8,5 +8,3 @@ const SuccessLabel = ({ text }) => {
   }
   return null
 }
-
-export default SuccessLabel

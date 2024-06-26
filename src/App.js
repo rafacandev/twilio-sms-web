@@ -13,13 +13,13 @@ import { HashRouter, Route, Switch } from "react-router-dom"
 
 import { AuthenticationProvider } from "./context/AuthenticationProvider"
 import { ComposerProvider } from "./context/ComposerProvider"
-import AuthenticationPage from "./component/AuthenticationPage/AuthenticationPage"
-import MessagesPage from "./component/MessagesPage/MessagesPage"
-import AuthenticationAuthTokenPage from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage"
-import AuthenticationApiKeyPage from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage"
+import { AuthenticationPage } from "./component/AuthenticationPage/AuthenticationPage"
+import { MessagesPage } from "./component/MessagesPage/MessagesPage"
+import { AuthenticationAuthTokenPage } from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage"
+import { AuthenticationApiKeyPage } from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage"
 import { NotificationsPage } from "./component/NotificationsPage/NotificationsPage"
 
-const App = () => {
+export const App = () => {
   return (
     <div className="App">
       <AuthenticationProvider>
@@ -39,5 +39,3 @@ const App = () => {
     </div>
   )
 }
-
-export default App

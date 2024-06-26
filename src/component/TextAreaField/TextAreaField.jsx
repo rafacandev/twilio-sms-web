@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const TextAreaField = ({
+export const TextAreaField = ({
   name = "",
   value = "",
   placeholder = "Placeholder",
@@ -41,5 +41,3 @@ const TextAreaField = ({
     </label>
   )
 }
-
-export default TextAreaField

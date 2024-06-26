@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const InputField = ({
+export const InputField = ({
   type = "text",
   name = "",
   value = "",
@@ -43,5 +43,3 @@ const InputField = ({
     </label>
   )
 }
-
-export default InputField

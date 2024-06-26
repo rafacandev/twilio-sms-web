@@ -12,7 +12,7 @@ const maskPhoneNumber = v => {
   return result
 }
 
-const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {} }) => {
+export const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {} }) => {
   const [loading, setLoading] = useState(true)
   const [phoneNumbers, setPhoneNumbers] = useState([])
   const [isError, setError] = useState(false)
@@ -49,5 +49,3 @@ const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = () => {
     <Select placeholder={placeHolderText} isLoading={loading} options={phoneNumberOptions} onChange={handleOnChange} />
   )
 }
-
-export default PhoneNumberSelector

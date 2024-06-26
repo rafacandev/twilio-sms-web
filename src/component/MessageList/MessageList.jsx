@@ -1,9 +1,14 @@
 import { useCallback, useEffect, useState } from "react"
 import { useGetTwilioMessages } from "../../hook/useGetTwilioMessages"
 import { Loading } from "./MessageListView"
-import MessageCard from "../MessageCard/MessageCard"
+import { MessageCard } from "../MessageCard/MessageCard"
 
-const MessageList = ({ phoneNumber = "", onActionClick = () => {}, onComplete = () => {}, onError = () => {} }) => {
+export const MessageList = ({
+  phoneNumber = "",
+  onActionClick = () => {},
+  onComplete = () => {},
+  onError = () => {},
+}) => {
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [hasMounted, setHasMounted] = useState(false)
@@ -67,5 +72,3 @@ const MessageList = ({ phoneNumber = "", onActionClick = () => {}, onComplete = 
     />
   ))
 }
-
-export default MessageList

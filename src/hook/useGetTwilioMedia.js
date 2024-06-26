@@ -3,7 +3,7 @@ import { toCredentials, useAuthentication } from "../context/AuthenticationProvi
 
 const cache = new Map()
 
-const useGetTwilioMedia = () => {
+export const useGetTwilioMedia = () => {
   const [authentication] = useAuthentication()
 
   const request = async messageSid => {
@@ -32,5 +32,3 @@ const useGetTwilioMedia = () => {
 
   return request
 }
-
-export default useGetTwilioMedia

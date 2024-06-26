@@ -1,6 +1,6 @@
 import "./MediaViewer.css"
 import { useEffect, useState } from "react"
-import useGetTwilioMedia from "../../hook/useGetTwilioMedia"
+import { useGetTwilioMedia } from "../../hook/useGetTwilioMedia"
 import { LoadingOutlined } from "@ant-design/icons"
 
 const Loading = () => (
@@ -18,7 +18,7 @@ const MediaContent = ({ media = [] }) => (
   </div>
 )
 
-const MediaViewer = ({ messageSid = "" }) => {
+export const MediaViewer = ({ messageSid = "" }) => {
   const [loading, setLoading] = useState(true)
   const [media, setMedia] = useState([])
   const getMedia = useGetTwilioMedia()
@@ -40,5 +40,3 @@ const MediaViewer = ({ messageSid = "" }) => {
 
   return <MediaContent media={media} />
 }
-
-export default MediaViewer

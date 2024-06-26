@@ -14,5 +14,3 @@ export const ErrorLabel = ({ error }) => {
 
   return null
 }
-
-export default ErrorLabel

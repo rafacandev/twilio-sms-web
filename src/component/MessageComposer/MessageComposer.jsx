@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react"
 import "./MessageComposer.css"
 import { useSendTwilioMessage } from "../../hook/useSendTwilioMessage"
-import SuccessLabel from "../SuccessLabel/SuccessLabel"
-import ErrorLabel from "../ErrorLabel/ErrorLabel"
-import InputField from "../InputField/InputField"
-import TextAreaField from "../TextAreaField/TextAreaField"
+import { SuccessLabel } from "../SuccessLabel/SuccessLabel"
+import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { InputField } from "../InputField/InputField"
+import { TextAreaField } from "../TextAreaField/TextAreaField"
 import { useComposerContext } from "../../context/ComposerProvider"
 
-const MessageComposer = ({ phoneNumber = "" }) => {
+export const MessageComposer = ({ phoneNumber = "" }) => {
   const [composerContext, setComposerContext] = useComposerContext()
 
   const [loading, setLoading] = useState(false)
@@ -101,5 +101,3 @@ const MessageComposer = ({ phoneNumber = "" }) => {
     </div>
   )
 }
-
-export default MessageComposer
