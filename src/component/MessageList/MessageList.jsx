@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { useGetTwilioMessages } from "../../hook/useGetTwilioMessages"
+import { useGetTwilioMessagesByPhoneNumber } from "../../hook/useGetTwilioMessages"
 import { Loading } from "./MessageListView"
 import { MessageCard } from "../MessageCard/MessageCard"
 
@@ -31,7 +31,7 @@ export const MessageList = ({
     [setMessages, setLoading],
   )
 
-  const getMessages = useGetTwilioMessages()
+  const getMessages = useGetTwilioMessagesByPhoneNumber()
 
   useEffect(() => {
     setHasMounted(true)

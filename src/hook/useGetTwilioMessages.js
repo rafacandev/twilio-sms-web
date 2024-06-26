@@ -3,7 +3,7 @@ import { toCredentials, useAuthentication } from "../context/AuthenticationProvi
 
 const sortByDate = (a, b) => (Date.parse(a.date_created) > Date.parse(b.date_created) ? -1 : 1)
 
-export const useGetTwilioMessages = () => {
+export const useGetTwilioMessagesByPhoneNumber = () => {
   const [authentication] = useAuthentication()
   const credentials = toCredentials(authentication)
 
