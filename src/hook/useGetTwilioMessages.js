@@ -21,3 +21,16 @@ export const useGetTwilioMessagesByPhoneNumber = () => {
     return result.sort(sortByDate)
   }
 }
+
+export const useGetTwilioMessages = () => {
+  const [authentication] = useAuthentication()
+  const credentials = toCredentials(authentication)
+
+  return async () => {
+    const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
+    const response = await axios.get(url, {
+      auth: credentials,
+    })
+    return response.data.messages.sort(sortByDate)
+  }
+}
