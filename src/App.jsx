@@ -18,6 +18,7 @@ import { MessagesPage } from "./component/MessagesPage/MessagesPage"
 import { AuthenticationAuthTokenPage } from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage"
 import { AuthenticationApiKeyPage } from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage"
 import { NotificationsPage } from "./component/NotificationsPage/NotificationsPage"
+import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedRoute"
 
 export const App = () => {
   return (
@@ -30,8 +31,8 @@ export const App = () => {
               <Route path="/authentication" component={AuthenticationPage} />
               <Route path="/authentication-token" component={AuthenticationAuthTokenPage} />
               <Route path="/authentication-api-key" component={AuthenticationApiKeyPage} />
-              <Route path="/phone-numbers" component={MessagesPage} />
-              <Route path="/notifications" component={NotificationsPage} />
+              <AuthenticatedRoute path="/phone-numbers" component={MessagesPage} retirectTo="/authentication" />
+              <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
             </Switch>
           </HashRouter>
         </ComposerProvider>
