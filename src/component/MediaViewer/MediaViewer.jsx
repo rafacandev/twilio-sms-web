@@ -1,7 +1,9 @@
 import "./MediaViewer.css"
 import { useEffect, useState } from "react"
-import { useGetTwilioMedia } from "../../hook/useGetTwilioMedia"
+import { getTwilioMedia } from "../../core/getTwilioMedia"
 import { LoadingOutlined } from "@ant-design/icons"
+import { useAuthentication } from "../../context/AuthenticationProvider"
+import { isEmpty} from "lodash"
 
 const Loading = () => (
   <div className="message-viewer-loading">
@@ -21,20 +23,21 @@ const MediaContent = ({ media = [] }) => (
 export const MediaViewer = ({ messageSid = "" }) => {
   const [loading, setLoading] = useState(true)
   const [media, setMedia] = useState([])
-  const getMedia = useGetTwilioMedia()
+  const [authentication] = useAuthentication()
+
 
   useEffect(() => {
-    getMedia(messageSid).then(m => {
+    getTwilioMedia(authentication, messageSid).then(m => {
       setMedia(m)
       setLoading(false)
     })
-  }, [getMedia, messageSid])
+  }, [authentication, messageSid])
 
   if (loading) {
     return <Loading />
   }
 
-  if (media.length === 0) {
+  if (isEmpty(media)) {
     return null
   }
 
