@@ -78,10 +78,22 @@ export const useAuthentication = () => {
 }
 
 export const AuthenticationProvider = ({ children }) => {
-  const [value, setValue] = useState({})
+  const [value, setValue] = useState(fromEnvironmentVariables())
   return (
     <AuthenticationReadContext.Provider value={value}>
       <AuthenticationWriteContext.Provider value={v => setValue(v)}>{children}</AuthenticationWriteContext.Provider>
     </AuthenticationReadContext.Provider>
   )
+}
+
+
+const fromEnvironmentVariables = () => {
+  const accountSid = process.env.REACT_APP_AUTHENTICATION_ACCOUNT_SID
+  const apiKey = process.env.REACT_APP_AUTHENTICATION_API_KEY
+  const apiSecret = process.env.REACT_APP_AUTHENTICATION_API_SECRET
+  if (accountSid !== undefined && apiKey !== undefined && apiSecret !== undefined) {
+    console.log(`Setting authentication from environment variables for accountSid: ${accountSid}`)
+    return new Authentication(accountSid, undefined, apiKey, apiSecret, AuthenticationMethod.API_KEY)
+  }
+  return new Authentication()
 }

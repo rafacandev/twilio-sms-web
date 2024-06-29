@@ -83,6 +83,11 @@ Sample `.env` file:
 ```
 # When this value is populated, then Google Tag Manager is going to be enabled with this publicId, i.e: GTM-0000000
 REACT_APP_GOOGLE_TAG_MANAGER_ID=GTM-0000000
+
+# Include your authentication info for auto sign-in
+REACT_APP_AUTHENTICATION_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxx
+REACT_APP_AUTHENTICATION_API_KEY=SKxxxxxxxxxxxxxxxxxxxx
+REACT_APP_AUTHENTICATION_API_SECRET=xxxxxxxxxxxxxxxxxxxx
 ```
 
 `.env` files should be managed independently and they should not be pushed to the codebase repository.
