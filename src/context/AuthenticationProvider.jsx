@@ -86,7 +86,6 @@ export const AuthenticationProvider = ({ children }) => {
   )
 }
 
-
 const fromEnvironmentVariables = () => {
   const accountSid = process.env.REACT_APP_AUTHENTICATION_ACCOUNT_SID
   const apiKey = process.env.REACT_APP_AUTHENTICATION_API_KEY
