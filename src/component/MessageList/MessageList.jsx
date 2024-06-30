@@ -1,60 +1,33 @@
-import { useCallback, useEffect, useState } from "react"
-import { useGetTwilioMessagesByPhoneNumber } from "../../hook/useGetTwilioMessages"
+import { useEffect, useState } from "react"
 import { Loading } from "./MessageListView"
 import { MessageCard } from "../MessageCard/MessageCard"
+import { useAuthentication } from "../../context/AuthenticationProvider"
+import { getTwilioMessagesByPhoneNumber } from "../../core/getTwilioMessagesByPhoneNumber"
 
 export const MessageList = ({
-  phoneNumber = "",
+  phoneNumber = undefined,
   onActionClick = () => {},
   onComplete = () => {},
   onError = () => {},
 }) => {
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
-  const [hasMounted, setHasMounted] = useState(false)
-  const [previousPhoneNumber, setPreviousPhoneNumber] = useState(null)
+  const [loadedPhoneNumber, setLoadedPhoneNumber] = useState(undefined)
+  const [authentication] = useAuthentication()
 
-  const handleSuccess = useCallback(
-    response => {
-      const messagesMapped = response.map(v => ({
-        messageSid: v.sid,
-        direction: v.direction,
-        from: v.from,
-        to: v.to,
-        date: v.date_created,
-        status: v.status,
-        body: v.body,
-      }))
-      setMessages(messagesMapped)
-      setLoading(false)
-    },
-    [setMessages, setLoading],
-  )
-
-  const getMessages = useGetTwilioMessagesByPhoneNumber()
-
+  console.log({ phoneNumber })
   useEffect(() => {
-    setHasMounted(true)
-  }, [setHasMounted])
-
-  useEffect(() => {
-    if (hasMounted && phoneNumber?.length > 0 && previousPhoneNumber !== phoneNumber) {
-      getMessages({ phoneNumber: phoneNumber }).then(handleSuccess).catch(onError).then(onComplete)
-      setPreviousPhoneNumber(phoneNumber)
-      setLoading(true)
+    if (phoneNumber !== undefined && loadedPhoneNumber !== phoneNumber) {
+      getTwilioMessagesByPhoneNumber(authentication, phoneNumber)
+        .then(ms => {
+          setLoadedPhoneNumber(phoneNumber)
+          setMessages(ms)
+          setLoading(false)
+        })
+        .catch(onError)
+        .then(onComplete)
     }
-  }, [
-    hasMounted,
-    phoneNumber,
-    previousPhoneNumber,
-    getMessages,
-    messages,
-    handleSuccess,
-    onError,
-    onComplete,
-    setPreviousPhoneNumber,
-    setLoading,
-  ])
+  }, [loading, authentication, phoneNumber, loadedPhoneNumber, onError, onComplete, setLoading])
 
   if (loading) return <Loading className="h1 m-2" />
 
