@@ -1,9 +1,9 @@
 import { buildUrl } from "./getTwilioPhoneNumbers"
 import { Authentication, toCredentials } from "../context/AuthenticationProvider"
-import { TwilioPhoneNumberResponse } from "./getTwilioPhoneNumbers"
 import axios from "axios"
 
 /**
+ * @typedef {import("./getTwilioPhoneNumbers").TwilioPhoneNumberResponse} TwilioPhoneNumberResponse
  * @returns {Promise<TwilioPhoneNumberResponse>}
  */
 export const getTwilioPhoneNumbersByPage = async (
