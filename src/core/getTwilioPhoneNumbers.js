@@ -2,7 +2,7 @@ import axios from "axios"
 import { Authentication, toCredentials } from "../context/AuthenticationProvider"
 import { isEmpty } from "lodash"
 
-const buildUrl = (accountSid = "", pageSize = 8, pageNumber = 0) =>
+export const buildUrl = (accountSid = "", pageSize = 8, pageNumber = 0) =>
   `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/IncomingPhoneNumbers.json?Beta=false&PageSize=${pageSize}&Page=${pageNumber}`
 
 /**
@@ -57,6 +57,7 @@ const getTwilioPhoneNumbersResursively = async (
 
 let cache = []
 /**
+ * @param {Authentication} authentication
  * @returns {function():Promise<Array<string>>}
  */
 export const getTwilioPhoneNumbers = async authentication => {

@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom"
 import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { AuthenticationApiKeyView } from "./AuthenticationApiKeyPageView"
-import { getTwilioPhoneNumbers } from "../../hook/usetGetTwilioPhoneNumbers"
+import { getTwilioPhoneNumbersByPage} from '../../core/getTwilioPhoneNumbersByPage'
 
 export const AuthenticationApiKeyPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -46,7 +46,7 @@ export const AuthenticationApiKeyPage = () => {
      * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
      */
     const auth = new Authentication(accountSid, "", apiKey, apiSecret, AuthenticationMethod.API_KEY)
-    getTwilioPhoneNumbers(auth, 1).then(handlePhoneNumbersSuccess).catch(handleError)
+    getTwilioPhoneNumbersByPage(auth).then(handlePhoneNumbersSuccess).catch(handleError)
   }
 
   return (
