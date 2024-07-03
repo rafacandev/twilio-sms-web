@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom"
 import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { AuthenticationApiKeyView } from "./AuthenticationApiKeyPageView"
-import { getTwilioPhoneNumbersByPage} from '../../core/getTwilioPhoneNumbersByPage'
+import { getTwilioPhoneNumbersByPage } from "../../core/getTwilioPhoneNumbersByPage"
 
 export const AuthenticationApiKeyPage = () => {
   const [authentication, setAuthentication] = useAuthentication()

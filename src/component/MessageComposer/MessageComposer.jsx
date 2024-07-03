@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react"
 import "./MessageComposer.css"
-import { useSendTwilioMessage } from "../../hook/useSendTwilioMessage"
 import { SuccessLabel } from "../SuccessLabel/SuccessLabel"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { InputField } from "../InputField/InputField"
 import { TextAreaField } from "../TextAreaField/TextAreaField"
 import { useComposerContext } from "../../context/ComposerProvider"
+import { sendTwilioMessage } from "../../core/sendTwilioMessage"
+import { useAuthentication } from "../../context/AuthenticationProvider"
 
 export const MessageComposer = ({ phoneNumber = "" }) => {
   const [composerContext, setComposerContext] = useComposerContext()
+  const [authentication] = useAuthentication()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -18,29 +20,16 @@ export const MessageComposer = ({ phoneNumber = "" }) => {
   const toValidationPattern = "^\\+\\d{11}"
   const messageValidationPattern = "[\\w\\d]{3,}"
 
-  const handleSendMessageSuccess = response => {
-    setMessageSent(true)
-    setTimeout(() => setMessageSent(false), 5000)
-  }
-
-  const handleError = err => {
-    setError(err)
-  }
-
-  const handleMessageSentComplete = () => {
-    setLoading(false)
-  }
-
-  const sendMessage = useSendTwilioMessage({
-    onSuccess: handleSendMessageSuccess,
-    onError: handleError,
-    onComplete: handleMessageSentComplete,
-  })
-
   const handleOnSubmit = event => {
     event.preventDefault()
     setLoading(true)
-    sendMessage({ to: to, from: phoneNumber, body: message })
+    sendTwilioMessage(authentication, to, phoneNumber, message)
+      .then(() => {
+        setMessageSent(true)
+        setTimeout(() => setMessageSent(false), 5000)
+      })
+      .catch(setError)
+      .then(() => setLoading(false))
     setComposerContext(to)
   }
 
