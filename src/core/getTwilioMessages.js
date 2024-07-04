@@ -1,5 +1,5 @@
 import axios from "axios"
-import { toCredentials } from "../context/AuthenticationProvider"
+import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
 
 const sortByDate = (a, b) => (Date.parse(a.date) > Date.parse(b.date) ? -1 : 1)
 
@@ -14,11 +14,10 @@ const sortByDate = (a, b) => (Date.parse(a.date) > Date.parse(b.date) ? -1 : 1)
  */
 
 /**
- *
- * @param {import { authentication } from "../context/AuthenticationProvider";} authentication
- * @returns {Message}
+ * @returns {Promise<Array<Message>>}
  */
-export const getTwilioMessages = async authentication => {
+export const getTwilioMessages = async () => {
+  const authentication = getAuthentication()
   const credentials = toCredentials(authentication)
   const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
   const response = await axios.get(url, {

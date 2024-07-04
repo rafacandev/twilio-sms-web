@@ -1,6 +1,6 @@
 import axios from "axios"
 import { isAxiosError } from "axios"
-import { toCredentials, useAuthentication } from "../context/AuthenticationProvider"
+import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
 import { getOrCreateService } from "./useGetTwilioService"
 
 const TWILIO_SMS_WEB = "twilio_sms_web"
@@ -53,12 +53,9 @@ const getOrCreateDocument = async (authentication, serviceSid) => {
  */
 
 /**
- * @returns {TwilioDocument}
+ * @returns {Promise<TwilioDocument>}
  */
-export const useGetOrCreateTwilioDocument = () => {
-  const [authentication] = useAuthentication()
-  return async () => {
-    const service = await getOrCreateService(authentication)
-    return getOrCreateDocument(authentication, service.sid)
-  }
+export const getOrCreateTwilioDocument = () => {
+  const authentication = getAuthentication()
+  return getOrCreateService(authentication).then(service => getOrCreateDocument(authentication, service.sid))
 }

@@ -1,6 +1,5 @@
 import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
-import { useAuthentication } from "../../context/AuthenticationProvider"
-import { useGetOrCreateTwilioDocument } from "../../hook/useCreateTwilioDocument"
+import { getOrCreateTwilioDocument } from "../../hook/useCreateTwilioDocument"
 import { useEffect, useState } from "react"
 import { getTwilioMessages } from "../../core/getTwilioMessages"
 import { MessageCard } from "../MessageCard/MessageCard"
@@ -27,23 +26,21 @@ const MessageList = ({ messages = [] }) =>
   ))
 
 export const NotificationsPage = () => {
-  const [authentication] = useAuthentication()
-  const getOrCreateDoc = useGetOrCreateTwilioDocument()
   const [messages, setMessages] = useState([])
 
-  const handleRun = async () => {
-    const d = await getOrCreateDoc()
-    console.log("Twilio Document", d)
-  }
-
   useEffect(() => {
-    getTwilioMessages(authentication).then(setMessages)
-  }, [authentication])
+    const initDocument = async () => {
+      const document = await getOrCreateTwilioDocument()
+      const msg = await getTwilioMessages()
+      setMessages(msg)
+      console.log("Twilio document and messages", document, msg)
+    }
+    initDocument()
+  }, [setMessages])
 
   return (
     <DefaultLayout>
       <h4>Notifications</h4>
-      <button onClick={handleRun}>Sync Notifications</button>
       <MessageList messages={messages} />
     </DefaultLayout>
   )
