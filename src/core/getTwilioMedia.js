@@ -1,9 +1,10 @@
 import axios from "axios"
-import { toCredentials } from "../context/AuthenticationProvider"
+import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
 
 const cache = new Map()
 
-export const getTwilioMedia = async (authentication, messageSid) => {
+export const getTwilioMedia = async messageSid => {
+  const authentication = getAuthentication()
   if (cache.has(messageSid)) {
     return cache.get(messageSid)
   }

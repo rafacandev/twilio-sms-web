@@ -10,12 +10,11 @@ export const sendTwilioMessage = (authentication = new Authentication(), to = ""
   data.append("Body", body)
 
   const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
-  axios
-    .post(url, data, {
-      auth: credentials,
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
+  axios.post(url, data, {
+    auth: credentials,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
   return Promise.resolve("sent")
 }

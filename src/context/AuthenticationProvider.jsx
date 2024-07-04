@@ -67,6 +67,9 @@ export const mapAuthenticationError = err => {
 
 const AuthenticationReadContext = React.createContext({})
 const AuthenticationWriteContext = React.createContext(p => {})
+let authenticationCache = new Authentication()
+
+export const getAuthentication = () => authenticationCache
 
 /**
  * @returns {[Authentication, function(Authentication)]}
@@ -78,10 +81,18 @@ export const useAuthentication = () => {
 }
 
 export const AuthenticationProvider = ({ children }) => {
+  authenticationCache = fromEnvironmentVariables()
   const [value, setValue] = useState(fromEnvironmentVariables())
   return (
     <AuthenticationReadContext.Provider value={value}>
-      <AuthenticationWriteContext.Provider value={v => setValue(v)}>{children}</AuthenticationWriteContext.Provider>
+      <AuthenticationWriteContext.Provider
+        value={auth => {
+          authenticationCache = auth
+          setValue(auth)
+        }}
+      >
+        {children}
+      </AuthenticationWriteContext.Provider>
     </AuthenticationReadContext.Provider>
   )
 }

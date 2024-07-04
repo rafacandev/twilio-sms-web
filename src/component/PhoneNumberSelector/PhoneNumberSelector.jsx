@@ -2,7 +2,6 @@ import Select from "react-select"
 import { useEffect, useState } from "react"
 import "./PhoneNumberSelector.css"
 import { getTwilioPhoneNumbers } from "../../core/getTwilioPhoneNumbers"
-import { useAuthentication } from "../../context/AuthenticationProvider"
 
 // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
 const maskPhoneNumber = v => {
@@ -17,14 +16,13 @@ export const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = 
   const [loading, setLoading] = useState(true)
   const [phoneNumbers, setPhoneNumbers] = useState([])
   const [isError, setError] = useState(false)
-  const [authentication] = useAuthentication()
 
   const handleOnChange = event => {
     onPhoneNumberChange(event.value)
   }
 
   useEffect(() => {
-    getTwilioPhoneNumbers(authentication)
+    getTwilioPhoneNumbers()
       .then(pn => {
         setPhoneNumbers(pn)
         setLoading(false)
@@ -34,7 +32,7 @@ export const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = 
         onError(err)
         setLoading(false)
       })
-  }, [authentication, setPhoneNumbers, setLoading, setError, onError])
+  }, [setPhoneNumbers, setLoading, setError, onError])
 
   const phoneNumberOptions = phoneNumbers.map(v => ({
     value: v,

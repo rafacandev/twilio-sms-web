@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Authentication, toCredentials } from "../context/AuthenticationProvider"
+import { Authentication, getAuthentication, toCredentials } from "../context/AuthenticationProvider"
 import { isEmpty } from "lodash"
 
 export const buildUrl = (accountSid = "", pageSize = 8, pageNumber = 0) =>
@@ -60,9 +60,9 @@ let cache = []
  * @param {Authentication} authentication
  * @returns {function():Promise<Array<string>>}
  */
-export const getTwilioPhoneNumbers = async authentication => {
+export const getTwilioPhoneNumbers = async () => {
   if (isEmpty(cache)) {
-    const response = await getTwilioPhoneNumbersResursively(authentication)
+    const response = await getTwilioPhoneNumbersResursively(getAuthentication())
     cache = response
       .flatMap(r => r?.data?.incoming_phone_numbers)
       .filter(pn => pn?.capabilities?.sms)

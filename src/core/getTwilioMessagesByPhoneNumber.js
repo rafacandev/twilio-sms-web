@@ -1,9 +1,11 @@
 import axios from "axios"
-import { Authentication, toCredentials } from "../context/AuthenticationProvider"
+import { toCredentials } from "../context/AuthenticationProvider"
 
 const sortByDate = (a, b) => (Date.parse(a.date) > Date.parse(b.date) ? -1 : 1)
 
 /**
+ * @typedef {import('../context/AuthenticationProvider').Authentication} Authentication
+ *
  * @param {Authentication} authentication
  * @param {string} phoneNumber
  * @returns

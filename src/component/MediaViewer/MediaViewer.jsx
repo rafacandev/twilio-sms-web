@@ -2,7 +2,6 @@ import "./MediaViewer.css"
 import { useEffect, useState } from "react"
 import { getTwilioMedia } from "../../core/getTwilioMedia"
 import { LoadingOutlined } from "@ant-design/icons"
-import { useAuthentication } from "../../context/AuthenticationProvider"
 import { isEmpty } from "lodash"
 
 const Loading = () => (
@@ -23,14 +22,13 @@ const MediaContent = ({ media = [] }) => (
 export const MediaViewer = ({ messageSid = "" }) => {
   const [loading, setLoading] = useState(true)
   const [media, setMedia] = useState([])
-  const [authentication] = useAuthentication()
 
   useEffect(() => {
-    getTwilioMedia(authentication, messageSid).then(m => {
+    getTwilioMedia(messageSid).then(m => {
       setMedia(m)
       setLoading(false)
     })
-  }, [authentication, messageSid])
+  }, [messageSid])
 
   if (loading) {
     return <Loading />
