@@ -3,6 +3,11 @@ import { getAuthentication, toCredentials } from "../context/AuthenticationProvi
 
 const cache = new Map()
 
+/**
+ *
+ * @param {string} messageSid
+ * @returns {Promise<string>}
+ */
 export const getTwilioMedia = async messageSid => {
   const authentication = getAuthentication()
   if (cache.has(messageSid)) {

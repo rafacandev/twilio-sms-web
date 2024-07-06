@@ -22,16 +22,18 @@ export const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = 
   }
 
   useEffect(() => {
-    getTwilioPhoneNumbers()
-      .then(pn => {
-        setPhoneNumbers(pn)
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(true)
-        onError(err)
-        setLoading(false)
-      })
+    const init = async () => {
+      try {
+        const pn = await getTwilioPhoneNumbers()
+        // setPhoneNumbers(pn)
+      } catch (err) {
+        // setError(true)
+        // onError(err)
+      } finally {
+        // setLoading(false)
+      }
+    }
+    init()
   }, [setPhoneNumbers, setLoading, setError, onError])
 
   const phoneNumberOptions = phoneNumbers.map(v => ({

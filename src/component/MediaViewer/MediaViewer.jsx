@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { getTwilioMedia } from "../../core/getTwilioMedia"
 import { LoadingOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
+import { useIsMounted } from "../../core/useIsMounted"
 
 const Loading = () => (
   <div className="message-viewer-loading">
@@ -22,13 +23,14 @@ const MediaContent = ({ media = [] }) => (
 export const MediaViewer = ({ messageSid = "" }) => {
   const [loading, setLoading] = useState(true)
   const [media, setMedia] = useState([])
+  const isMounted = useIsMounted()
 
   useEffect(() => {
-    getTwilioMedia(messageSid).then(m => {
-      setMedia(m)
-      setLoading(false)
-    })
-  }, [messageSid])
+    getTwilioMedia(messageSid)
+      .then(m => isMounted() && setMedia(m))
+      .catch(err => console.log("TODO: Create a warning component for the user to know about the failure", err))
+      .then(() => isMounted() && setLoading(false))
+  }, [isMounted, messageSid, setMedia, setLoading])
 
   if (loading) {
     return <Loading />
