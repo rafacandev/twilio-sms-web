@@ -2,6 +2,7 @@ import Select from "react-select"
 import { useEffect, useState } from "react"
 import "./PhoneNumberSelector.css"
 import { getTwilioPhoneNumbers } from "../../core/getTwilioPhoneNumbers"
+import { useIsMounted } from "../../core/useIsMounted"
 
 // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
 const maskPhoneNumber = v => {
@@ -16,25 +17,23 @@ export const PhoneNumberSelector = ({ onError = () => {}, onPhoneNumberChange = 
   const [loading, setLoading] = useState(true)
   const [phoneNumbers, setPhoneNumbers] = useState([])
   const [isError, setError] = useState(false)
+  const isMounted = useIsMounted()
 
   const handleOnChange = event => {
     onPhoneNumberChange(event.value)
   }
 
   useEffect(() => {
-    const init = async () => {
-      try {
-        const pn = await getTwilioPhoneNumbers()
-        // setPhoneNumbers(pn)
-      } catch (err) {
-        // setError(true)
-        // onError(err)
-      } finally {
-        // setLoading(false)
-      }
-    }
-    init()
-  }, [setPhoneNumbers, setLoading, setError, onError])
+    getTwilioPhoneNumbers()
+      .then(pn => isMounted() && setPhoneNumbers(pn))
+      .catch(err => {
+        if (isMounted()) {
+          setError(err)
+          onError(err)
+        }
+      })
+      .then(() => isMounted() && setLoading(false))
+  }, [isMounted, setPhoneNumbers, setError, onError, setLoading])
 
   const phoneNumberOptions = phoneNumbers.map(v => ({
     value: v,
