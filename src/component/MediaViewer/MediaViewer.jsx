@@ -1,9 +1,9 @@
 import "./MediaViewer.css"
 import { useEffect, useState } from "react"
-import { getTwilioMedia } from "../../core/getTwilioMedia"
+import { getTwilioMedia } from "../../js/getTwilioMedia"
 import { LoadingOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
-import { useIsMounted } from "../../core/useIsMounted"
+import { useIsMounted } from "../../js/useIsMounted"
 
 const Loading = () => (
   <div className="message-viewer-loading">

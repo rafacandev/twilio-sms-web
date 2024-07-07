@@ -5,7 +5,7 @@ import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { InputField } from "../InputField/InputField"
 import { TextAreaField } from "../TextAreaField/TextAreaField"
 import { useComposerContext } from "../../context/ComposerProvider"
-import { sendTwilioMessage } from "../../core/sendTwilioMessage"
+import { sendTwilioMessage } from "../../js/sendTwilioMessage"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 
 export const MessageComposer = ({ phoneNumber = "" }) => {

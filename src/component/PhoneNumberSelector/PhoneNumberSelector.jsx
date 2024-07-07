@@ -1,8 +1,8 @@
 import Select from "react-select"
 import { useEffect, useState } from "react"
 import "./PhoneNumberSelector.css"
-import { getTwilioPhoneNumbers } from "../../core/getTwilioPhoneNumbers"
-import { useIsMounted } from "../../core/useIsMounted"
+import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
+import { useIsMounted } from "../../js/useIsMounted"
 
 // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
 const maskPhoneNumber = v => {

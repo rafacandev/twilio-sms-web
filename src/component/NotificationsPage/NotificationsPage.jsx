@@ -1,11 +1,11 @@
 import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { getOrCreateTwilioDocument } from "../../hook/useCreateTwilioDocument"
 import { useEffect, useState } from "react"
-import { getTwilioMessages } from "../../core/getTwilioMessages"
+import { getTwilioMessages } from "../../js/getTwilioMessages"
 import { MessageCard } from "../MessageCard/MessageCard"
 
 /**
- * @typedef {import ("../../core/getTwilioMessages").Message} Message
+ * @typedef {import ("../../js/getTwilioMessages").Message} Message
  */
 
 /**

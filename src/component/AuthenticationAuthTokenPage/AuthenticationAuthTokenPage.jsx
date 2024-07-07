@@ -9,7 +9,7 @@ import {
 } from "../../context/AuthenticationProvider"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getTwilioPhoneNumbersByPage } from "../../core/getTwilioPhoneNumbersByPage"
+import { getTwilioPhoneNumbersByPage } from "../../js/getTwilioPhoneNumbersByPage"
 
 export const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()

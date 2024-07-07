@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Loading } from "./MessageListView"
 import { MessageCard } from "../MessageCard/MessageCard"
 import { useAuthentication } from "../../context/AuthenticationProvider"
-import { getTwilioMessagesByPhoneNumber } from "../../core/getTwilioMessagesByPhoneNumber"
+import { getTwilioMessagesByPhoneNumber } from "../../js/getTwilioMessagesByPhoneNumber"
 
 export const MessageList = ({
   phoneNumber = undefined,
