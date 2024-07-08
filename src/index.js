@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import "./index.css"
 import { App } from "./App"
 import { reportWebVitals } from "./reportWebVitals"
-import { initializeGoogleTagManager } from "./google-tag-manager/google-tag-manager"
+import { initializeGoogleTagManager } from "./js/google-tag-manager"
 
 initializeGoogleTagManager()
 
