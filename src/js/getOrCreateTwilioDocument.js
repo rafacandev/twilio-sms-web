@@ -1,7 +1,7 @@
 import axios from "axios"
 import { isAxiosError } from "axios"
 import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
-import { getOrCreateService } from "../js/getTwilioService"
+import { getOrCreateService } from "./getTwilioService"
 
 const TWILIO_SMS_WEB = "twilio_sms_web"
 

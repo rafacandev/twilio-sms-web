@@ -1,5 +1,5 @@
 import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
-import { getOrCreateTwilioDocument } from "../../hook/useCreateTwilioDocument"
+import { getOrCreateTwilioDocument } from "../../js/getOrCreateTwilioDocument"
 import { useEffect, useState } from "react"
 import { getTwilioMessages } from "../../js/getTwilioMessages"
 import { MessageCard } from "../MessageCard/MessageCard"
