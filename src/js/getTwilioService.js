@@ -23,15 +23,14 @@ const getService = async authentication => {
   return serviceCache
 }
 
-
 /**
  * @typedef {Object} TwilioService
  * @property {string} friendly_name - The string that you assigned to describe the resource.
  * @property {string} account_sid - The SID of the Account that created the Service resource.
  * @property {string} sid - The unique string that we created to identify the Service resource.
-*/
+ */
 
 /**
  * @returns {Promise<TwilioService>} - Twilio Service for sync API
-*/
+ */
 export const getOrCreateService = authentication => getService(authentication) ?? createService(authentication)
