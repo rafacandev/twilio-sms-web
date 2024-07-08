@@ -55,7 +55,7 @@ const getOrCreateDocument = async (authentication, serviceSid) => {
 /**
  * @returns {Promise<TwilioDocument>}
  */
-export const getOrCreateTwilioDocument = () => {
+export const getOrCreateTwilioDocument = async () => {
   const authentication = getAuthentication()
   return getOrCreateService(authentication).then(service => getOrCreateDocument(authentication, service.sid))
 }
