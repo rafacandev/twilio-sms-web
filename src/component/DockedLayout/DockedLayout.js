@@ -3,11 +3,11 @@ import { GithubOutlined, InboxOutlined, SendOutlined, PhoneOutlined } from "@ant
 const iconStyle = { fontSize: ".9rem", lineHeight: "1.5rem" }
 
 const NavItem = ({ children }) => (
-  <div className="h-12 flex flex-col px-4 mx-2 hover:bg-violet-700 hover:cursor-pointer">{children}</div>
+  <div className="h-12 flex flex-col px-3 mx-2 hover:bg-violet-700 hover:cursor-pointer">{children}</div>
 )
 
 const NavBar = () => (
-  <nav className="text-white px-5 flex">
+  <nav className="text-white px-2 flex">
     <NavItem>
       <InboxOutlined style={iconStyle} />
       Inbox
