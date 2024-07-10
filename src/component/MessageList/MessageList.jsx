@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Loading } from "./MessageListView"
 import { MessageCard } from "../MessageCard/MessageCard"
-import { useAuthentication } from "../../context/AuthenticationProvider"
 import { getTwilioMessagesByPhoneNumber } from "../../js/getTwilioMessagesByPhoneNumber"
 
 export const MessageList = ({
@@ -13,12 +12,10 @@ export const MessageList = ({
   const [loading, setLoading] = useState(true)
   const [messages, setMessages] = useState([])
   const [loadedPhoneNumber, setLoadedPhoneNumber] = useState(undefined)
-  const [authentication] = useAuthentication()
 
-  console.log({ phoneNumber })
   useEffect(() => {
     if (phoneNumber !== undefined && loadedPhoneNumber !== phoneNumber) {
-      getTwilioMessagesByPhoneNumber(authentication, phoneNumber)
+      getTwilioMessagesByPhoneNumber(phoneNumber)
         .then(ms => {
           setLoadedPhoneNumber(phoneNumber)
           setMessages(ms)
@@ -27,7 +24,7 @@ export const MessageList = ({
         .catch(onError)
         .then(onComplete)
     }
-  }, [loading, authentication, phoneNumber, loadedPhoneNumber, onError, onComplete, setLoading])
+  }, [loading, phoneNumber, loadedPhoneNumber, onError, onComplete, setLoading])
 
   if (loading) return <Loading className="h1 m-2" />
 
