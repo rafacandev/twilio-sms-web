@@ -20,6 +20,7 @@ import { AuthenticationApiKeyPage } from "./component/AuthenticationApiKeyPage/A
 import { NotificationsPage } from "./component/NotificationsPage/NotificationsPage"
 import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedRoute"
 import { MailBox } from "./component/MailBox/MailBox"
+import { UiPage } from "./component/UiPage/UiPage"
 
 export const App = () => {
   return (
@@ -35,6 +36,7 @@ export const App = () => {
               <AuthenticatedRoute path="/phone-numbers" component={MessagesPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/mailbox" component={MailBox} retirectTo="/authentication" />
+              <Route path="/ui" component={UiPage} />
             </Switch>
           </HashRouter>
         </ComposerProvider>
