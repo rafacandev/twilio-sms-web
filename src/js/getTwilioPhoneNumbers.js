@@ -57,7 +57,6 @@ const getTwilioPhoneNumbersResursively = async (
 
 let cache = []
 /**
- * @param {Authentication} authentication
  * @returns {Promise<Array<string>>}
  */
 export const getTwilioPhoneNumbers = async () => {
