@@ -9,7 +9,7 @@ const messageLabelClass = direction => `message-card-label text-code text-small 
 const messageLabelRotation = direction => (toBaseDirection(direction) === "inbound" ? 180 : 0)
 const copyStyle = { padding: "0", margin: "0" }
 
-const toDateString = date => {
+export const toDateString = date => {
   const d = new Date(date)
   return `${d.toDateString()} ${d.toLocaleTimeString()}`
 }
