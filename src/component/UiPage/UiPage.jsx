@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import { DockedLayout } from "../DockedLayout/DockedLayout"
 import { MessageTable } from "../MessageTable/MessageTable"
 
@@ -16,6 +17,7 @@ const messages = [
     messageSid: "SM353e3a1cba2954973ff040a37bed2590",
     status: "undelivered",
     to: "+15550000001",
+    date: dayjs().subtract(40, 'second'),
     isRead: true,
   },
   {
@@ -25,6 +27,7 @@ const messages = [
     messageSid: "SM3fbd8b8d17b341b8e8d7f1e1b7287b20",
     status: "delivered",
     to: "+15550000001",
+    date: dayjs().subtract(5, 'minute'),
   },
   {
     body: `Don't forget our meeting tomorrow at 10 AM.
@@ -35,6 +38,7 @@ const messages = [
     messageSid: "SM47bfc5e10f8c4b1b9a6f3a0b712bb1d5",
     status: "delivered",
     to: "+15550000001",
+    date: dayjs().subtract(2, 'month'),
     isRead: true,
   },
   {
@@ -44,6 +48,7 @@ const messages = [
     messageSid: "SM75a5b42b8e14f60b12f27c8a8b1e6f02",
     status: "undelivered",
     to: "+15550000001",
+    date: dayjs().subtract(3, 'year'),
   },
 ]
 

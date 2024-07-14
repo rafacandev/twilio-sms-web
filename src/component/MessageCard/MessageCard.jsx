@@ -10,6 +10,7 @@ const messageLabelRotation = direction => (toBaseDirection(direction) === "inbou
 const copyStyle = { padding: "0", margin: "0" }
 
 export const toDateString = date => {
+  if (!date) return ''
   const d = new Date(date)
   return `${d.toDateString()} ${d.toLocaleTimeString()}`
 }

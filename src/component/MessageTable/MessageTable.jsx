@@ -1,4 +1,4 @@
-import { toDateString } from "../MessageCard/MessageCard"
+import { fromNow } from "../../js/util"
 
 /**
  * @typedef {Object} Message
@@ -15,9 +15,9 @@ import { toDateString } from "../MessageCard/MessageCard"
  */
 export const MessageRow = message => (
   <tr key={message.messageSid} className="h-12 border hover:bg-violet-100 hover:cursor-pointer">
-    <td className="p-2 border-r border-violet-200">{message.to}</td>
-    <td className="p-2 border-r border-violet-200">{message.from}</td>
-    <td className="p-2 border-r border-violet-200 hidden md:table-cell">{toDateString(message.date)}</td>
+    <td className="p-2 border-r border-violet-200 font-mono">{message.to}</td>
+    <td className="p-2 border-r border-violet-200 font-mono">{message.from}</td>
+    <td className="p-2 border-r border-violet-200 text-xs hidden md:table-cell">{fromNow(message.date)}</td>
     <td className="p-2 truncate">{message.body}</td>
   </tr>
 )
@@ -29,9 +29,9 @@ export const MessageTable = ({ messages }) => (
   <table className="table-fixed border-violet-200 w-full">
     <thead className="bg-violet-200 h-6">
       <tr>
-        <th className="w-32">To</th>
-        <th className="w-32">From</th>
-        <th className="w-32 hidden md:table-cell">Date</th>
+        <th className="w-28">To</th>
+        <th className="w-28">From</th>
+        <th className="w-20 hidden md:table-cell">Date</th>
         <th className="">Message</th>
       </tr>
     </thead>
