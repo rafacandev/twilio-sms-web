@@ -44,7 +44,6 @@ export const getTwilioMessagesByPhoneNumber = async phoneNumber => {
     .sort(sortByDate)
 }
 
-
 /**
  * @param {Array<string>} phoneNumber
  * @returns {Array<Message>}
