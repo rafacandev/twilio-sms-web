@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { DockedLayout } from "../DockedLayout/DockedLayout"
-import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { getTwilioMessages } from "../../js/getTwilioMessagesByPhoneNumber"
-import { MessageTable } from "../MessageTable/MessageTable"
+import { MessageRows } from "../MessageRows/MessageRows"
 
 export const MailBox = () => {
   const [messages, setMessages] = useState([])
@@ -15,7 +14,7 @@ export const MailBox = () => {
     <DockedLayout>
       <h3>Inbox</h3>
       <p className="text-xs italic">Your most recent incoming messages</p>
-      <MessageTable messages={messages} />
+      <MessageRows messages={messages} />
     </DockedLayout>
   )
 }
