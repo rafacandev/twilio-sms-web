@@ -12,27 +12,49 @@ import { fromNow } from "../../js/util"
 
 /**
  * @param {Message} message
+ * @returns {boolean}
+ */
+const isRead = message => message.isRead ?? false
+
+/**
+ * @param {Message} message
+ * @returns {string}
+ */
+const isReadContent = message => (isRead(message) ? "bg-gray-200 text-gray-600" : "")
+
+/**
+ * @param {Message} message
+ * @returns {string}
+ */
+const isReadHeader = message => (isRead(message) ? "text-gray-400" : "text-gray-500")
+
+/**
+ * @param {Message} message
  */
 const MessageRow = message => (
   <div
     key={message.messageSid}
-    className="border-t-2 border-l-8 border-l-transparent border-violet-200 hover:border-l-violet-500 hover:bg-violet-100 hover:cursor-pointer active:bg-violet-200 p-3"
+    className={`
+    border-violet-200 border-b-2
+    shadow-black
+    hover:bg-violet-100 hover:cursor-pointer  hover:shadow-md hover:border-b-violet-400
+    active:bg-violet-200 h-20 p-2 ${isReadContent(message)}`}
   >
-    <div className="flex text-xs text-gray-500 mb-1">
-      <div className="w-20">
+    <div className={`text-xs mb-2 overflow-clip font-sans font-light ${isReadHeader(message)}`}>
+      <span className="inline-block w-20">
         <b>Inbound</b>
-      </div>
-      <div className="w-32">
+      </span>
+      <span className="inline-block w-32">
         <b>To:</b>
         {message.to}
-      </div>
-      <div className="w-36">
+      </span>
+      <span className="inline-block w-36">
         <b>From:</b>
         {message.from}
-      </div>
-      <div className="invisible md:visible">{fromNow(message.date)}</div>
+      </span>
+      <span className="hidden md:inline-block">{fromNow(message.date)}</span>
     </div>
-    <div>{message.body}</div>
+    <div className="line-clamp-2">{message.body}</div>
   </div>
 )
 
@@ -40,5 +62,5 @@ const MessageRow = message => (
  * @param {{messages: Array<Message>}} messages
  */
 export const MessageRows = ({ messages }) => (
-  <div className="border-violet-200 border-b-2 border-x-2">{messages.map(MessageRow)}</div>
+  <div className="border-2 border-b-0 border-violet-200">{messages.map(MessageRow)}</div>
 )
