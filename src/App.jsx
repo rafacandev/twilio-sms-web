@@ -21,6 +21,7 @@ import { NotificationsPage } from "./component/NotificationsPage/NotificationsPa
 import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedRoute"
 import { MailBox } from "./component/MailBox/MailBox"
 import { UiPage } from "./component/UiPage/UiPage"
+import { NotFoundPage } from "./component/NotFoundPage/NotFoundPage"
 
 export const App = () => {
   return (
@@ -37,6 +38,7 @@ export const App = () => {
               <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/mailbox" component={MailBox} retirectTo="/authentication" />
               <Route path="/ui" component={UiPage} />
+              <Route path="*" component={NotFoundPage} />
             </Switch>
           </HashRouter>
         </ComposerProvider>
