@@ -118,9 +118,9 @@ export const UiPage = () => (
     <h3>UI Page</h3>
     <p className="italic">Display mocked UI elements for quick iteration</p>
     <hr />
-    <NotFoundPage />
-    <hr />
     <p className="my-1">MessageRows with messages</p>
     <MessageRows messages={messages} />
+    <hr />
+    <NotFoundPage />
   </DockedLayout>
 )
