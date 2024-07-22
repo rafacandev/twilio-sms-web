@@ -1,4 +1,5 @@
 import { fromNow } from "../../js/util"
+import { ContainerFilled, ContainerOutlined } from "@ant-design/icons"
 
 /**
  * @typedef {Object} Message
@@ -33,28 +34,29 @@ const isReadHeader = message => (isRead(message) ? "text-gray-400" : "text-gray-
  */
 const MessageRow = message => (
   <div
-    key={message.messageSid}
-    className={`
-    border-violet-200 border-b-2
-    shadow-black
-    hover:bg-violet-100 hover:cursor-pointer  hover:shadow-md hover:border-b-violet-400
-    active:bg-violet-200 h-20 p-2 ${isReadContent(message)}`}
+    className={`flex
+  ${isReadContent(message)}
+  border-violet-200 border-b-2
+  shadow-black
+  hover:bg-violet-100 hover:cursor-pointer  hover:shadow-md hover:border-b-violet-400 hover:border-l-violet-400
+  active:bg-violet-200 h-24
+  `}
   >
-    <div className={`text-xs mb-2 overflow-clip font-sans font-light ${isReadHeader(message)}`}>
-      <span className="inline-block w-20">
-        <b>Inbound</b>
-      </span>
-      <span className="inline-block w-32">
-        <b>To:</b>
-        {message.to}
-      </span>
-      <span className="inline-block w-36">
-        <b>From:</b>
-        {message.from}
-      </span>
-      <span className="hidden md:inline-block">{fromNow(message.date)}</span>
+    <ContainerOutlined className="text-lg text-violet-900 pt-6 pl-2 pr-2" />
+    <div key={message.messageSid} className="grow">
+      <div className={`${isReadHeader(message)} text-xs my-2 overflow-clip font-sans font-light`}>
+        <span className="inline-block w-32">
+          <b>To:</b>
+          {message.to}
+        </span>
+        <span className="inline-block w-36">
+          <b>From:</b>
+          {message.from}
+        </span>
+        <span className="hidden md:inline-block">{fromNow(message.date)}</span>
+      </div>
+      <div className="line-clamp-3">{message.body}</div>
     </div>
-    <div className="line-clamp-2">{message.body}</div>
   </div>
 )
 
