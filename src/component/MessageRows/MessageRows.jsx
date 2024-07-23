@@ -1,5 +1,5 @@
+import { ContainerOutlined } from "@ant-design/icons"
 import { fromNow } from "../../js/util"
-import { ContainerFilled, ContainerOutlined } from "@ant-design/icons"
 
 /**
  * @typedef {Object} Message
@@ -42,7 +42,7 @@ const MessageRow = message => (
   active:bg-violet-200 h-24
   `}
   >
-    <ContainerOutlined className="text-lg text-violet-900 pt-6 pl-2 pr-2" />
+    <ContainerOutlined className="text-lg text-violet-900 pt-6 pl-2 pr-3" />
     <div key={message.messageSid} className="grow">
       <div className={`${isReadHeader(message)} text-xs my-2 overflow-clip font-sans font-light`}>
         <span className="inline-block w-32">
