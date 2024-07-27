@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { DockedLayout } from "../DockedLayout/DockedLayout"
-import { getTwilioMessages } from "../../js/getTwilioMessagesByPhoneNumber"
+import { getTwilioMessages } from "../../js/getTwilioMessages"
 import { MessageRows } from "../MessageRows/MessageRows"
 
 export const Inbox = () => {
