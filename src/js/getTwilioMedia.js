@@ -4,7 +4,6 @@ import { getAuthentication, toCredentials } from "../context/AuthenticationProvi
 const cache = new Map()
 
 /**
- *
  * @param {string} messageSid
  * @returns {Promise<string>}
  */
