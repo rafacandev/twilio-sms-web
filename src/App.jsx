@@ -19,9 +19,9 @@ import { AuthenticationAuthTokenPage } from "./component/AuthenticationAuthToken
 import { AuthenticationApiKeyPage } from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage"
 import { NotificationsPage } from "./component/NotificationsPage/NotificationsPage"
 import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedRoute"
-import { MailBox } from "./component/MailBox/MailBox"
 import { UiPage } from "./component/UiPage/UiPage"
 import { NotFoundPage } from "./component/NotFoundPage/NotFoundPage"
+import { Inbox } from "./component/Inbox/Inbox"
 
 export const App = () => {
   return (
@@ -36,7 +36,7 @@ export const App = () => {
               <Route path="/authentication-api-key" component={AuthenticationApiKeyPage} />
               <AuthenticatedRoute path="/phone-numbers" component={MessagesPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
-              <AuthenticatedRoute path="/mailbox" component={MailBox} retirectTo="/authentication" />
+              <AuthenticatedRoute path="/inbox" component={Inbox} retirectTo="/authentication" />
               <Route path="/ui" component={UiPage} />
               <Route path="*" component={NotFoundPage} />
             </Switch>

@@ -3,7 +3,7 @@ import { DockedLayout } from "../DockedLayout/DockedLayout"
 import { getTwilioMessages } from "../../js/getTwilioMessagesByPhoneNumber"
 import { MessageRows } from "../MessageRows/MessageRows"
 
-export const MailBox = () => {
+export const Inbox = () => {
   const [messages, setMessages] = useState([])
 
   useEffect(() => {

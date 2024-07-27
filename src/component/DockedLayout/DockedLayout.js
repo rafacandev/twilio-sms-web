@@ -11,7 +11,7 @@ const NavBar = () => {
   const history = useHistory()
 
   const navigateToInbox = () => {
-    history.push("/mailbox")
+    history.push("/inbox")
   }
 
   return (
@@ -19,7 +19,7 @@ const NavBar = () => {
       <nav className="text-white text-[.75rem] px-2 flex">
         <NavItem onClick={navigateToInbox}>
           <InboxOutlined className="text-lg" />
-          Mailbox
+          Inbox
         </NavItem>
         <NavItem>
           <SendOutlined className="text-lg" />
