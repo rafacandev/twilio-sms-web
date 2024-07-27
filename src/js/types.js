@@ -6,4 +6,5 @@
  * @prop {string} to
  * @prop {string} status
  * @prop {string} body
+ * @prop {boolean} hasMedia
  */

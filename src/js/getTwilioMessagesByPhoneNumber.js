@@ -58,6 +58,7 @@ export const getTwilioMessages = async () => {
       date: v.date_created,
       status: v.status,
       body: v.body,
+      hasMedia: parseInt(v.num_media) > 0,
     }))
     .sort(sortByDate)
 }

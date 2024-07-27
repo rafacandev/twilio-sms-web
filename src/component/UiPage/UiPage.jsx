@@ -20,6 +20,7 @@ const messages = [
     to: "+15550000002",
     date: dayjs().subtract(2, "hours"),
     isRead: false,
+    hasMedia: false,
   },
   {
     body: "Almost done. I'll send it over in an hour.",
@@ -30,6 +31,7 @@ const messages = [
     to: "+15550000001",
     date: dayjs().subtract(1, "hour"),
     isRead: false,
+    hasMedia: true,
   },
   {
     body: "Great! Can you also include the summary of the last meeting?",
@@ -40,6 +42,7 @@ const messages = [
     to: "+15550000002",
     date: dayjs().subtract(55, "minutes"),
     isRead: false,
+    hasMedia: false,
   },
   {
     body: "Sure, I'll add it in. isRead === undefined",
@@ -60,6 +63,7 @@ const messages = [
     to: "+15550000001",
     date: dayjs().subtract(30, "minutes"),
     isRead: false,
+    hasMedia: true,
   },
   {
     body: "Received. Everything looks good. Thanks for the quick turnaround!",
@@ -70,6 +74,7 @@ const messages = [
     to: "+15550000002",
     date: dayjs().subtract(20, "minutes"),
     isRead: true,
+    hasMedia: true,
   },
   {
     body: "No problem! Let me know if there's anything else you need.",
