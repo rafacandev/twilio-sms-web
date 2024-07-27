@@ -9,7 +9,7 @@ import {
 } from "../../context/AuthenticationProvider"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getTwilioPhoneNumbersByPage } from "../../js/getTwilioPhoneNumbersByPage"
+import { hasPermissions } from "../../js/hasTwilioPermissions"
 
 export const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -37,14 +37,8 @@ export const AuthenticationAuthTokenPage = () => {
 
   const handleSignIn = () => {
     setLoading(true)
-    /*
-     * We want to get phone numbers after sign-in because at minimum we want to know
-     * if the credentials have permissions for it before moving forward
-     *
-     * TODO: Get a list of permissions from Twilio and controll what the user may or may not do.
-     */
     const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
-    getTwilioPhoneNumbersByPage(auth).then(handlePhoneNumbersSuccess).catch(handleError)
+    hasPermissions(auth).then(handlePhoneNumbersSuccess).catch(handleError)
   }
 
   return (
