@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 import { DockedLayout } from "../DockedLayout/DockedLayout"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
+import { Selector } from "../Inbox/Selector"
 
 /**
  * @typedef {import ('../../js/types').Message}
@@ -124,6 +125,7 @@ export const UiPage = () => (
     <p className="italic">Display mocked UI elements for quick iteration</p>
     <hr />
     <p className="my-1">MessageRows with messages</p>
+    <Selector />
     <MessageRows messages={messages} />
     <hr />
     <NotFoundPage />
