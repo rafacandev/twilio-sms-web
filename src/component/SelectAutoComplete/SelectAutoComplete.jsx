@@ -1,97 +1,129 @@
-import { useState } from "react";
+import { useState } from "react"
+import { emptyFn } from "../../js/types"
 
-export const AutoComplete = ({ suggestions }) => {
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [input, setInput] = useState("");
+const states = [
+  "Alabama",
+  "Alaska",
+  "Arizona",
+  "Arkansas",
+  "California",
+  "Colorado",
+  "Connecticut",
+  "Delaware",
+  "Florida",
+  "Georgia",
+  "Hawaii",
+  "Idaho",
+  "Illinois",
+  "Indiana",
+  "Iowa",
+  "Kansas",
+  "Kentucky",
+  "Louisiana",
+  "Maine",
+  "Maryland",
+  "Massachusetts",
+  "Michigan",
+  "Minnesota",
+  "Mississippi",
+  "Missouri",
+  "Montana",
+  "Nebraska",
+  "Nevada",
+  "New Hampshire",
+  "New Jersey",
+  "New Mexico",
+  "New York",
+  "North Carolina",
+  "North Dakota",
+  "Ohio",
+  "Oklahoma",
+  "Oregon",
+  "Pennsylvania",
+  "Rhode Island",
+  "South Carolina",
+  "South Dakota",
+  "Tennessee",
+  "Texas",
+  "Utah",
+  "Vermont",
+  "Virginia",
+  "Washington",
+  "West Virginia",
+  "Wisconsin",
+  "Wyoming",
+]
 
-  const onChange = (e) => {
-    const userInput = e.target.value;
+const Options = ({ options = [], onChange = emptyFn }) =>
+  options.map((o, i) => (
+    <option key={i} value={o} className="px-2 py-1.5 hover:via-violet-200" onChange={onChange}>
+      {o}
+    </option>
+  ))
 
-    // Filter our suggestions that don't contain the user's input
-    const unLinked = suggestions.filter(
-      (suggestion) =>
-        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-
-    setInput(e.target.value);
-    setFilteredSuggestions(unLinked);
-    setActiveSuggestionIndex(0);
-    setShowSuggestions(true);
-  };
-
-  const onClick = (e) => {
-    setFilteredSuggestions([]);
-    setInput(e.target.innerText);
-    setActiveSuggestionIndex(0);
-    setShowSuggestions(false);
-  };
-
-  const onKeyDown = (e) => {
-    // User pressed the enter key
-    if (e.keyCode === 13) {
-      setInput(filteredSuggestions[activeSuggestionIndex]);
-      setActiveSuggestionIndex(0);
-      setShowSuggestions(false);
-    }
-    // User pressed the up arrow
-    else if (e.keyCode === 38) {
-      if (activeSuggestionIndex === 0) {
-        return;
-      }
-
-      setActiveSuggestionIndex(activeSuggestionIndex - 1);
-    }
-    // User pressed the down arrow
-    else if (e.keyCode === 40) {
-      if (activeSuggestionIndex - 1 === filteredSuggestions.length) {
-        return;
-      }
-
-      setActiveSuggestionIndex(activeSuggestionIndex + 1);
-    }
-  };
-
-  const SuggestionsListComponent = () => {
-    return filteredSuggestions.length ? (
-      <ul class="suggestions">
-        {filteredSuggestions.map((suggestion, index) => {
-          let className;
-
-          // Flag the active suggestion with a class
-          if (index === activeSuggestionIndex) {
-            className = "suggestion-active";
-          }
-
-          return (
-            <li className={className} key={suggestion} onClick={onClick}>
-              {suggestion}
-            </li>
-          );
-        })}
-      </ul>
-    ) : (
-      <div class="no-suggestions">
-        <span role="img" aria-label="tear emoji">
-          😪
-        </span>{" "}
-        <em>sorry no suggestions</em>
-      </div>
-    );
-  };
+const Select = ({ options = [], value = "", selected = "", isPrestine = true, onChange = emptyFn }) => {
+  if (isPrestine) return null
+  if (options.length < 1) return null
+  if (options.find(o => o.toLowerCase() === value.toLowerCase()) !== undefined) return null
 
   return (
     <>
+      <select
+        size="7"
+        value={selected}
+        className={`absolute left-0 top-8 w-full border-2 rounded border-violet-200 bg-white`}
+        onChange={ev => onChange(ev.target.value)}
+      >
+        <Options options={options} />
+      </select>
+    </>
+  )
+}
+
+export const SelectAutoComplete = ({}) => {
+  const [text, setText] = useState("")
+  const [optionIndex, setSelectedIndex] = useState(0)
+  const filteredOptions = states.filter(o => o.toLowerCase().includes(text.toLowerCase()))
+  const [isPrestine, setPrestine] = useState(true)
+
+  const selectOption = (direction = 0) => {
+    const target = optionIndex + direction
+    if (target >= filteredOptions.length || target < 0) return
+    setSelectedIndex(target)
+  }
+
+  const handleKeyDown = k => {
+    if ("ArrowDown" === k) {
+      selectOption(+1)
+    } else if ("ArrowUp" === k) {
+      selectOption(-1)
+    } else if ("Enter" === k) {
+      setText(filteredOptions[optionIndex])
+    } else {
+    }
+  }
+
+  const handleOnChange = (val = "") => {
+    setPrestine(false)
+    setText(val)
+  }
+
+  return (
+    <div className="relative w-44">
       <input
         type="text"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={input}
+        className="w-full border-2 rounded p-2 h-8 border-violet-200"
+        value={text}
+        onChange={e => handleOnChange(e.target.value)}
+        onKeyDown={e => handleKeyDown(e.key)}
       />
-      {showSuggestions && input && <SuggestionsListComponent />}
-    </>
-  );
-};
-
-export default AutoComplete;
+      <Select
+        isPrestine={isPrestine}
+        value={text}
+        selected={filteredOptions[optionIndex]}
+        options={filteredOptions}
+        onChange={handleOnChange}
+      />
+    </div>
+  )
+}

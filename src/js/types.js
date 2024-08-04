@@ -8,3 +8,5 @@
  * @prop {string} body
  * @prop {boolean} hasMedia
  */
+
+export const emptyFn = () => {}

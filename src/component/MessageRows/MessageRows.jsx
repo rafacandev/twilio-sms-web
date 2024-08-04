@@ -37,6 +37,7 @@ const messageBody = message =>
  */
 const MessageRow = message => (
   <div
+    key={message.messageSid}
     className={`flex
   ${isReadContent(message)}
   border-violet-200 border-b-2
@@ -49,7 +50,7 @@ const MessageRow = message => (
       <ContainerOutlined className="block mt-6 text-lg text-violet-900" />
       {message.hasMedia && <PaperClipOutlined className="block mt-2 text-violet-900" />}
     </div>
-    <div key={message.messageSid} className="grow">
+    <div className="grow">
       <div className={`${isReadHeader(message)} text-xs my-2 overflow-clip font-sans font-light`}>
         <span className="inline-block w-32">
           <b>To:</b>

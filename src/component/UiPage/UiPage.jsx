@@ -3,6 +3,7 @@ import { DockedLayout } from "../DockedLayout/DockedLayout"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
+import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
 
 /**
  * @typedef {import ('../../js/types').Message}
@@ -124,6 +125,7 @@ export const UiPage = () => (
     <h3>UI Page</h3>
     <p className="italic">Display mocked UI elements for quick iteration</p>
     <hr />
+    <SelectAutoComplete />
     <p className="my-1">MessageRows with messages</p>
     <Selector />
     <MessageRows messages={messages} />
