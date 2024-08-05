@@ -5,11 +5,11 @@ import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { useIsMounted } from "../../js/useIsMounted"
 
 // TODO: Currently, this mask is limited to country code +1; we need a mask for all country codes
-const maskPhoneNumber = v => {
+export const maskPhoneNumber = v => {
   let result = v.substr(0, 2)
   result += " " + v.substr(2, 3)
-  result += " " + v.substr(5, 3)
-  result += " " + v.substr(8)
+  result += "-" + v.substr(5, 3)
+  result += "-" + v.substr(8)
   return result
 }
 

@@ -4,9 +4,12 @@ import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
+import { range } from "lodash"
+import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
+import { useState } from "react"
 
 /**
- * @typedef {import ('../../js/types').Message}
+ * @typedef {import ('../../js/types').Message} Message
  */
 
 /**
@@ -120,16 +123,29 @@ const messages = [
   },
 ]
 
-export const UiPage = () => (
-  <DockedLayout>
-    <h3>UI Page</h3>
-    <p className="italic">Display mocked UI elements for quick iteration</p>
-    <hr />
-    <SelectAutoComplete />
-    <p className="my-1">MessageRows with messages</p>
-    <Selector />
-    <MessageRows messages={messages} />
-    <hr />
-    <NotFoundPage />
-  </DockedLayout>
-)
+const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  .map(i => `+1555000000${i}`)
+  .map(i => ({ val: i, text: maskPhoneNumber(i) }))
+
+export const UiPage = () => {
+  const [selected, setSelected] = useState("")
+  return (
+    <DockedLayout>
+      <h3>UI Page</h3>
+      <p className="italic">Display mocked UI elements for quick iteration</p>
+      <div>
+        <h5>Select with auto-complete</h5>
+        <div className="flex items-center gap-4">
+          <SelectAutoComplete options={phoneNumbersOptions} onChange={e => setSelected(e)} />
+          <div>Selected: {selected}</div>
+        </div>
+      </div>
+
+      <p className="my-1">MessageRows with messages</p>
+      <Selector />
+      <MessageRows messages={messages} />
+      <hr />
+      <NotFoundPage />
+    </DockedLayout>
+  )
+}

@@ -1,76 +1,26 @@
 import { useState } from "react"
 import { emptyFn } from "../../js/types"
 
-const states = [
-  "Alabama",
-  "Alaska",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "Florida",
-  "Georgia",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Pennsylvania",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-]
-
-const Options = ({ options = [], onChange = emptyFn }) =>
+const Options = ({ options = [{ val: "", text: "" }] }) =>
   options.map((o, i) => (
-    <option key={i} value={o} className="px-2 py-1.5 hover:via-violet-200" onChange={onChange}>
-      {o}
+    <option key={i} value={o.val} className="px-2 py-1.5 hover:via-violet-200">
+      {o.text}
     </option>
   ))
 
-const Select = ({ options = [], value = "", selected = "", isPrestine = true, onChange = emptyFn }) => {
+const Select = ({
+  options = [{ val: "", text: "" }],
+  selected = { val: "", text: "" },
+  isPrestine = true,
+  onChange = emptyFn,
+}) => {
   if (isPrestine) return null
   if (options.length < 1) return null
-  if (options.find(o => o.toLowerCase() === value.toLowerCase()) !== undefined) return null
-
   return (
     <>
       <select
         size="7"
-        value={selected}
+        value={selected.val}
         className={`absolute left-0 top-8 w-full border-2 rounded border-violet-200 bg-white`}
         onChange={ev => onChange(ev.target.value)}
       >
@@ -80,10 +30,13 @@ const Select = ({ options = [], value = "", selected = "", isPrestine = true, on
   )
 }
 
-export const SelectAutoComplete = ({}) => {
+export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange = emptyFn }) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
-  const filteredOptions = states.filter(o => o.toLowerCase().includes(text.toLowerCase()))
+  const filteredOptions = options.filter(o => {
+    const t = text.toLowerCase()
+    return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
+  })
   const [isPrestine, setPrestine] = useState(true)
 
   const selectOption = (direction = 0) => {
@@ -92,20 +45,31 @@ export const SelectAutoComplete = ({}) => {
     setSelectedIndex(target)
   }
 
-  const handleKeyDown = k => {
+  const handleOnChangeSelect = (val = "") => {
+    setPrestine(true)
+    const t = filteredOptions.find(o => o.val === val).text
+    setText(t)
+    onChange(t)
+  }
+
+  const handleOnChangeInput = (val = "") => {
+    setPrestine(false)
+    setText(val)
+  }
+
+  const handleOnKeyDownInput = k => {
     if ("ArrowDown" === k) {
       selectOption(+1)
     } else if ("ArrowUp" === k) {
       selectOption(-1)
     } else if ("Enter" === k) {
-      setText(filteredOptions[optionIndex])
-    } else {
+      if (!isPrestine) {
+        const t = filteredOptions[optionIndex].text
+        setText(filteredOptions[optionIndex].text)
+        onChange(t)
+      }
+      setPrestine(true)
     }
-  }
-
-  const handleOnChange = (val = "") => {
-    setPrestine(false)
-    setText(val)
   }
 
   return (
@@ -114,15 +78,15 @@ export const SelectAutoComplete = ({}) => {
         type="text"
         className="w-full border-2 rounded p-2 h-8 border-violet-200"
         value={text}
-        onChange={e => handleOnChange(e.target.value)}
-        onKeyDown={e => handleKeyDown(e.key)}
+        onChange={e => handleOnChangeInput(e.target.value)}
+        onKeyDown={e => handleOnKeyDownInput(e.key)}
+        onFocusCapture={e => setPrestine(false)}
       />
       <Select
         isPrestine={isPrestine}
-        value={text}
         selected={filteredOptions[optionIndex]}
         options={filteredOptions}
-        onChange={handleOnChange}
+        onChange={handleOnChangeSelect}
       />
     </div>
   )
