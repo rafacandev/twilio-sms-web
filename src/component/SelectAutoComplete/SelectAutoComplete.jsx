@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { emptyFn } from "../../js/types"
+import { DoubleRightOutlined } from "@ant-design/icons"
 
 const Options = ({ options = [{ val: "", text: "" }] }) =>
   options.map((o, i) => (
@@ -30,7 +31,7 @@ const Select = ({
   )
 }
 
-export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange = emptyFn }) => {
+export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange = emptyFn, className = "" }) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
   const filteredOptions = options.filter(o => {
@@ -57,12 +58,14 @@ export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange
     setText(val)
   }
 
-  const handleOnKeyDownInput = k => {
-    if ("ArrowDown" === k) {
+  const handleOnKeyDownInput = ev => {
+    if ("ArrowDown" === ev.key) {
+      ev.preventDefault()
       selectOption(+1)
-    } else if ("ArrowUp" === k) {
+    } else if ("ArrowUp" === ev.key) {
+      ev.preventDefault()
       selectOption(-1)
-    } else if ("Enter" === k) {
+    } else if ("Enter" === ev.key) {
       if (!isPrestine) {
         const t = filteredOptions[optionIndex].text
         setText(filteredOptions[optionIndex].text)
@@ -73,15 +76,16 @@ export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange
   }
 
   return (
-    <div className="relative w-44">
+    <div className={`relative ${className}`}>
       <input
         type="text"
         className="w-full border-2 rounded p-2 h-8 border-violet-200"
         value={text}
         onChange={e => handleOnChangeInput(e.target.value)}
-        onKeyDown={e => handleOnKeyDownInput(e.key)}
+        onKeyDown={e => handleOnKeyDownInput(e)}
         onFocusCapture={e => setPrestine(false)}
       />
+      <DoubleRightOutlined className="absolute right-1 top-3 bg-white text-black text-[.6rem]" rotate="90" />
       <Select
         isPrestine={isPrestine}
         selected={filteredOptions[optionIndex]}

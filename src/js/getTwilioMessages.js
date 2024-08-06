@@ -2,7 +2,7 @@ import axios from "axios"
 import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
 
 /**
- * @typedef { @import("./types/Message").Message} Message
+ * @typedef {import('./types').Message} Message
  */
 
 const sortByDate = (a, b) => (Date.parse(a.date) > Date.parse(b.date) ? -1 : 1)

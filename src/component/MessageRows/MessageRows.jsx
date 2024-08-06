@@ -16,7 +16,7 @@ const isRead = message => message.isRead ?? false
  * @param {Message} message
  * @returns {string}
  */
-const isReadContent = message => (isRead(message) ? "bg-gray-200 text-gray-600" : "")
+const isReadContent = message => (isRead(message) ? "bg-gray-200 text-gray-600" : "bg-white")
 
 /**
  * @param {Message} message
