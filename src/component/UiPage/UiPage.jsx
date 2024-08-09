@@ -4,7 +4,6 @@ import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
-import { range } from "lodash"
 import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
 import { useState } from "react"
 
@@ -136,7 +135,11 @@ export const UiPage = () => {
       <div>
         <h5>Select with auto-complete</h5>
         <div className="flex items-center gap-4">
-          <SelectAutoComplete options={phoneNumbersOptions} onChange={e => setSelected(e)} />
+          <SelectAutoComplete
+            options={phoneNumbersOptions}
+            onChange={e => setSelected(e)}
+            defaultValue="+15550000001"
+          />
           <div>Selected: {selected}</div>
         </div>
       </div>

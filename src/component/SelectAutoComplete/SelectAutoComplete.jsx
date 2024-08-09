@@ -1,6 +1,7 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
 import { DoubleRightOutlined } from "@ant-design/icons"
+import { isEmpty } from "lodash"
 
 const Options = ({ options = [{ val: "", text: "" }] }) =>
   options.map((o, i) => (
@@ -31,14 +32,21 @@ const Select = ({
   )
 }
 
-export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange = emptyFn, className = "" }) => {
+export const SelectAutoComplete = ({
+  options = [{ val: "", text: "" }],
+  onChange = emptyFn,
+  className = "",
+  defaultValue = "",
+}) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
+  const [isPrestine, setPrestine] = useState(true)
+  const inputRef = useRef(null)
+
   const filteredOptions = options.filter(o => {
     const t = text.toLowerCase()
     return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
   })
-  const [isPrestine, setPrestine] = useState(true)
 
   const selectOption = (direction = 0) => {
     const target = optionIndex + direction
@@ -57,6 +65,15 @@ export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange
     setPrestine(false)
     setText(val)
   }
+
+  useEffect(() => {
+    if (!isEmpty(defaultValue)) {
+      const match = options.find(o => o.val === defaultValue)
+      if (match !== undefined) {
+        setText(match.text)
+      }
+    }
+  }, [setText, options, defaultValue])
 
   const handleOnKeyDownInput = ev => {
     if ("ArrowDown" === ev.key) {
@@ -78,6 +95,7 @@ export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange
   return (
     <div className={`relative ${className}`}>
       <input
+        ref={inputRef}
         type="text"
         className="w-full border-2 rounded p-2 h-8 border-violet-200"
         value={text}
@@ -85,7 +103,11 @@ export const SelectAutoComplete = ({ options = [{ val: "", text: "" }], onChange
         onKeyDown={e => handleOnKeyDownInput(e)}
         onFocusCapture={e => setPrestine(false)}
       />
-      <DoubleRightOutlined className="absolute right-1 top-3 bg-white text-black text-[.6rem]" rotate="90" />
+      <DoubleRightOutlined
+        className="absolute right-1 top-3 bg-white text-black text-[.6rem]"
+        rotate="90"
+        onClick={e => inputRef.current.focus()}
+      />
       <Select
         isPrestine={isPrestine}
         selected={filteredOptions[optionIndex]}

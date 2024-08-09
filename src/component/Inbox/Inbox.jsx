@@ -7,7 +7,7 @@ import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 
 export const Inbox = () => {
   const [messages, setMessages] = useState([])
-  const [phoneNumbers, setPhoneNumbers] = useState(null)
+  const [phoneNumbers, setPhoneNumbers] = useState([])
 
   useEffect(() => {
     getTwilioMessages().then(setMessages)
