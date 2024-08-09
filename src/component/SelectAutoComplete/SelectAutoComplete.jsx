@@ -13,10 +13,10 @@ const Options = ({ options = [{ val: "", text: "" }] }) =>
 const Select = ({
   options = [{ val: "", text: "" }],
   selected = { val: "", text: "" },
-  isPrestine = true,
   onChange = emptyFn,
+  expanded = false,
 }) => {
-  if (isPrestine) return null
+  if (!expanded) return null
   if (options.length < 1) return null
   return (
     <>
@@ -40,7 +40,7 @@ export const SelectAutoComplete = ({
 }) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
-  const [isPrestine, setPrestine] = useState(true)
+  const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
 
   const filteredOptions = options.filter(o => {
@@ -55,14 +55,13 @@ export const SelectAutoComplete = ({
   }
 
   const handleOnChangeSelect = (val = "") => {
-    setPrestine(true)
     const t = filteredOptions.find(o => o.val === val).text
     setText(t)
+    setExpanded(false)
     onChange(t)
   }
 
   const handleOnChangeInput = (val = "") => {
-    setPrestine(false)
     setText(val)
   }
 
@@ -83,12 +82,24 @@ export const SelectAutoComplete = ({
       ev.preventDefault()
       selectOption(-1)
     } else if ("Enter" === ev.key) {
-      if (!isPrestine) {
-        const t = filteredOptions[optionIndex].text
-        setText(filteredOptions[optionIndex].text)
-        onChange(t)
-      }
-      setPrestine(true)
+      const t = filteredOptions[optionIndex].text
+      setText(filteredOptions[optionIndex].text)
+      setExpanded(false)
+      onChange(t)
+    } else {
+      setExpanded(true)
+    }
+  }
+
+  const handleOnInputFocus = () => {
+    const match = options.find(o => {
+      const t = text.toLowerCase()
+      return o.text.toLowerCase() === t || o.val.toLowerCase() === t
+    })
+    if (match !== undefined) {
+      setExpanded(false)
+    } else {
+      setExpanded(true)
     }
   }
 
@@ -101,7 +112,7 @@ export const SelectAutoComplete = ({
         value={text}
         onChange={e => handleOnChangeInput(e.target.value)}
         onKeyDown={e => handleOnKeyDownInput(e)}
-        onFocusCapture={e => setPrestine(false)}
+        onFocusCapture={handleOnInputFocus}
       />
       <DoubleRightOutlined
         className="absolute right-1 top-3 bg-white text-black text-[.6rem]"
@@ -109,10 +120,10 @@ export const SelectAutoComplete = ({
         onClick={e => inputRef.current.focus()}
       />
       <Select
-        isPrestine={isPrestine}
         selected={filteredOptions[optionIndex]}
         options={filteredOptions}
         onChange={handleOnChangeSelect}
+        expanded={expanded}
       />
     </div>
   )
