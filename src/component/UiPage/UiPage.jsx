@@ -145,7 +145,7 @@ export const UiPage = () => {
       </div>
 
       <p className="my-1">MessageRows with messages</p>
-      <Selector />
+      <Selector phoneNumbers={phoneNumbersOptions.map(o => o.val)} />
       <MessageRows messages={messages} />
       <hr />
       <NotFoundPage />

@@ -103,6 +103,13 @@ export const SelectAutoComplete = ({
     }
   }
 
+  const handleOnDropdown = () => {
+    setText("")
+    onChange("")
+    inputRef.current.focus()
+    setExpanded(true)
+  }
+
   return (
     <div className={`relative ${className}`}>
       <input
@@ -115,9 +122,9 @@ export const SelectAutoComplete = ({
         onFocusCapture={handleOnInputFocus}
       />
       <DoubleRightOutlined
-        className="absolute right-1 top-3 bg-white text-black text-[.6rem]"
+        className="absolute right-1 text-black text-[.6rem] pt-3 h-8"
         rotate="90"
-        onClick={e => inputRef.current.focus()}
+        onClick={e => handleOnDropdown()}
       />
       <Select
         selected={filteredOptions[optionIndex]}
