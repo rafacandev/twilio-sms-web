@@ -127,25 +127,20 @@ const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   .map(i => ({ val: i, text: maskPhoneNumber(i) }))
 
 export const UiPage = () => {
-  const [selected, setSelected] = useState("")
   return (
     <DockedLayout>
       <h3>UI Page</h3>
       <p className="italic">Display mocked UI elements for quick iteration</p>
       <div>
         <h5>Select with auto-complete</h5>
-        <div className="flex items-center gap-4">
-          <SelectAutoComplete
-            options={phoneNumbersOptions}
-            onChange={e => setSelected(e)}
-            defaultValue="+15550000001"
-          />
-          <div>Selected: {selected}</div>
+        <div className="flex items-center gap-4 my-2">
+          <SelectAutoComplete options={phoneNumbersOptions} defaultValue="+15550000001" />
+          <SelectAutoComplete options={phoneNumbersOptions} loading="false" />
         </div>
       </div>
 
       <p className="my-1">MessageRows with messages</p>
-      <Selector phoneNumbers={phoneNumbersOptions.map(o => o.val)} />
+      <Selector phoneNumbers={phoneNumbersOptions.map(o => o.val)} loading={false} />
       <MessageRows messages={messages} />
       <hr />
       <NotFoundPage />

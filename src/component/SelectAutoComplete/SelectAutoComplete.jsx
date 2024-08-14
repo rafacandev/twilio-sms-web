@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
-import { DoubleRightOutlined } from "@ant-design/icons"
+import { DoubleRightOutlined, LoadingOutlined, Loading3QuartersOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
 import { select, selectOptions } from "../../ui/classes"
 
@@ -14,11 +14,24 @@ const Options = ({ options = [{ val: "", text: "" }] }) =>
 const Select = ({
   options = [{ val: "", text: "" }],
   selected = { val: "", text: "" },
+  loading = true,
   onChange = emptyFn,
   expanded = false,
 }) => {
   if (!expanded) return null
   if (options.length < 1) return null
+  if (loading) {
+    return (
+      <div
+        className={`absolute left-0 top-8 w-full bg-white border-2 border-violet-200 rounded h-10 flex justify-center items-center`}
+      >
+        <div>
+          <Loading3QuartersOutlined className="text-purple-600 font-extrabold" spin="true" />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <select
       size="7"
@@ -32,7 +45,7 @@ const Select = ({
 }
 
 const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "", text = "") => {
-  if (options.find(o => o.val === defaultValue).text === text) return options
+  if (options.find(o => o.val === defaultValue)?.text === text) return options
   return options.filter(o => {
     const t = text.toLowerCase()
     return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
@@ -44,6 +57,7 @@ export const SelectAutoComplete = ({
   onChange = emptyFn,
   className = "",
   defaultValue = "",
+  loading = true,
 }) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
@@ -129,6 +143,7 @@ export const SelectAutoComplete = ({
       <Select
         selected={filteredOptions[optionIndex]}
         options={filteredOptions}
+        loading={loading}
         onChange={handleSelectOnChange}
         expanded={expanded}
       />

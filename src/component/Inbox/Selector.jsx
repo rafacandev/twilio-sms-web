@@ -12,7 +12,7 @@ const toOptions = (phoneNumbers = []) => {
   return [{ val: "all", text: "All phone numbers" }, ...options]
 }
 
-export const Selector = ({ phoneNumbers = [] }) => {
+export const Selector = ({ phoneNumbers = [], loading = true }) => {
   return (
     <div className="flex">
       <select defaultValue="recent" className={select}>
@@ -29,7 +29,7 @@ export const Selector = ({ phoneNumbers = [] }) => {
           All messages
         </option>
       </select>
-      <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="all" />
+      <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="all" loading={loading} />
     </div>
   )
 }
