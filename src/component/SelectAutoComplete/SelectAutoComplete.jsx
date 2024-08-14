@@ -32,6 +32,14 @@ const Select = ({
   )
 }
 
+const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "", text = "") => {
+  if (options.find(o => o.val === defaultValue).text === text) return options
+  return options.filter(o => {
+    const t = text.toLowerCase()
+    return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
+  })
+}
+
 export const SelectAutoComplete = ({
   options = [{ val: "", text: "" }],
   onChange = emptyFn,
@@ -42,28 +50,7 @@ export const SelectAutoComplete = ({
   const [optionIndex, setSelectedIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
-
-  const filteredOptions = options.filter(o => {
-    const t = text.toLowerCase()
-    return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
-  })
-
-  const selectOption = (direction = 0) => {
-    const target = optionIndex + direction
-    if (target >= filteredOptions.length || target < 0) return
-    setSelectedIndex(target)
-  }
-
-  const handleOnChangeSelect = (val = "") => {
-    const t = filteredOptions.find(o => o.val === val).text
-    setText(t)
-    setExpanded(false)
-    onChange(t)
-  }
-
-  const handleOnChangeInput = (val = "") => {
-    setText(val)
-  }
+  const filteredOptions = filterOptions(options, defaultValue, text)
 
   useEffect(() => {
     if (!isEmpty(defaultValue)) {
@@ -74,7 +61,17 @@ export const SelectAutoComplete = ({
     }
   }, [setText, options, defaultValue])
 
-  const handleOnKeyDownInput = ev => {
+  const selectOption = (direction = 0) => {
+    const target = optionIndex + direction
+    if (target >= filteredOptions.length || target < 0) return
+    setSelectedIndex(target)
+  }
+
+  const handleInputOnChange = (val = "") => {
+    setText(val)
+  }
+
+  const handleInputOnKeyDown = ev => {
     if ("ArrowDown" === ev.key) {
       ev.preventDefault()
       selectOption(+1)
@@ -91,7 +88,7 @@ export const SelectAutoComplete = ({
     }
   }
 
-  const handleOnInputFocus = () => {
+  const handleInputOnFocus = () => {
     const match = options.find(o => {
       const t = text.toLowerCase()
       return o.text.toLowerCase() === t || o.val.toLowerCase() === t
@@ -103,11 +100,15 @@ export const SelectAutoComplete = ({
     }
   }
 
-  const handleOnDropdown = () => {
-    setText("")
-    onChange("")
-    inputRef.current.focus()
-    setExpanded(true)
+  const handleInputArrowOnClick = () => {
+    setExpanded(v => !v)
+  }
+
+  const handleSelectOnChange = (val = "") => {
+    const t = filteredOptions.find(o => o.val === val).text
+    setText(t)
+    setExpanded(false)
+    onChange(t)
   }
 
   return (
@@ -117,19 +118,19 @@ export const SelectAutoComplete = ({
         type="text"
         className="w-full border-2 rounded p-2 h-8 border-violet-200"
         value={text}
-        onChange={e => handleOnChangeInput(e.target.value)}
-        onKeyDown={e => handleOnKeyDownInput(e)}
-        onFocusCapture={handleOnInputFocus}
+        onChange={e => handleInputOnChange(e.target.value)}
+        onKeyDown={e => handleInputOnKeyDown(e)}
+        onFocusCapture={handleInputOnFocus}
       />
       <DoubleRightOutlined
         className="absolute right-1 text-black text-[.6rem] pt-3 h-8"
         rotate="90"
-        onClick={e => handleOnDropdown()}
+        onClick={handleInputArrowOnClick}
       />
       <Select
         selected={filteredOptions[optionIndex]}
         options={filteredOptions}
-        onChange={handleOnChangeSelect}
+        onChange={handleSelectOnChange}
         expanded={expanded}
       />
     </div>
