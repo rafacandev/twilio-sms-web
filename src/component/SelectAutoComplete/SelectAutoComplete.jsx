@@ -2,10 +2,11 @@ import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
 import { DoubleRightOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
+import { select, selectOptions } from "../../ui/classes"
 
 const Options = ({ options = [{ val: "", text: "" }] }) =>
   options.map((o, i) => (
-    <option key={i} value={o.val} className="px-2 py-1.5 hover:via-violet-200">
+    <option key={i} value={o.val} className={selectOptions}>
       {o.text}
     </option>
   ))
@@ -19,16 +20,14 @@ const Select = ({
   if (!expanded) return null
   if (options.length < 1) return null
   return (
-    <>
-      <select
-        size="7"
-        value={selected.val}
-        className={`absolute left-0 top-8 w-full border-2 rounded border-violet-200 bg-white`}
-        onChange={ev => onChange(ev.target.value)}
-      >
-        <Options options={options} />
-      </select>
-    </>
+    <select
+      size="7"
+      value={selected.val}
+      className={`absolute left-0 top-8 w-full ${select}`}
+      onChange={ev => onChange(ev.target.value)}
+    >
+      <Options options={options} />
+    </select>
   )
 }
 
