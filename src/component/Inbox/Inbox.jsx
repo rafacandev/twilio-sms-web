@@ -21,7 +21,7 @@ export const Inbox = () => {
     <DockedLayout>
       <h3>Inbox</h3>
       <p className="text-xs italic">Your most recent incoming messages</p>
-      <Selector phoneNumbers={phoneNumbers} loading={loading} />
+      <Selector className="mb-1" phoneNumbers={phoneNumbers} loading={loading} />
       <MessageRows messages={messages} />
     </DockedLayout>
   )
