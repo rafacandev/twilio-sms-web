@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
-import { DoubleRightOutlined, LoadingOutlined, Loading3QuartersOutlined } from "@ant-design/icons"
+import { DoubleRightOutlined, Loading3QuartersOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
 import { select, selectOptions } from "../../ui/classes"
 

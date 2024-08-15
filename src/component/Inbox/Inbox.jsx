@@ -8,17 +8,20 @@ import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 export const Inbox = () => {
   const [messages, setMessages] = useState([])
   const [phoneNumbers, setPhoneNumbers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getTwilioMessages().then(setMessages)
-    getTwilioPhoneNumbers().then(setPhoneNumbers)
+    getTwilioPhoneNumbers()
+      .then(setPhoneNumbers)
+      .then(() => setLoading(false))
   }, [])
 
   return (
     <DockedLayout>
       <h3>Inbox</h3>
       <p className="text-xs italic">Your most recent incoming messages</p>
-      <Selector phoneNumbers={phoneNumbers}></Selector>
+      <Selector phoneNumbers={phoneNumbers} loading={loading} />
       <MessageRows messages={messages} />
     </DockedLayout>
   )
