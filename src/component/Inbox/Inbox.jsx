@@ -18,13 +18,18 @@ export const Inbox = () => {
       .then(() => setLoading(false))
   }, [])
 
-  console.log('messageFilter', messageFilter)
+  console.log("messageFilter", messageFilter)
 
   return (
     <DockedLayout>
       <h3>Inbox</h3>
       <p className="text-xs italic">Your most recent incoming messages</p>
-      <Selector className="mb-1" phoneNumbers={phoneNumbers} loading={loading} onMessageFilterChange={setMessageFilter} />
+      <Selector
+        className="mb-1"
+        phoneNumbers={phoneNumbers}
+        loading={loading}
+        onMessageFilterChange={setMessageFilter}
+      />
       <MessageRows messages={messages} />
     </DockedLayout>
   )

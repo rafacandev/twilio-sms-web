@@ -5,7 +5,6 @@ import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
 import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
-import { useState } from "react"
 
 /**
  * @typedef {import ('../../js/types').Message} Message
@@ -140,7 +139,7 @@ export const UiPage = () => {
       </div>
 
       <p className="my-1">MessageRows with messages</p>
-      <Selector phoneNumbers={phoneNumbersOptions.map(o => o.val)} loading={false} />
+      <Selector className="mb-1" phoneNumbers={phoneNumbersOptions.map(o => o.val)} loading={false} />
       <MessageRows messages={messages} />
       <hr />
       <NotFoundPage />

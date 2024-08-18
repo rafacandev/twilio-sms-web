@@ -9,10 +9,9 @@ const toOptions = (phoneNumbers = []) => {
 }
 
 export const MessageFilterOption = {
-  all: 'all',
-  recent: 'recent',
-  received: 'received',
-  sent:'sent'
+  all: "all",
+  received: "received",
+  sent: "sent",
 }
 
 export const Selector = ({ className = "", phoneNumbers = [], loading = true, onMessageFilterChange = emptyFn }) => {
@@ -20,17 +19,14 @@ export const Selector = ({ className = "", phoneNumbers = [], loading = true, on
     <div className={className}>
       <div className="flex gap-1">
         <select defaultValue="recent" className={`${select}`} onChange={e => onMessageFilterChange(e.target.value)}>
-          <option className={selectOptions} value={MessageFilterOption.recent}>
-            Recent messages
+          <option className={selectOptions} value={MessageFilterOption.all}>
+            All messages
           </option>
           <option className={selectOptions} value={MessageFilterOption.received}>
             Received messages
           </option>
           <option className={selectOptions} value={MessageFilterOption.sent}>
             Sent messages
-          </option>
-          <option className={selectOptions} value={MessageFilterOption.all}>
-            All messages
           </option>
         </select>
         <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="all" loading={loading} />
