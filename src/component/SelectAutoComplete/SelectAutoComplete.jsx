@@ -5,8 +5,8 @@ import { isEmpty } from "lodash"
 import { select, selectOptions } from "../../ui/classes"
 
 const Options = ({ options = [{ val: "", text: "" }] }) =>
-  options.map((o, i) => (
-    <option key={i} value={o.val} className={selectOptions}>
+  options.map((o) => (
+    <option key={o.val} value={o.val} className={selectOptions}>
       {o.text}
     </option>
   ))
@@ -44,7 +44,7 @@ const Select = ({
   )
 }
 
-const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "", text = "") => {
+const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "default", text = "") => {
   if (options.find(o => o.val === defaultValue)?.text === text) return options
   return options.filter(o => {
     const t = text.toLowerCase()
@@ -56,7 +56,7 @@ export const SelectAutoComplete = ({
   options = [{ val: "", text: "" }],
   onChange = emptyFn,
   className = "",
-  defaultValue = "",
+  defaultValue = "default",
   loading = true,
 }) => {
   const [text, setText] = useState("")
@@ -92,10 +92,10 @@ export const SelectAutoComplete = ({
       ev.preventDefault()
       selectOption(-1)
     } else if ("Enter" === ev.key) {
-      const t = filteredOptions[optionIndex].text
-      setText(filteredOptions[optionIndex].text)
+      const {val, text} = filteredOptions[optionIndex]
       setExpanded(false)
-      onChange(t)
+      setText(text)
+      onChange(val)
     } else {
       setExpanded(true)
     }
@@ -118,10 +118,10 @@ export const SelectAutoComplete = ({
   }
 
   const handleSelectOnChange = (val = "") => {
-    const t = filteredOptions.find(o => o.val === val).text
-    setText(t)
+    const text = filteredOptions.find(o => o.val === val).text
+    setText(text)
     setExpanded(false)
-    onChange(t)
+    onChange(val)
   }
 
   return (
