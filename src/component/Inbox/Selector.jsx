@@ -5,7 +5,7 @@ import { emptyFn } from "../../js/types"
 
 const toOptions = (phoneNumbers = []) => {
   const options = phoneNumbers.map(p => ({ val: p, text: maskPhoneNumber(p) }))
-  return [{ val: "all", text: "All phone numbers" }, ...options]
+  return [{ val: "default", text: "All phone numbers" }, ...options]
 }
 
 export const MessageFilterOption = {
@@ -14,22 +14,28 @@ export const MessageFilterOption = {
   sent: "sent",
 }
 
-export const Selector = ({ className = "", phoneNumbers = [], loading = true, onMessageFilterChange = emptyFn }) => {
+const SelectDirection = ({onMessageFilterChange=emptyFn}) => (
+  <select defaultValue="recent" className={`${select}`} onChange={e => onMessageFilterChange(e.target.value)}>
+  <option className={selectOptions} value={MessageFilterOption.all}>
+    All messages
+  </option>
+  <option className={selectOptions} value={MessageFilterOption.received}>
+    Received messages
+  </option>
+  <option className={selectOptions} value={MessageFilterOption.sent}>
+    Sent messages
+  </option>
+</select>
+)
+
+export const Selector = ({ className = "", phoneNumbers = [], phoneNumber =  loading = true, onMessageFilterChange = emptyFn, onPhoneNumberChange = emptyFn }) => {
+
+
   return (
     <div className={className}>
       <div className="flex gap-1">
-        <select defaultValue="recent" className={`${select}`} onChange={e => onMessageFilterChange(e.target.value)}>
-          <option className={selectOptions} value={MessageFilterOption.all}>
-            All messages
-          </option>
-          <option className={selectOptions} value={MessageFilterOption.received}>
-            Received messages
-          </option>
-          <option className={selectOptions} value={MessageFilterOption.sent}>
-            Sent messages
-          </option>
-        </select>
-        <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="all" loading={loading} />
+        <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="default" loading={loading} onChange={onPhoneNumberChange} />
+        <SelectDirection onMessageFilterChange={onMessageFilterChange}/>
       </div>
     </div>
   )
