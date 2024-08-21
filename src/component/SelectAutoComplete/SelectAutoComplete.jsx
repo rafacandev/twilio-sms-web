@@ -23,6 +23,7 @@ export const SelectAutoComplete = ({
   const [optionIndex, setSelectedIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
+  const rootRef = useRef(null)
   const filteredOptions = filterOptions(options, defaultValue, text)
 
   useEffect(() => {
@@ -31,6 +32,18 @@ export const SelectAutoComplete = ({
       if (match !== undefined) {
         setText(match.text)
       }
+    }
+
+    const handleWindowOnClick = event => {
+      if (!rootRef.current.contains(event.target)) {
+        setExpanded(false)
+      }
+    }
+
+    window.addEventListener("click", handleWindowOnClick)
+
+    return () => {
+      window.removeEventListener("click", handleWindowOnClick)
     }
   }, [setText, options, defaultValue])
 
@@ -89,7 +102,7 @@ export const SelectAutoComplete = ({
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div ref={rootRef} className={`relative ${className}`}>
       <input
         ref={inputRef}
         type="text"
