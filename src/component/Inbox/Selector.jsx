@@ -14,28 +14,38 @@ export const MessageFilterOption = {
   sent: "sent",
 }
 
-const SelectDirection = ({onMessageFilterChange=emptyFn}) => (
+const SelectDirection = ({ onMessageFilterChange = emptyFn }) => (
   <select defaultValue="recent" className={`${select}`} onChange={e => onMessageFilterChange(e.target.value)}>
-  <option className={selectOptions} value={MessageFilterOption.all}>
-    All messages
-  </option>
-  <option className={selectOptions} value={MessageFilterOption.received}>
-    Received messages
-  </option>
-  <option className={selectOptions} value={MessageFilterOption.sent}>
-    Sent messages
-  </option>
-</select>
+    <option className={selectOptions} value={MessageFilterOption.all}>
+      All messages
+    </option>
+    <option className={selectOptions} value={MessageFilterOption.received}>
+      Received messages
+    </option>
+    <option className={selectOptions} value={MessageFilterOption.sent}>
+      Sent messages
+    </option>
+  </select>
 )
 
-export const Selector = ({ className = "", phoneNumbers = [], phoneNumber =  loading = true, onMessageFilterChange = emptyFn, onPhoneNumberChange = emptyFn }) => {
-
-
+export const Selector = ({
+  className = "",
+  phoneNumbers = [],
+  loading = true,
+  onMessageFilterChange = emptyFn,
+  onPhoneNumberChange = emptyFn,
+}) => {
   return (
     <div className={className}>
       <div className="flex gap-1">
-        <SelectAutoComplete className="w-36" options={toOptions(phoneNumbers)} defaultValue="default" loading={loading} onChange={onPhoneNumberChange} />
-        <SelectDirection onMessageFilterChange={onMessageFilterChange}/>
+        <SelectAutoComplete
+          className="w-36"
+          options={toOptions(phoneNumbers)}
+          defaultValue="default"
+          loading={loading}
+          onChange={onPhoneNumberChange}
+        />
+        <SelectDirection onMessageFilterChange={onMessageFilterChange} />
       </div>
     </div>
   )

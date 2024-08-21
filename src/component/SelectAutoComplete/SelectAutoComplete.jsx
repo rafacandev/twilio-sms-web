@@ -1,48 +1,8 @@
 import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
-import { DoubleRightOutlined, Loading3QuartersOutlined } from "@ant-design/icons"
+import { DoubleRightOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
-import { select, selectOptions } from "../../ui/classes"
-
-const Options = ({ options = [{ val: "", text: "" }] }) =>
-  options.map((o) => (
-    <option key={o.val} value={o.val} className={selectOptions}>
-      {o.text}
-    </option>
-  ))
-
-const Select = ({
-  options = [{ val: "", text: "" }],
-  selected = { val: "", text: "" },
-  loading = true,
-  onChange = emptyFn,
-  expanded = false,
-}) => {
-  if (!expanded) return null
-  if (options.length < 1) return null
-  if (loading) {
-    return (
-      <div
-        className={`absolute left-0 top-8 w-full bg-white border-2 border-violet-200 rounded h-10 flex justify-center items-center`}
-      >
-        <div>
-          <Loading3QuartersOutlined className="text-purple-600 font-extrabold" spin="true" />
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <select
-      size="7"
-      value={selected.val}
-      className={`absolute left-0 top-8 w-full ${select}`}
-      onChange={ev => onChange(ev.target.value)}
-    >
-      <Options options={options} />
-    </select>
-  )
-}
+import { Select } from "./Select"
 
 const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "default", text = "") => {
   if (options.find(o => o.val === defaultValue)?.text === text) return options
@@ -57,7 +17,7 @@ export const SelectAutoComplete = ({
   onChange = emptyFn,
   className = "",
   defaultValue = "default",
-  loading = true,
+  loading = false,
 }) => {
   const [text, setText] = useState("")
   const [optionIndex, setSelectedIndex] = useState(0)
@@ -92,7 +52,7 @@ export const SelectAutoComplete = ({
       ev.preventDefault()
       selectOption(-1)
     } else if ("Enter" === ev.key) {
-      const {val, text} = filteredOptions[optionIndex]
+      const { val, text } = filteredOptions[optionIndex]
       setExpanded(false)
       setText(text)
       onChange(val)

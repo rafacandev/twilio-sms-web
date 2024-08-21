@@ -5,7 +5,7 @@ import { getAuthentication, toCredentials } from "../context/AuthenticationProvi
  * @typedef {import('./types').Message} Message
  */
 
-const toMessage = (v={}) => ({
+const toMessage = (v = {}) => ({
   messageSid: v.sid,
   direction: v.direction,
   from: v.from,
@@ -33,17 +33,13 @@ export const getTwilioMessagesByPhoneNumber = async phoneNumber => {
     auth: credentials,
     params: { To: phoneNumber },
   })
-  return []
-    .concat(fromResult.data.messages)
-    .concat(toResult.data.messages)
-    .map(toMessage)
-    .sort(sortByDate)
+  return [].concat(fromResult.data.messages).concat(toResult.data.messages).map(toMessage).sort(sortByDate)
 }
 
 /**
  * @returns {Promise<Array<Message>>}
  */
-export const getTwilioMessages = async (from = '', to = '') => {
+export const getTwilioMessages = async (from = "", to = "") => {
   const authentication = getAuthentication()
   const credentials = toCredentials(authentication)
   const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
@@ -52,17 +48,15 @@ export const getTwilioMessages = async (from = '', to = '') => {
   if (to.length > 0) {
     params.To = to
   }
-  
+
   if (from.length > 0) {
     params.From = from
   }
 
   const response = await axios.get(url, {
     auth: credentials,
-    params
+    params,
   })
 
-  return response.data.messages
-    .map(toMessage)
-    .sort(sortByDate)
+  return response.data.messages.map(toMessage).sort(sortByDate)
 }
