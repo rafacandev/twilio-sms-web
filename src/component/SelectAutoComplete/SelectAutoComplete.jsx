@@ -42,6 +42,10 @@ export const SelectAutoComplete = ({
 
   const handleInputOnChange = (val = "") => {
     setText(val)
+    const match = options.find(o => o.val === val)
+    if (match !== undefined) {
+      onChange(val)
+    }
   }
 
   const handleInputOnKeyDown = ev => {

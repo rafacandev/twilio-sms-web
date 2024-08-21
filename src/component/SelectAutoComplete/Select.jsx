@@ -15,7 +15,9 @@ export const Select = ({
   if (loading) {
     return (
       <div
-        className={`absolute left-0 top-8 w-full bg-white border-2 border-violet-200 rounded h-10 flex justify-center items-center`}
+        className="absolute left-0 top-8 w-full h-10  
+        rounded bg-white border-2 border-violet-200
+        flex justify-center items-center"
       >
         <div>
           <Loading3QuartersOutlined className="text-purple-600 font-extrabold" spin="true" />
