@@ -3,7 +3,7 @@ import { fromNow } from "../../js/util"
 import { isEmpty } from "lodash"
 
 /**
- * @typedef { @impor("../types").Message} Message
+ * @typedef {import("../../js/types").Message} Message
  */
 
 /**

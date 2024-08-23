@@ -4,21 +4,21 @@ import { getTwilioMessages } from "../../js/getTwilioMessages"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { MessageFilterOption, Selector } from "./Selector"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
+import { getMessages } from "./getMessages"
 
 export const Inbox = () => {
   const [messages, setMessages] = useState([])
   const [phoneNumbers, setPhoneNumbers] = useState([])
+  const [phoneNumber, setPhoneNumber] = useState("default")
   const [loading, setLoading] = useState(true)
   const [messageFilter, setMessageFilter] = useState(MessageFilterOption.all)
 
   useEffect(() => {
-    getTwilioMessages().then(setMessages)
+    getMessages(phoneNumber).then(setMessages)
     getTwilioPhoneNumbers()
       .then(setPhoneNumbers)
       .then(() => setLoading(false))
-  }, [])
-
-  console.log("messageFilter", messageFilter)
+  }, [phoneNumber])
 
   return (
     <DockedLayout>
@@ -29,6 +29,7 @@ export const Inbox = () => {
         phoneNumbers={phoneNumbers}
         loading={loading}
         onMessageFilterChange={setMessageFilter}
+        onPhoneNumberChange={setPhoneNumber}
       />
       <MessageRows messages={messages} />
     </DockedLayout>
