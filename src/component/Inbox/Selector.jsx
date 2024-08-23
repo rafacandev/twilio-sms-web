@@ -31,6 +31,7 @@ const SelectDirection = ({ onMessageFilterChange = emptyFn }) => (
 export const Selector = ({
   className = "",
   phoneNumbers = [],
+  phoneNumber = "default",
   loading = true,
   onMessageFilterChange = emptyFn,
   onPhoneNumberChange = emptyFn,
@@ -41,7 +42,7 @@ export const Selector = ({
         <SelectAutoComplete
           className="w-36"
           options={toOptions(phoneNumbers)}
-          defaultValue="default"
+          value={phoneNumber}
           loading={loading}
           onChange={onPhoneNumberChange}
         />

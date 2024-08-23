@@ -27,6 +27,7 @@ export const Inbox = () => {
       <Selector
         className="mb-1"
         phoneNumbers={phoneNumbers}
+        phoneNumber={phoneNumber}
         loading={loading}
         onMessageFilterChange={setMessageFilter}
         onPhoneNumberChange={setPhoneNumber}

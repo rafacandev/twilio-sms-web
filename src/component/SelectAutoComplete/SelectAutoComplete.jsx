@@ -4,19 +4,21 @@ import { DoubleRightOutlined } from "@ant-design/icons"
 import { isEmpty } from "lodash"
 import { Select } from "./Select"
 
-const filterOptions = (options = [{ val: "", text: "" }], defaultValue = "default", text = "") => {
-  if (options.find(o => o.val === defaultValue)?.text === text) return options
+const filterOptions = (options = [{ val: "", text: "" }], value = "default", text = "") => {
+  if (options.find(o => o.val === value)?.text === text) return options
   return options.filter(o => {
     const t = text.toLowerCase()
     return o.text.toLowerCase().includes(t) || o.val.toLowerCase().includes(t)
   })
 }
 
+const optionByValue = (options = [{ val: "", text: "" }], val = "") => options.find(o => o.val === val)
+
 export const SelectAutoComplete = ({
   options = [{ val: "", text: "" }],
   onChange = emptyFn,
   className = "",
-  defaultValue = "default",
+  value = "default",
   loading = false,
 }) => {
   const [text, setText] = useState("")
@@ -24,14 +26,12 @@ export const SelectAutoComplete = ({
   const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
   const rootRef = useRef(null)
-  const filteredOptions = filterOptions(options, defaultValue, text)
+  const filteredOptions = filterOptions(options, value, text)
 
   useEffect(() => {
-    if (!isEmpty(defaultValue)) {
-      const match = options.find(o => o.val === defaultValue)
-      if (match !== undefined) {
-        setText(match.text)
-      }
+    const match = optionByValue(options, value).text
+    if (match !== undefined) {
+      setText(match)
     }
 
     const handleWindowOnClick = event => {
@@ -45,7 +45,14 @@ export const SelectAutoComplete = ({
     return () => {
       window.removeEventListener("click", handleWindowOnClick)
     }
-  }, [setText, options, defaultValue])
+  }, [setText, options, value])
+
+  useEffect(() => {
+    const match = optionByValue(options, value).text
+    if (match !== undefined) {
+      setText(match)
+    }
+  }, [value])
 
   const selectOption = (direction = 0) => {
     const target = optionIndex + direction
@@ -55,8 +62,7 @@ export const SelectAutoComplete = ({
 
   const handleInputOnChange = (val = "") => {
     setText(val)
-    const match = options.find(o => o.val === val)
-    if (match !== undefined) {
+    if (optionByValue(options, val) !== undefined) {
       onChange(val)
     }
   }
@@ -95,8 +101,8 @@ export const SelectAutoComplete = ({
   }
 
   const handleSelectOnChange = (val = "") => {
-    const text = filteredOptions.find(o => o.val === val).text
-    setText(text)
+    const match = optionByValue(filteredOptions, val).text
+    setText(match)
     setExpanded(false)
     onChange(val)
   }
