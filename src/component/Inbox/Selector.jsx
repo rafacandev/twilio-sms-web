@@ -8,6 +8,8 @@ const toOptions = (phoneNumbers = []) => {
   return [{ val: "default", text: "All phone numbers" }, ...options]
 }
 
+const isValidOption = (phoneNumber = "", phoneNumbers = []) => phoneNumbers.find(p => p === phoneNumber) !== undefined
+
 export const MessageFilterOption = {
   all: "all",
   received: "received",
@@ -35,19 +37,17 @@ export const Selector = ({
   loading = true,
   onMessageFilterChange = emptyFn,
   onPhoneNumberChange = emptyFn,
-}) => {
-  return (
-    <div className={className}>
-      <div className="flex gap-1">
-        <SelectAutoComplete
-          className="w-36"
-          options={toOptions(phoneNumbers)}
-          value={phoneNumber}
-          loading={loading}
-          onChange={onPhoneNumberChange}
-        />
-        {phoneNumber !== "default" && <SelectDirection onMessageFilterChange={onMessageFilterChange} />}
-      </div>
+}) => (
+  <div className={className}>
+    <div className="flex gap-1">
+      <SelectAutoComplete
+        className="w-36"
+        options={toOptions(phoneNumbers)}
+        value={phoneNumber}
+        loading={loading}
+        onChange={onPhoneNumberChange}
+      />
+      {isValidOption(phoneNumber, phoneNumbers) && <SelectDirection onMessageFilterChange={onMessageFilterChange} />}
     </div>
-  )
-}
+  </div>
+)
