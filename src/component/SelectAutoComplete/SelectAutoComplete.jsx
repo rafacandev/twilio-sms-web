@@ -29,7 +29,7 @@ export const SelectAutoComplete = ({
   const filteredOptions = filterOptions(options, value, text)
 
   useEffect(() => {
-    const match = optionByValue(options, value).text
+    const match = optionByValue(options, value)?.text
     if (match !== undefined) {
       setText(match)
     }
@@ -48,7 +48,7 @@ export const SelectAutoComplete = ({
   }, [setText, options, value])
 
   useEffect(() => {
-    const match = optionByValue(options, value).text
+    const match = optionByValue(options, value)?.text
     if (match !== undefined) {
       setText(match)
     }

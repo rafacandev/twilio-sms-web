@@ -5,6 +5,7 @@ import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
 import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
+import { useState } from "react"
 
 /**
  * @typedef {import ('../../js/types').Message} Message
@@ -126,6 +127,7 @@ const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   .map(i => ({ val: i, text: maskPhoneNumber(i) }))
 
 export const UiPage = () => {
+  const [phoneNumber, setPhoneNumber] = useState("default")
   return (
     <DockedLayout>
       <h3>UI Page</h3>
@@ -133,13 +135,19 @@ export const UiPage = () => {
       <div>
         <h5>Select with auto-complete</h5>
         <div className="flex items-center gap-4 my-2">
-          <SelectAutoComplete options={phoneNumbersOptions} defaultValue="+15550000001" />
-          <SelectAutoComplete options={phoneNumbersOptions} loading="false" />
+          <SelectAutoComplete options={phoneNumbersOptions} value="+15550000001" />
+          <SelectAutoComplete options={phoneNumbersOptions} value="default" loading="false" />
         </div>
       </div>
 
       <p className="my-1">MessageRows with messages</p>
-      <Selector className="mb-1" phoneNumbers={phoneNumbersOptions.map(o => o.val)} loading={false} />
+      <Selector
+        className="mb-1"
+        phoneNumber={phoneNumber}
+        phoneNumbers={phoneNumbersOptions.map(o => o.val)}
+        loading={false}
+        onPhoneNumberChange={setPhoneNumber}
+      />
       <MessageRows messages={messages} />
       <hr />
       <NotFoundPage />

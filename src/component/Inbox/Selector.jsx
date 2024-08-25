@@ -46,7 +46,7 @@ export const Selector = ({
           loading={loading}
           onChange={onPhoneNumberChange}
         />
-        <SelectDirection onMessageFilterChange={onMessageFilterChange} />
+        {phoneNumber !== "default" && <SelectDirection onMessageFilterChange={onMessageFilterChange} />}
       </div>
     </div>
   )
