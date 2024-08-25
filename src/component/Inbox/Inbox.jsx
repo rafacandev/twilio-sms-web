@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { DockedLayout } from "../DockedLayout/DockedLayout"
-import { getTwilioMessages } from "../../js/getTwilioMessages"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { MessageFilterOption, Selector } from "./Selector"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
@@ -14,11 +13,14 @@ export const Inbox = () => {
   const [messageFilter, setMessageFilter] = useState(MessageFilterOption.all)
 
   useEffect(() => {
-    getMessages(phoneNumber).then(setMessages)
+    getMessages(phoneNumber, messageFilter).then(setMessages)
+  }, [phoneNumber, messageFilter])
+
+  useEffect(() => {
     getTwilioPhoneNumbers()
       .then(setPhoneNumbers)
       .then(() => setLoading(false))
-  }, [phoneNumber])
+  }, [])
 
   return (
     <DockedLayout>
