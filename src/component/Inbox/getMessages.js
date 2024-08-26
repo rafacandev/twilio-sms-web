@@ -6,7 +6,7 @@ import { MessageFilterOption } from "./Selector"
  */
 
 /**
- * 
+ *
  * @returns {Promise<Array<Message>>}
  */
 export const getMessages = async (phoneNumber = "default", filter = MessageFilterOption.all) => {

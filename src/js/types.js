@@ -1,4 +1,13 @@
 /**
+ * @readonly
+ * @enum {string}
+ */
+export const MessageDirection = {
+  sent: "sent",
+  received: "received",
+}
+
+/**
  * @typedef {Object} Message
  * @prop {string} messageSid
  * @prop {string} direction

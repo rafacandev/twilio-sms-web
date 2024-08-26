@@ -1,5 +1,6 @@
 import axios from "axios"
 import { getAuthentication, toCredentials } from "../context/AuthenticationProvider"
+import { MessageDirection } from "./types"
 
 /**
  * @typedef {import('./types').Message} Message
@@ -7,7 +8,7 @@ import { getAuthentication, toCredentials } from "../context/AuthenticationProvi
 
 const toMessage = (v = {}) => ({
   messageSid: v.sid,
-  direction: v.direction,
+  direction: v.direction.includes("inbound") ? MessageDirection.received : MessageDirection.sent,
   from: v.from,
   to: v.to,
   date: v.date_created,
