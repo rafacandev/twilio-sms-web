@@ -47,7 +47,7 @@ export const DockedLayout = ({ children }) => {
       </div>
       <div className="flex grow">
         <div className="bg-gray-200 grow"></div>
-        <div className="bg-gray-100 w-full max-w-4xl p-2 pb-4">{children}</div>
+        <div className="bg-gray-100 w-full max-w-4xl pt-2 pb-4 md:px-2 lg:px-4">{children}</div>
         <div className="bg-gray-200 grow"></div>
       </div>
     </div>
