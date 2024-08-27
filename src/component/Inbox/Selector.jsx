@@ -44,6 +44,7 @@ export const Selector = ({
         className="w-36"
         options={toOptions(phoneNumbers)}
         value={phoneNumber}
+        defaultValue="default"
         loading={loading}
         onChange={onPhoneNumberChange}
       />

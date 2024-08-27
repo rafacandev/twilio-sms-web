@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { emptyFn } from "../../js/types"
 import { DoubleRightOutlined } from "@ant-design/icons"
-import { isEmpty } from "lodash"
 import { Select } from "./Select"
 
 const filterOptions = (options = [{ val: "", text: "" }], value = "default", text = "") => {
@@ -19,6 +18,7 @@ export const SelectAutoComplete = ({
   onChange = emptyFn,
   className = "",
   value = "default",
+  defaultValue = "default",
   loading = false,
 }) => {
   const [text, setText] = useState("")
@@ -89,7 +89,7 @@ export const SelectAutoComplete = ({
       const t = text.toLowerCase()
       return o.text.toLowerCase() === t || o.val.toLowerCase() === t
     })
-    if (match !== undefined) {
+    if (match !== undefined && match.val !== defaultValue) {
       setExpanded(false)
     } else {
       setExpanded(true)
