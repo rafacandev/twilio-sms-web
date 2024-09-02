@@ -35,7 +35,7 @@ export const SelectAutoComplete = ({
     }
 
     const handleWindowOnClick = event => {
-      if (!rootRef.current.contains(event.target)) {
+      if (!rootRef.current?.contains(event.target)) {
         setExpanded(false)
       }
     }
