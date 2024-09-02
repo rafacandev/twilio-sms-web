@@ -52,7 +52,7 @@ export const SelectAutoComplete = ({
     if (match !== undefined) {
       setText(match)
     }
-  }, [value])
+  }, [value, options])
 
   const selectOption = (direction = 0) => {
     const target = optionIndex + direction

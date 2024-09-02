@@ -22,6 +22,7 @@ import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedR
 import { UiPage } from "./component/UiPage/UiPage"
 import { NotFoundPage } from "./component/NotFoundPage/NotFoundPage"
 import { Inbox } from "./component/Inbox/Inbox"
+import { ConversationPage } from "./component/ConversationPage/ConversationPage"
 
 export const App = () => {
   return (
@@ -37,6 +38,11 @@ export const App = () => {
               <AuthenticatedRoute path="/phone-numbers" component={MessagesPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/inbox" component={Inbox} retirectTo="/authentication" />
+              <AuthenticatedRoute
+                path="/conversation/:from/:to"
+                component={ConversationPage}
+                retirectTo="/authentication"
+              />
               <Route path="/ui" component={UiPage} />
               <Route path="*" component={NotFoundPage} />
             </Switch>

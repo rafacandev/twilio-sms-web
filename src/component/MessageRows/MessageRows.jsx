@@ -1,15 +1,8 @@
-import {
-  ContainerFilled,
-  ContainerOutlined,
-  InboxOutlined,
-  MailOutlined,
-  MessageTwoTone,
-  PaperClipOutlined,
-  SendOutlined,
-} from "@ant-design/icons"
+import { InboxOutlined, SendOutlined } from "@ant-design/icons"
 import { fromNow } from "../../js/util"
 import { isEmpty } from "lodash"
 import { MessageDirection } from "../../js/types"
+import { useHistory } from "react-router-dom"
 
 /**
  * @typedef {import("../../js/types").Message} Message
@@ -53,38 +46,47 @@ const MessageIcon = ({ message }) =>
 /**
  * @param {Message} message
  */
-const MessageRow = message => (
-  <div
-    key={message.messageSid}
-    className={`flex
+const MessageRow = message => {
+  const history = useHistory()
+
+  const handleOnClick = () => {
+    history.push(`/conversation/${message.from}/${message.to}`)
+  }
+
+  return (
+    <div
+      key={message.messageSid}
+      onClick={handleOnClick}
+      className={`flex
   ${isReadContent(message)}
   border-violet-200 border-b-2
   shadow-black
   hover:bg-violet-100 hover:cursor-pointer hover:shadow-md hover:border-b-violet-400 hover:border-l-violet-400
   active:bg-violet-200 h-24
   `}
-  >
-    <div className="flex items-center justify-center">
-      <MessageIcon message={message} />
-    </div>
-    <div className="grow">
-      <div className={`${isReadHeader(message)} text-xs my-2 overflow-clip font-sans font-light`}>
-        <span className="inline-block w-32">
-          <b>To:</b>
-          {message.to}
-        </span>
-        <span className="inline-block w-36">
-          <b>From:</b>
-          {message.from}
-        </span>
-        <span className="hidden md:inline-block">
-          {message.direction} {fromNow(message.date)}
-        </span>
+    >
+      <div className="flex items-center justify-center">
+        <MessageIcon message={message} />
       </div>
-      <div className="line-clamp-3">{messageBody(message)}</div>
+      <div className="grow">
+        <div className={`${isReadHeader(message)} text-xs my-2 overflow-clip font-sans font-light`}>
+          <span className="inline-block w-32">
+            <b>To:</b>
+            {message.to}
+          </span>
+          <span className="inline-block w-36">
+            <b>From:</b>
+            {message.from}
+          </span>
+          <span className="hidden md:inline-block">
+            {message.direction} {fromNow(message.date)}
+          </span>
+        </div>
+        <div className="line-clamp-3">{messageBody(message)}</div>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 /**
  * @param {{messages: Array<Message>}} messages
