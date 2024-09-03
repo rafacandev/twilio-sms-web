@@ -22,11 +22,25 @@ export const SelectAutoComplete = ({
   loading = false,
 }) => {
   const [text, setText] = useState("")
-  const [optionIndex, setSelectedIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const inputRef = useRef(null)
   const rootRef = useRef(null)
   const filteredOptions = filterOptions(options, value, text)
+  const [optionIndex, setOptionIndex] = useState(0)
+
+  useEffect(() => {
+    const option = optionByValue(options, value)
+    const target = option === undefined ? 0 : filteredOptions.findIndex(o => o.val === value)
+    setOptionIndex(target)
+  }, [value, options, setOptionIndex])
+
+  const shiftOption = (shift = 0) => {
+    const target = optionIndex + shift
+    if (target < 0) return
+    if (target > filteredOptions.length) return
+    console.log({ target, optionShift: optionIndex, filteredOptions, fe: filteredOptions[optionIndex] })
+    setOptionIndex(target)
+  }
 
   /**
    * setExpanded(false) on click event if fired
@@ -51,16 +65,10 @@ export const SelectAutoComplete = ({
     }
   }, [value, options])
 
-  const shiftOption = (shift = 0) => {
-    const target = optionIndex + shift
-    if (target >= filteredOptions.length || target < 0) return
-    setSelectedIndex(target)
-  }
-
   const handleInputOnKeyDown = ev => {
     if ("ArrowDown" === ev.key) {
       ev.preventDefault()
-      shiftOption(+1)
+      shiftOption(1)
     } else if ("ArrowUp" === ev.key) {
       ev.preventDefault()
       shiftOption(-1)
