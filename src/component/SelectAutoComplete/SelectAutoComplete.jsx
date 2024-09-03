@@ -28,24 +28,21 @@ export const SelectAutoComplete = ({
   const rootRef = useRef(null)
   const filteredOptions = filterOptions(options, value, text)
 
+  /**
+   * setExpanded(false) on click event if fired
+   * outside this component
+   */
   useEffect(() => {
-    const match = optionByValue(options, value)?.text
-    if (match !== undefined) {
-      setText(match)
-    }
-
     const handleWindowOnClick = event => {
       if (!rootRef.current?.contains(event.target)) {
         setExpanded(false)
       }
     }
-
     window.addEventListener("click", handleWindowOnClick)
-
     return () => {
       window.removeEventListener("click", handleWindowOnClick)
     }
-  }, [setText, options, value])
+  }, [setText, options])
 
   useEffect(() => {
     const match = optionByValue(options, value)?.text
@@ -54,26 +51,19 @@ export const SelectAutoComplete = ({
     }
   }, [value, options])
 
-  const selectOption = (direction = 0) => {
-    const target = optionIndex + direction
+  const shiftOption = (shift = 0) => {
+    const target = optionIndex + shift
     if (target >= filteredOptions.length || target < 0) return
     setSelectedIndex(target)
-  }
-
-  const handleInputOnChange = (val = "") => {
-    setText(val)
-    if (optionByValue(options, val) !== undefined) {
-      onChange(val)
-    }
   }
 
   const handleInputOnKeyDown = ev => {
     if ("ArrowDown" === ev.key) {
       ev.preventDefault()
-      selectOption(+1)
+      shiftOption(+1)
     } else if ("ArrowUp" === ev.key) {
       ev.preventDefault()
-      selectOption(-1)
+      shiftOption(-1)
     } else if ("Enter" === ev.key) {
       const { val, text } = filteredOptions[optionIndex]
       setExpanded(false)
@@ -84,14 +74,25 @@ export const SelectAutoComplete = ({
     }
   }
 
+  const handleInputOnChange = (val = "") => {
+    setText(val)
+    if (optionByValue(options, val) !== undefined) {
+      onChange(val)
+    }
+  }
+
   const handleInputOnFocus = () => {
     const match = options.find(o => {
       const t = text.toLowerCase()
       return o.text.toLowerCase() === t || o.val.toLowerCase() === t
     })
-    if (match !== undefined && match.val !== defaultValue) {
-      setExpanded(false)
+    if (match === undefined) {
+      setExpanded(true)
     } else {
+      if (match.val === defaultValue) {
+        setText("")
+        onChange("")
+      }
       setExpanded(true)
     }
   }
