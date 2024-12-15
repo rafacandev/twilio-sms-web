@@ -11,7 +11,7 @@ export const PhoneSelector = ({
   phoneNumber = "default",
   loading = true,
   onPhoneNumberChange = emptyFn,
-}) =>
+}) => (
   <SelectAutoComplete
     className="w-36"
     options={toOptions(phoneNumbers)}
@@ -20,3 +20,4 @@ export const PhoneSelector = ({
     loading={loading}
     onChange={onPhoneNumberChange}
   />
+)

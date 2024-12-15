@@ -44,11 +44,7 @@ export const App = () => {
                 component={ConversationPage}
                 retirectTo="/authentication"
               />
-              <AuthenticatedRoute
-                path="/send"
-                component={SendPage}
-                retirectTo="/authentication"
-              />
+              <AuthenticatedRoute path="/send" component={SendPage} retirectTo="/authentication" />
               <Route path="/ui" component={UiPage} />
               <Route path="*" component={NotFoundPage} />
             </Switch>

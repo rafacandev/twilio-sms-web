@@ -34,7 +34,12 @@ export const Selector = ({
 }) => (
   <div className={className}>
     <div className="flex gap-1">
-      <PhoneSelector loading={loading} phoneNumber={phoneNumber} phoneNumbers={phoneNumbers} onPhoneNumberChange={onPhoneNumberChange} />
+      <PhoneSelector
+        loading={loading}
+        phoneNumber={phoneNumber}
+        phoneNumbers={phoneNumbers}
+        onPhoneNumberChange={onPhoneNumberChange}
+      />
       {isValidOption(phoneNumber, phoneNumbers) && <SelectDirection onMessageFilterChange={onMessageFilterChange} />}
     </div>
   </div>
