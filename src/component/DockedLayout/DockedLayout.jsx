@@ -14,6 +14,10 @@ const NavBar = () => {
     history.push("/inbox")
   }
 
+  const navigateToSend = () => {
+    history.push("/send")
+  }
+
   return (
     <>
       <nav className="text-white text-[.75rem] px-2 flex">
@@ -22,7 +26,7 @@ const NavBar = () => {
           Inbox
         </NavItem>
         <NavItem>
-          <SendOutlined className="text-lg" />
+          <SendOutlined className="text-lg" onClick={navigateToSend} />
           Send
         </NavItem>
         <div className="grow flex justify-center items-center text-lg">Twilio SMS Web</div>

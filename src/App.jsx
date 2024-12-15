@@ -23,6 +23,7 @@ import { UiPage } from "./component/UiPage/UiPage"
 import { NotFoundPage } from "./component/NotFoundPage/NotFoundPage"
 import { Inbox } from "./component/Inbox/Inbox"
 import { ConversationPage } from "./component/ConversationPage/ConversationPage"
+import { SendPage } from "./component/SendPage/SendPage"
 
 export const App = () => {
   return (
@@ -41,6 +42,11 @@ export const App = () => {
               <AuthenticatedRoute
                 path="/conversation/:from/:to"
                 component={ConversationPage}
+                retirectTo="/authentication"
+              />
+              <AuthenticatedRoute
+                path="/send"
+                component={SendPage}
                 retirectTo="/authentication"
               />
               <Route path="/ui" component={UiPage} />
