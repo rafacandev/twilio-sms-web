@@ -1,12 +1,6 @@
-import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
-import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
 import { select, selectOptions } from "../../ui/classes"
 import { emptyFn } from "../../js/types"
-
-const toOptions = (phoneNumbers = []) => {
-  const options = phoneNumbers.map(p => ({ val: p, text: maskPhoneNumber(p) }))
-  return [{ val: "default", text: "All phone numbers" }, ...options]
-}
+import { PhoneSelector } from "../PhoneSelector/PhoneSelector"
 
 const isValidOption = (phoneNumber = "", phoneNumbers = []) => phoneNumbers.find(p => p === phoneNumber) !== undefined
 
@@ -40,14 +34,7 @@ export const Selector = ({
 }) => (
   <div className={className}>
     <div className="flex gap-1">
-      <SelectAutoComplete
-        className="w-36"
-        options={toOptions(phoneNumbers)}
-        value={phoneNumber}
-        defaultValue="default"
-        loading={loading}
-        onChange={onPhoneNumberChange}
-      />
+      <PhoneSelector loading={loading} phoneNumber={phoneNumber} phoneNumbers={phoneNumbers} onPhoneNumberChange={onPhoneNumberChange} />
       {isValidOption(phoneNumber, phoneNumbers) && <SelectDirection onMessageFilterChange={onMessageFilterChange} />}
     </div>
   </div>
