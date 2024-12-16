@@ -12,9 +12,11 @@ const Status = {
   sent: "sent",
 }
 
+const phoneMatch = '[+][0-9]{11}'
+
 export const SendPage = () => {
   const [phoneNumbers, setPhoneNumbers] = useState([])
-  const [from, setFrom] = useState("default")
+  const [from, setFrom] = useState("")
   const [to, setTo] = useState("")
   const [message, setMessage] = useState("")
   const [authentication] = useAuthentication()
@@ -30,8 +32,15 @@ export const SendPage = () => {
     setStatus(Status.sending)
     sendTwilioMessage(authentication, to, from, message).then(() => setStatus(Status.sent))
   }
-
+  
   const isLoading = () => status === Status.loading || status === Status.sending
+  
+  const isValid = () => {
+    const isValidFrom = from.match(phoneMatch) !== null
+    const isValidTo = to.length > 0 && to.match(phoneMatch) !== null
+    const isValidMessage = message.length >= 3
+    return isValidFrom && isValidTo && isValidMessage
+  }
 
   return (
     <DockedLayout>
@@ -44,6 +53,7 @@ export const SendPage = () => {
           phoneNumbers={phoneNumbers}
           phoneNumber={from}
           onPhoneNumberChange={setFrom}
+          includeAllOption={false}
           loading={isLoading()}
         />
       </div>
@@ -69,12 +79,13 @@ export const SendPage = () => {
         rows="5"
       ></textarea>
       <p className="text-xs font-thin m-0">Messages must be between 3 and 500 characters.</p>
-      <button
-        className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right"
-        onClick={handleSend}
-      >
-        Send
-      </button>
+        <button
+          className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300"
+          onClick={handleSend}
+          disabled={!isValid()}
+        >
+          Send
+        </button>
     </DockedLayout>
   )
 }
