@@ -1,80 +1,88 @@
 import { useEffect, useState } from "react"
-import { DockedLayout } from "../DockedLayout/DockedLayout"
-import { PhoneSelector } from "../PhoneSelector/PhoneSelector"
+import { useHistory } from "react-router-dom"
+import { useAuthentication } from "../../context/AuthenticationProvider"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { sendTwilioMessage } from "../../js/sendTwilioMessage"
-import { useAuthentication } from "../../context/AuthenticationProvider"
-
-const Status = {
-  loading: "loading",
-  loaded: "loaded",
-  sending: "sending",
-  sent: "sent",
-}
+import { phonePattern } from "../../js/util"
+import { Layout } from "../Layout/Layout"
+import { PhoneCombobox } from "../PhoneCombobox/PhoneComboox"
+import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { Loading3QuartersOutlined } from "@ant-design/icons"
 
 export const SendPage = () => {
   const [phoneNumbers, setPhoneNumbers] = useState([])
-  const [from, setFrom] = useState("default")
+  const [from, setFrom] = useState("")
   const [to, setTo] = useState("")
   const [message, setMessage] = useState("")
+  const [loadingPhoneNumbers, setLoadingPhoneNumbers] = useState(true)
+  const [sendingMessage, setSendingMessage] = useState(false)
+  const [error, setError] = useState(null)
   const [authentication] = useAuthentication()
-  const [status, setStatus] = useState(Status.loading)
+  const history = useHistory()
 
   useEffect(() => {
     getTwilioPhoneNumbers()
       .then(setPhoneNumbers)
-      .then(() => setStatus(Status.loaded))
+      .catch(setError)
+      .finally(() => setLoadingPhoneNumbers(false))
   }, [])
 
-  const handleSend = () => {
-    setStatus(Status.sending)
-    sendTwilioMessage(authentication, to, from, message).then(() => setStatus(Status.sent))
+  const handleToOnChange = e => {
+    const val = e.target.value
+    setTo("+" + val.replace(/\D/g, ""))
   }
 
-  const isLoading = () => status === Status.loading || status === Status.sending
+  const handleSend = () => {
+    if (sendingMessage) return
+
+    setSendingMessage(true)
+    sendTwilioMessage(authentication, to, from, message)
+      .catch(setError)
+      .then(messageSid => history.push(`/sent/${messageSid}`))
+      .finally(() => setSendingMessage(false))
+  }
+
+  const isValid = () => {
+    const isValidFrom = phoneNumbers.includes(from)
+    const isValidTo = to.match(phonePattern) !== null
+    const isValidMessage = message.length >= 3 && message.length < 500
+    return !sendingMessage && isValidFrom && isValidTo && isValidMessage
+  }
+
+  const hint = `Send a message from  ${from === "" ? "?" : from}  to  ${to === "" ? "?" : to}`
 
   return (
-    <DockedLayout>
+    <Layout>
       <h3>Send</h3>
-      <p className="text-xs italic">Send a message to a phone number.</p>
+      <p className="my-4">Select phone number to send a message from.</p>
+      <ErrorLabel error={error} className="mb-4" />
       <div className="flex items-center">
-        <label className="w-10">From:</label>{" "}
-        <PhoneSelector
-          className="inline w-36"
-          phoneNumbers={phoneNumbers}
-          phoneNumber={from}
-          onPhoneNumberChange={setFrom}
-          loading={isLoading()}
+        <label className="w-14">From:</label>
+        <PhoneCombobox
+          options={phoneNumbers}
+          onSelect={setFrom}
+          loading={loadingPhoneNumbers}
+          disabled={sendingMessage}
         />
       </div>
       <div className="flex items-center mt-2">
-        <label className="w-10">To:</label>
-        <input
-          className="w-36 border-2 rounded p-1 border-violet-200 invalid:border-red-500 invalid:border-red"
-          type="tel"
-          pattern="[\+]\d{11}"
-          onChange={i => setTo(i.target.value)}
-        />
+        <label className="w-14">To:</label>
+        <input type="tel" value={to} pattern={phonePattern} onChange={handleToOnChange} disabled={sendingMessage} />
       </div>
-
-      <p className="mb-1 mt-4">
-        Sending a message from <b className="mx-1">{from}</b> to <b className="mx-1">{to}</b>
-      </p>
       <textarea
-        className="w-full border-2 rounded p-2 border-violet-200 invalid:border-red-500"
-        placeholder={`Send a message from  ${from}  to  ${to}`}
+        className="w-full mt-2 p-2"
+        placeholder={hint}
         onChange={i => setMessage(i.target.value)}
         minLength="3"
         maxLength="500"
+        disabled={sendingMessage}
         rows="5"
       ></textarea>
       <p className="text-xs font-thin m-0">Messages must be between 3 and 500 characters.</p>
-      <button
-        className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right"
-        onClick={handleSend}
-      >
-        Send
+      <button className="float-right" onClick={handleSend} disabled={!isValid()}>
+        {!sendingMessage && "Send"}
+        {sendingMessage && <Loading3QuartersOutlined spin="true" />}
       </button>
-    </DockedLayout>
+    </Layout>
   )
 }

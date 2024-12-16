@@ -14,6 +14,7 @@ const toMessage = (v = {}) => ({
   date: v.date_created,
   status: v.status,
   body: v.body,
+  media: parseInt(v.num_media),
 })
 
 export const sortByDate = (a, b) => (Date.parse(a.date) > Date.parse(b.date) ? -1 : 1)
@@ -60,4 +61,19 @@ export const getTwilioMessages = async (from = "", to = "") => {
   })
 
   return response.data.messages.map(toMessage).sort(sortByDate)
+}
+
+/**
+ * @returns {Promise<Message>}
+ */
+export const getTwilioMessage = async (messageSid = "") => {
+  const authentication = getAuthentication()
+  const credentials = toCredentials(authentication)
+  const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages/${messageSid}.json`
+
+  const response = await axios.get(url, {
+    auth: credentials,
+  })
+
+  return toMessage(response.data)
 }

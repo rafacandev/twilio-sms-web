@@ -1,10 +1,10 @@
-.message-viewer {
-  max-width: 50%;
+.message-viewer-content {
+  border: 2px solid silver;
 }
 
-.message-viewer-content {
-  width: 100%;
-  border: 2px solid silver;
+.message-viewer-content.thumbnail {
+  height: 128px;
+  margin: 0 0.25rem 0 0.25rem;
 }
 
 .message-viewer-loading {

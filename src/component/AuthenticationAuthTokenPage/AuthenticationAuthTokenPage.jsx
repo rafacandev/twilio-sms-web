@@ -1,5 +1,4 @@
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
-import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { AuthenticationAuthTokenView } from "./AuthenticationAuthTokenPageView"
 import {
   Authentication,
@@ -10,6 +9,7 @@ import {
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { hasPermissions } from "../../js/hasTwilioPermissions"
+import { LayoutWithoutNavBar } from "../Layout/Layout"
 
 export const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -32,7 +32,7 @@ export const AuthenticationAuthTokenPage = () => {
       authToken,
       method: AuthenticationMethod.AUTH_TOKEN,
     })
-    history.push("/phone-numbers")
+    history.push("/inbox")
   }
 
   const handleSignIn = () => {
@@ -42,9 +42,20 @@ export const AuthenticationAuthTokenPage = () => {
   }
 
   return (
-    <DefaultLayout>
+    <LayoutWithoutNavBar>
       <h4>Authentication with Auth Token</h4>
-      <ErrorLabel error={error} />
+      <p className="my-4">
+        You can use your main account credentials (Account SID and Auth Token) to access Twilio for your main or
+        subaccounts.
+        <a
+          href="https://help.twilio.com/articles/223136027-Auth-Tokens-and-How-to-Change-Them"
+          target="_blank"
+          rel="noreferrer"
+        >
+          See Twilio Auth Token
+        </a>
+      </p>
+      <ErrorLabel error={error} className="mt-6" onClose={() => setError(null)} />
       <AuthenticationAuthTokenView
         accountSid={accountSid}
         authToken={authToken}
@@ -54,6 +65,6 @@ export const AuthenticationAuthTokenPage = () => {
         onSignIn={handleSignIn}
         onCancel={handleCancel}
       />
-    </DefaultLayout>
+    </LayoutWithoutNavBar>
   )
 }

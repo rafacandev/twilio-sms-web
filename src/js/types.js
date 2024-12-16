@@ -15,7 +15,7 @@ export const MessageDirection = {
  * @prop {string} to
  * @prop {string} status
  * @prop {string} body
- * @prop {boolean} hasMedia
+ * @prop {number} media
  */
 
 export const emptyFn = () => {}

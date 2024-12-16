@@ -1,4 +1,4 @@
-import { InputField } from "../InputField/InputField"
+const loadingClassName = (loading = false) => (loading ? "loading" : "")
 
 export const AuthenticationApiKeyView = ({
   accountSid = "",
@@ -12,49 +12,59 @@ export const AuthenticationApiKeyView = ({
   onSignIn = () => {},
 }) => (
   <form
+    className="grid grid-cols-1 gap-3"
     onSubmit={e => {
       e.preventDefault()
       onSignIn()
     }}
   >
-    <InputField
-      type="text"
-      name="AccountSid"
-      label="Account SID"
-      value={accountSid}
-      autoComplete="account-sid"
-      placeholder="Account SID located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onAccountSidChange}
-    />
-    <InputField
-      type="text"
-      name="ApiKey"
-      label="API Key"
-      value={apiKey}
-      autoComplete="api-key"
-      placeholder="API Key located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onApiKeyChange}
-    />
-    <InputField
-      type="password"
-      name="ApiSecret"
-      label="API Secret"
-      value={apiSecret}
-      autoComplete="api-secret"
-      placeholder="API Secret for your API Key"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onApiSecretChange}
-    />
-    <div className="buttons-container">
-      <button className="btn btn-secondary" id="AUTHENTICATION-API-KEY-CANCEL" type="button" onClick={onCancel}>
+    <label>
+      <span>Account SID</span>
+      <input
+        className="block w-full"
+        type="text"
+        name="AccountSid"
+        value={accountSid}
+        autoComplete="account-sid"
+        placeholder="Account SID located at your Twilio Console"
+        required
+        disabled={loading}
+        onChange={e => onAccountSidChange(e.target.value)}
+      />
+    </label>
+    <label>
+      <span>Api Key</span>
+      <input
+        className="block w-full"
+        type="text"
+        name="ApiKey"
+        value={apiKey}
+        autoComplete="api-key"
+        placeholder="API Key located at your Twilio Console"
+        required
+        disabled={loading}
+        onChange={e => onApiKeyChange(e.target.value)}
+      />
+    </label>
+    <label>
+      <span>Api Secret</span>
+      <input
+        className="block w-full"
+        type="password"
+        name="ApiSecret"
+        value={apiSecret}
+        autoComplete="api-secret"
+        placeholder="API Secret for you API Key"
+        required
+        disabled={loading}
+        onChange={e => onApiSecretChange(e.target.value)}
+      />
+    </label>
+    <div className="flex justify-end gap-3">
+      <button type="button" onClick={onCancel}>
         Cancel
       </button>
-      <button className="btn btn-primary" id="AUTHENTICATION-API-KEY-SIGN-IN" type="submit">
+      <button className={loadingClassName(loading)} type="submit">
         Sign-in
       </button>
     </div>

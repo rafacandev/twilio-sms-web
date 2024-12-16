@@ -1,5 +1,3 @@
-import { InputField } from "../InputField/InputField"
-
 const loadingClassName = (loading = false) => (loading ? "loading" : "")
 
 export const AuthenticationAuthTokenView = ({
@@ -12,42 +10,45 @@ export const AuthenticationAuthTokenView = ({
   onSignIn = () => {},
 }) => (
   <form
+    className="grid grid-cols-1 gap-3"
     onSubmit={e => {
       e.preventDefault()
       onSignIn()
     }}
   >
-    <InputField
-      type="text"
-      name="AccountSid"
-      label="Account SID"
-      value={accountSid}
-      autoComplete="account-sid"
-      placeholder="Account SID located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onAccountSidChange}
-    />
-    <InputField
-      type="password"
-      name="AuthToken"
-      label="Auth Token"
-      value={authToken}
-      autoComplete="auth-token"
-      placeholder="Auth Token located at your Twilio Console"
-      isRequired={true}
-      isEnabled={!loading}
-      onChange={onAuthTokenChange}
-    />
-    <div className="buttons-container">
-      <button className="btn btn-secondary" id="AUTHENTICATION-TOKEN-CANCEL" type="button" onClick={onCancel}>
+    <label>
+      <span>Account SID</span>
+      <input
+        className="block w-full"
+        type="text"
+        name="AccountSid"
+        value={accountSid}
+        autoComplete="account-sid"
+        placeholder="Account SID located at your Twilio Console"
+        required
+        disabled={loading}
+        onChange={e => onAccountSidChange(e.target.value)}
+      />
+    </label>
+    <label>
+      <span>Auth Token</span>
+      <input
+        className="block w-full"
+        type="password"
+        name="AuthToken"
+        value={authToken}
+        autoComplete="auth-token"
+        placeholder="Aut Token located at your Twilio Console"
+        required
+        disabled={loading}
+        onChange={e => onAuthTokenChange(e.target.value)}
+      />
+    </label>
+    <div className="flex justify-end gap-3">
+      <button type="button" onClick={onCancel}>
         Cancel
       </button>
-      <button
-        className={`btn btn-primary ${loadingClassName(loading)}`}
-        id="AUTHENTICATION-TOKEN-SIGN-IN"
-        type="submit"
-      >
+      <button className={loadingClassName(loading)} type="submit">
         Sign-in
       </button>
     </div>
