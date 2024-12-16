@@ -25,8 +25,8 @@ const NavBar = () => {
           <InboxOutlined className="text-lg" />
           Inbox
         </NavItem>
-        <NavItem>
-          <SendOutlined className="text-lg" onClick={navigateToSend} />
+        <NavItem onClick={navigateToSend}>
+          <SendOutlined className="text-lg" />
           Send
         </NavItem>
         <div className="grow flex justify-center items-center text-lg">Twilio SMS Web</div>
