@@ -2,7 +2,10 @@ import { GithubOutlined, InboxOutlined, SendOutlined } from "@ant-design/icons"
 import { useHistory } from "react-router-dom"
 
 const NavItem = ({ children, onClick = () => {} }) => (
-  <div onClick={onClick} className="h-12 flex flex-col px-3 mx-2 hover:bg-violet-700 hover:cursor-pointer">
+  <div
+    onClick={onClick}
+    className="h-12 flex flex-col justify-center items-center px-3 mx-2 hover:bg-violet-700 hover:cursor-pointer"
+  >
     {children}
   </div>
 )
@@ -23,11 +26,11 @@ const NavBar = () => {
       <nav className="text-white text-[.75rem] px-2 flex">
         <NavItem onClick={navigateToInbox}>
           <InboxOutlined className="text-lg" />
-          Inbox
+          <span>Inbox</span>
         </NavItem>
         <NavItem onClick={navigateToSend}>
           <SendOutlined className="text-lg" />
-          Send
+          <span>Send</span>
         </NavItem>
         <div className="grow flex justify-center items-center text-lg">Twilio SMS Web</div>
         <NavItem>
