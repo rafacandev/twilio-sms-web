@@ -1,9 +1,8 @@
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
-import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
 import { emptyFn } from "../../js/types"
 
 const toOptions = (phoneNumbers = [], includeAllOption) => {
-  const options = phoneNumbers.map(p => ({ val: p, text: maskPhoneNumber(p) }))
+  const options = phoneNumbers.map(p => ({ val: p, text: p }))
   const includeOptions = includeAllOption ? [{ val: "default", text: "All phone numbers" }] : []
   return [...includeOptions, ...options]
 }
