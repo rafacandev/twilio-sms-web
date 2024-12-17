@@ -42,6 +42,8 @@ export const SendPage = () => {
     return isValidFrom && isValidTo && isValidMessage
   }
 
+  const hint = `Send a message from  ${from === "" ? "?" : from}  to  ${to === "" ? "?" : to}`
+
   return (
     <DockedLayout>
       <h3>Send</h3>
@@ -66,13 +68,9 @@ export const SendPage = () => {
           onChange={i => setTo(i.target.value)}
         />
       </div>
-
-      <p className="mb-1 mt-4">
-        Sending a message from <b className="mx-1">{from}</b> to <b className="mx-1">{to}</b>
-      </p>
       <textarea
-        className="w-full border-2 rounded p-2 border-violet-200 invalid:border-red-500"
-        placeholder={`Send a message from  ${from}  to  ${to}`}
+        className="w-full border-2 rounded mt-2 p-2 border-violet-200 invalid:border-red-500"
+        placeholder={hint}
         onChange={i => setMessage(i.target.value)}
         minLength="3"
         maxLength="500"
