@@ -1,7 +1,7 @@
 import { AuthenticationMethod } from "../../context/AuthenticationProvider"
 import { useHistory } from "react-router-dom"
 import { AuthenticationMethodCard } from "../AuthenticationMethodCard/AuthenticationMethodCard"
-import { DockedLayoutBlankNavBar } from "../DockedLayout/DockedLayout"
+import { LayoutWithoutNavBar } from "../Layout/Layout"
 
 export const AuthenticationPage = () => {
   const history = useHistory()
@@ -15,8 +15,8 @@ export const AuthenticationPage = () => {
   }
 
   return (
-    <DockedLayoutBlankNavBar>
+    <LayoutWithoutNavBar>
       <AuthenticationMethodCard onChange={handleAuthMethod} />
-    </DockedLayoutBlankNavBar>
+    </LayoutWithoutNavBar>
   )
 }

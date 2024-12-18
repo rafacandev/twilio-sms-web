@@ -1,7 +1,7 @@
 import { CheckCircleFilled } from "@ant-design/icons"
 
 import { useEffect, useState } from "react"
-import { DockedLayout } from "../DockedLayout/DockedLayout"
+import { Layout } from "../Layout/Layout"
 import { PhoneSelector } from "../PhoneSelector/PhoneSelector"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { sendTwilioMessage } from "../../js/sendTwilioMessage"
@@ -18,7 +18,7 @@ const Status = {
 const phoneMatch = "[+][0-9]{11}"
 
 const Dialog = (from = "?", to = "?", close = emptyFn) => (
-  <DockedLayout>
+  <Layout>
     <div className="flex max-h-[600px] h-full items-center">
       <dialog open className="p-6 border-2 rounded border-purple-800 bg-white text-center">
         <CheckCircleFilled className="text-green-200 text-5xl block mb-8" />
@@ -33,7 +33,7 @@ const Dialog = (from = "?", to = "?", close = emptyFn) => (
         </button>
       </dialog>
     </div>
-  </DockedLayout>
+  </Layout>
 )
 
 export const SendPage = () => {
@@ -72,7 +72,7 @@ export const SendPage = () => {
   }
 
   return (
-    <DockedLayout>
+    <Layout>
       <h3>Send</h3>
       <p className="text-xs italic">Send a message to a phone number.</p>
       <div className="flex items-center">
@@ -107,6 +107,6 @@ export const SendPage = () => {
       <button className="float-right" onClick={handleSend} disabled={!isValid()}>
         Send
       </button>
-    </DockedLayout>
+    </Layout>
   )
 }

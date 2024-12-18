@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { DockedLayout } from "../DockedLayout/DockedLayout"
+import { Layout } from "../Layout/Layout"
 import { useEffect, useState } from "react"
 import { getTwilioMessages, sortByDate } from "../../js/getTwilioMessages"
 import { MessageRows } from "../MessageRows/MessageRows"
@@ -15,13 +15,13 @@ export const ConversationPage = () => {
   }, [from, to])
 
   return (
-    <DockedLayout>
+    <Layout>
       <h3>Conversation</h3>
       <p className="text-xs">
         Messages exchanged between <span className="font-semibold">{from}</span> and{" "}
         <span className="font-semibold">{to}</span>
       </p>
       <MessageRows messages={messages} />
-    </DockedLayout>
+    </Layout>
   )
 }

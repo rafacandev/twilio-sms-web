@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { DockedLayout } from "../DockedLayout/DockedLayout"
+import { Layout } from "../Layout/Layout"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
@@ -126,7 +126,7 @@ const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => `+1555000000${i
 export const UiPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("default")
   return (
-    <DockedLayout>
+    <Layout>
       <h3>UI Page</h3>
 
       <p className="italic">Display mocked UI elements for quick iteration</p>
@@ -159,6 +159,6 @@ export const UiPage = () => {
       <MessageRows messages={messages} />
       <hr />
       <NotFoundPage />
-    </DockedLayout>
+    </Layout>
   )
 }

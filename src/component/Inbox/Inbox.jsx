@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { DockedLayout } from "../DockedLayout/DockedLayout"
+import { Layout } from "../Layout/Layout"
 import { MessageRows } from "../MessageRows/MessageRows"
 import { MessageFilterOption, Selector } from "./Selector"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
@@ -23,7 +23,7 @@ export const Inbox = () => {
   }, [])
 
   return (
-    <DockedLayout>
+    <Layout>
       <h3>Inbox</h3>
       <p className="text-xs italic">Your most recent incoming messages</p>
       <Selector
@@ -35,6 +35,6 @@ export const Inbox = () => {
         onPhoneNumberChange={setPhoneNumber}
       />
       <MessageRows messages={messages} />
-    </DockedLayout>
+    </Layout>
   )
 }
