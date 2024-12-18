@@ -40,12 +40,15 @@ export const AuthenticationAuthTokenView = ({
       onChange={onAuthTokenChange}
     />
     <div className="buttons-container">
-      <button className="btn btn-secondary" id="AUTHENTICATION-TOKEN-CANCEL" type="button" onClick={onCancel}>
+      <button
+        className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300"
+        type="button"
+        onClick={onCancel}
+      >
         Cancel
       </button>
       <button
-        className={`btn btn-primary ${loadingClassName(loading)}`}
-        id="AUTHENTICATION-TOKEN-SIGN-IN"
+        className={`border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300 ${loadingClassName(loading)}`}
         type="submit"
       >
         Sign-in

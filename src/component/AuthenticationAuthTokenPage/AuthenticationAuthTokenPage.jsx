@@ -1,5 +1,4 @@
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
-import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { AuthenticationAuthTokenView } from "./AuthenticationAuthTokenPageView"
 import {
   Authentication,
@@ -10,6 +9,7 @@ import {
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { hasPermissions } from "../../js/hasTwilioPermissions"
+import { DockedLayoutBlankNavBar } from "../DockedLayout/DockedLayout"
 
 export const AuthenticationAuthTokenPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -42,7 +42,7 @@ export const AuthenticationAuthTokenPage = () => {
   }
 
   return (
-    <DefaultLayout>
+    <DockedLayoutBlankNavBar>
       <h4>Authentication with Auth Token</h4>
       <ErrorLabel error={error} />
       <AuthenticationAuthTokenView
@@ -54,6 +54,6 @@ export const AuthenticationAuthTokenPage = () => {
         onSignIn={handleSignIn}
         onCancel={handleCancel}
       />
-    </DefaultLayout>
+    </DockedLayoutBlankNavBar>
   )
 }
