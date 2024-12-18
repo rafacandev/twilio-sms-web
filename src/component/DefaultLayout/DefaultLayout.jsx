@@ -8,8 +8,8 @@ const NavBar = () => {
   const navigateToAuthenticationPage = () => {
     history.push("/authentication")
   }
-  const navigateToPhoneNumbersPage = () => {
-    history.push("/phone-numbers")
+  const navigateToInboxPage = () => {
+    history.push("/inbox")
   }
   const navigateToNotificationsPage = () => {
     history.push("/notifications")
@@ -23,7 +23,7 @@ const NavBar = () => {
           Authentication
         </div>
         <div className="default-layout-nav-bar-btn-spacer"></div>
-        <div className="default-layout-nav-bar-btn text-light" onClick={navigateToPhoneNumbersPage}>
+        <div className="default-layout-nav-bar-btn text-light" onClick={navigateToInboxPage}>
           Messages
         </div>
 

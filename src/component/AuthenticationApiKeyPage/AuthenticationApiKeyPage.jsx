@@ -34,7 +34,7 @@ export const AuthenticationApiKeyPage = () => {
       apiSecret,
       method: AuthenticationMethod.API_KEY,
     })
-    history.push("/phone-numbers")
+    history.push("/inbox")
   }
 
   const handleSignIn = () => {

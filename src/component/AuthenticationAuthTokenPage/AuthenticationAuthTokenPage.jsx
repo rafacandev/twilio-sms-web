@@ -32,7 +32,7 @@ export const AuthenticationAuthTokenPage = () => {
       authToken,
       method: AuthenticationMethod.AUTH_TOKEN,
     })
-    history.push("/phone-numbers")
+    history.push("/inbox")
   }
 
   const handleSignIn = () => {
