@@ -6,10 +6,10 @@ import {
 } from "../../context/AuthenticationProvider"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { AuthenticationApiKeyView } from "./AuthenticationApiKeyPageView"
 import { hasPermissions } from "../../js/hasTwilioPermissions"
+import { DockedLayoutBlankNavBar } from "../DockedLayout/DockedLayout"
 
 export const AuthenticationApiKeyPage = () => {
   const [authentication, setAuthentication] = useAuthentication()
@@ -44,7 +44,7 @@ export const AuthenticationApiKeyPage = () => {
   }
 
   return (
-    <DefaultLayout>
+    <DockedLayoutBlankNavBar>
       <h4>Authentication with Api Key</h4>
       <ErrorLabel error={error} />
       <AuthenticationApiKeyView
@@ -58,6 +58,6 @@ export const AuthenticationApiKeyPage = () => {
         onSignIn={handleSignIn}
         onCancel={handleCancel}
       />
-    </DefaultLayout>
+    </DockedLayoutBlankNavBar>
   )
 }
