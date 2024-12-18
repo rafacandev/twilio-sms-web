@@ -60,3 +60,18 @@ export const DockedLayout = ({ children }) => {
     </div>
   )
 }
+
+export const DockedLayoutBlankNavBar = ({ children }) => {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex h-12">
+        <div className="bg-violet-900 grow flex justify-center items-center text-lg text-white">Twilio SMS Web</div>
+      </div>
+      <div className="flex grow">
+        <div className="bg-gray-200 grow"></div>
+        <div className="bg-gray-100 w-full max-w-4xl pt-2 pb-4 md:px-2 lg:px-4">{children}</div>
+        <div className="bg-gray-200 grow"></div>
+      </div>
+    </div>
+  )
+}
