@@ -14,10 +14,8 @@ import { HashRouter, Route, Switch } from "react-router-dom"
 import { AuthenticationProvider } from "./context/AuthenticationProvider"
 import { ComposerProvider } from "./context/ComposerProvider"
 import { AuthenticationPage } from "./component/AuthenticationPage/AuthenticationPage"
-import { MessagesPage } from "./component/MessagesPage/MessagesPage"
 import { AuthenticationAuthTokenPage } from "./component/AuthenticationAuthTokenPage/AuthenticationAuthTokenPage"
 import { AuthenticationApiKeyPage } from "./component/AuthenticationApiKeyPage/AuthenticationApiKeyPage"
-import { NotificationsPage } from "./component/NotificationsPage/NotificationsPage"
 import { AuthenticatedRoute } from "./component/AuthenticatedRoute/AuthentiatedRoute"
 import { UiPage } from "./component/UiPage/UiPage"
 import { NotFoundPage } from "./component/NotFoundPage/NotFoundPage"
@@ -36,8 +34,6 @@ export const App = () => {
               <Route path="/authentication" component={AuthenticationPage} />
               <Route path="/authentication-token" component={AuthenticationAuthTokenPage} />
               <Route path="/authentication-api-key" component={AuthenticationApiKeyPage} />
-              <AuthenticatedRoute path="/phone-numbers" component={MessagesPage} retirectTo="/authentication" />
-              <AuthenticatedRoute path="/notifications" component={NotificationsPage} retirectTo="/authentication" />
               <AuthenticatedRoute path="/inbox" component={Inbox} retirectTo="/authentication" />
               <AuthenticatedRoute
                 path="/conversation/:from/:to"

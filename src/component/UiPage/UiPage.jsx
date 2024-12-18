@@ -4,7 +4,6 @@ import { MessageRows } from "../MessageRows/MessageRows"
 import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
-import { maskPhoneNumber } from "../PhoneNumberSelector/PhoneNumberSelector"
 import { useState } from "react"
 
 /**
@@ -122,9 +121,7 @@ const messages = [
   },
 ]
 
-const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-  .map(i => `+1555000000${i}`)
-  .map(i => ({ val: i, text: maskPhoneNumber(i) }))
+const phoneNumbersOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => `+1555000000${i}`).map(i => ({ val: i, text: i }))
 
 export const UiPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("default")
