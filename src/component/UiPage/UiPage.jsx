@@ -128,7 +128,18 @@ export const UiPage = () => {
   return (
     <DockedLayout>
       <h3>UI Page</h3>
+
       <p className="italic">Display mocked UI elements for quick iteration</p>
+
+      <div className="my-10">
+        <h5>Basic Elements</h5>
+        <h6>Buttons</h6>
+        <div className="flex gap-3">
+          <button type="button">Simple Button</button>
+          <button className="w-56">Wide button</button>
+        </div>
+      </div>
+
       <div>
         <h5>Select with auto-complete</h5>
         <div className="flex items-center gap-4 my-2">

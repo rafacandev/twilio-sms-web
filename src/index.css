@@ -29,12 +29,27 @@ code {
   font-family: source-code-pro, Monaco, Consolas, "Courier New", monospace;
 }
 
-.buttons-container {
-  display: flex;
-  justify-content: right;
+button {
+  background-color: #6d28d9;
+  border: #4c1d95 solid 2px;
+  border-radius: 6px;
+  padding: 8px 16px 8px 16px;
+  color: white;
 }
 
-.buttons-container button {
-  margin-left: 1.5em;
-  min-width: 8em;
+button:hover {
+  background-color: #8b5cf6;
+}
+
+button:active {
+  background-color: #4c1d95;
+}
+
+button:invalid {
+  border-color: #ef4444;
+}
+
+button:disabled {
+  border-color: #d1d5db;
+  background-color: #e5e7eb;
 }

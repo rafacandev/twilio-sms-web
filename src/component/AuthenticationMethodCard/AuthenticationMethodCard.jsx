@@ -4,7 +4,7 @@ import { emptyFn } from "../../js/types"
 export const AuthenticationMethodCard = ({ onChange = emptyFn }) => (
   <div className="text-center mt-8">
     <div className="authentication-method-card-header">Authenticate with Twilio:</div>
-    <button className="bg-purple-800 p-2 w-56 text-white m-5" onClick={e => onChange(AuthenticationMethod.AUTH_TOKEN)}>
+    <button className="w-56 m-5" onClick={e => onChange(AuthenticationMethod.AUTH_TOKEN)}>
       AuthToken
     </button>
 
@@ -14,7 +14,7 @@ export const AuthenticationMethodCard = ({ onChange = emptyFn }) => (
       <hr className="w-40 border-t-2 border-gray-300" />
     </div>
 
-    <button className="bg-purple-800 p-2 w-56 text-white m-5" onClick={e => onChange(AuthenticationMethod.API_KEY)}>
+    <button className="w-56 m-5" onClick={e => onChange(AuthenticationMethod.API_KEY)}>
       Api Key
     </button>
   </div>

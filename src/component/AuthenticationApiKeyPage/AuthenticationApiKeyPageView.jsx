@@ -52,18 +52,11 @@ export const AuthenticationApiKeyView = ({
       isEnabled={!loading}
       onChange={onApiSecretChange}
     />
-    <div className="buttons-container">
-      <button
-        className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300"
-        type="button"
-        onClick={onCancel}
-      >
+    <div className="flex justify-end gap-3">
+      <button type="button" onClick={onCancel}>
         Cancel
       </button>
-      <button
-        className={`border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300 ${loadingClassName(loading)}`}
-        type="submit"
-      >
+      <button className={loadingClassName(loading)} type="submit">
         Sign-in
       </button>
     </div>

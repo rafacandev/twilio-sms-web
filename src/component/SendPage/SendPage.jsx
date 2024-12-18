@@ -104,11 +104,7 @@ export const SendPage = () => {
         rows="5"
       ></textarea>
       <p className="text-xs font-thin m-0">Messages must be between 3 and 500 characters.</p>
-      <button
-        className="border-2 rounded py-2 px-4 border-white invalid:border-red-500 bg-purple-900 text-white hover:bg-purple-700 active:bg-purple-950 float-right disabled:bg-gray-200 disabled:border-gray-300"
-        onClick={handleSend}
-        disabled={!isValid()}
-      >
+      <button className="float-right" onClick={handleSend} disabled={!isValid()}>
         Send
       </button>
     </DockedLayout>
