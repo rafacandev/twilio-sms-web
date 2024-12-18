@@ -6,8 +6,6 @@ import "spectre.css/dist/spectre.min.css"
 import "spectre.css/dist/spectre-exp.css"
 import "spectre.css/dist/spectre-icons.css"
 
-import "./App.css"
-
 import React from "react"
 import { HashRouter, Route, Switch } from "react-router-dom"
 
@@ -25,7 +23,7 @@ import { SendPage } from "./component/SendPage/SendPage"
 
 export const App = () => {
   return (
-    <div className="App">
+    <div className="h-full">
       <AuthenticationProvider>
         <ComposerProvider>
           <HashRouter>

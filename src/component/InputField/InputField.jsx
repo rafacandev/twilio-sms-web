@@ -38,8 +38,8 @@ export const InputField = ({
         onChange={event => onChange(event.target.value)}
         onBlur={() => setPristine(false)}
       />
-      {showInvalid && <span className="form-input-hint">{invalidHint}</span>}
-      {!showInvalid && <span className="form-input-hint">{placeholder}</span>}
+      {showInvalid && <span className="text-gray-400">{invalidHint}</span>}
+      {!showInvalid && <span className="text-gray-400">{placeholder}</span>}
     </label>
   )
 }

@@ -36,8 +36,8 @@ export const TextAreaField = ({
         onChange={event => onChange(event.target.value)}
         onBlur={() => setPristine(false)}
       ></textarea>
-      {showInvalid && <span className="form-input-hint">{invalidHint}</span>}
-      {!showInvalid && <span className="form-input-hint">{placeholder}</span>}
+      {showInvalid && <span className="text-gray-400">{invalidHint}</span>}
+      {!showInvalid && <span className="text-gray-400">{placeholder}</span>}
     </label>
   )
 }
