@@ -37,7 +37,7 @@ export const MessageComposer = ({ phoneNumber = "" }) => {
     if (v.length > 0) {
       v = "+" + v.replace(/\D/g, "")
     }
-    if (v.length < 13) {
+    if (v.length < 14) {
       setTo(v)
       setComposerContext(v)
     }
