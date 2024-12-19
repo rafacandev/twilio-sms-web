@@ -5,6 +5,7 @@ import { NotFoundPage } from "../NotFoundPage/NotFoundPage"
 import { Selector } from "../Inbox/Selector"
 import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
 import { useState } from "react"
+import { Combobox } from "../Combobox/Combobox"
 
 /**
  * @typedef {import ('../../js/types').Message} Message
@@ -128,19 +129,21 @@ export const UiPage = () => {
   return (
     <Layout>
       <h3>UI Page</h3>
-
       <p className="italic">Display mocked UI elements for quick iteration</p>
-
-      <div className="my-10">
-        <h5>Basic Elements</h5>
+      <div className="mt-8">
+        <h5>Native Elements</h5>
         <h6>Buttons</h6>
         <div className="flex gap-3">
           <button type="button">Simple Button</button>
           <button className="w-56">Wide button</button>
         </div>
       </div>
+      <div className="mt-8">
+        <h5>Combobox</h5>
+        <Combobox options={phoneNumbersOptions.map(o => o.val)} />
+      </div>
 
-      <div>
+      <div className="mt-8">
         <h5>Select with auto-complete</h5>
         <div className="flex items-center gap-4 my-2">
           <SelectAutoComplete options={phoneNumbersOptions} value="+15550000001" />
