@@ -44,7 +44,7 @@ export const AuthenticationAuthTokenPage = () => {
   return (
     <LayoutWithoutNavBar>
       <h4>Authentication with Auth Token</h4>
-      <ErrorLabel error={error} />
+      <ErrorLabel error={error} className="mt-6" onClose={() => setError(null)} />
       <AuthenticationAuthTokenView
         accountSid={accountSid}
         authToken={authToken}
