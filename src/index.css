@@ -108,3 +108,15 @@ h6 {
   font-weight: 800;
   line-height: 1.375;
 }
+label span {
+  font-size: 0.875rem;
+}
+
+a {
+  font-weight: 500;
+  color: #2563eb;
+}
+
+a:hover {
+  text-decoration: underline;
+}
