@@ -140,7 +140,7 @@ export const UiPage = () => {
           <button className="w-56">Wide button</button>
         </div>
         <h6>Inputs</h6>
-        <input value="Regular input"/>
+        <input value="Regular input" />
         <input value="Required input" required />
         <input value="Disabled input" disabled />
       </div>

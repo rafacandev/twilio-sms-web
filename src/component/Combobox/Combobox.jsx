@@ -1,4 +1,4 @@
-import { DoubleRightOutlined } from "@ant-design/icons"
+import { DoubleRightOutlined, RightOutlined, CaretDownFilled, StepBackwardFilled } from "@ant-design/icons"
 
 import { useState, useEffect, useRef } from "react"
 import { emptyFn } from "../../js/types"
@@ -6,7 +6,7 @@ import { emptyFn } from "../../js/types"
 const Option = (o = "option", isActive = false, onClick = emptyFn, onMouseOver = emptyFn) => (
   <div
     key={o}
-    className={`${isActive ? "bg-gray-200" : "bg-white"}  h-8 flex items-center`}
+    className={`${isActive ? "bg-gray-200" : "bg-white"}  h-10 flex items-center`}
     onMouseOver={onMouseOver}
     onClick={onClick}
   >
@@ -80,24 +80,21 @@ export const Combobox = ({ options = [] }) => {
 
   return (
     <div ref={rootRef} className="w-36">
-      <div className="w-36 flex">
+      <label className="w-36 flex" onFocus={handleInputOnFocus}>
         <input
           type="text"
-          className="mb-2 w-36"
+          className="w-36"
           value={inputValue}
           onChange={e => setInputValue(e.value)}
-          onFocus={handleInputOnFocus}
           onKeyDown={e => handleInputOnKeyDown(e)}
         />
-        <DoubleRightOutlined
-          className="text-black text-[.6rem] relative right-4 top-1"
-          rotate={isOpen ? "-90" : "90"}
-        />
-      </div>
+        {!isOpen && <CaretDownFilled className="relative right-5 top-3 cursor-text text-gray-500" />}
+        {isOpen && <StepBackwardFilled className="relative right-5 top-3 cursor-text text-gray-500" rotate="-90" />}
+      </label>
 
       {isOpen && (
-        <div className="bg-pink-300 absolute z-10 w-36">
-          <div className="border-purple-300 border h-56 overflow-y-auto divide-y divide-dashed z-10">
+        <div className="absolute z-10 w-36 mt-1">
+          <div className="border-gray-300 border-2 h-60 overflow-y-auto divide-y-2 divide-dotted">
             {options.map((o, i) =>
               Option(
                 o,

@@ -62,8 +62,8 @@ input {
 }
 
 input:disabled {
-  border-color: #D1D5DB;
+  border-color: #d1d5db;
   border-style: dotted;
-  color: #4B5563;
-  background-color: #E5E7EB;
+  color: #4b5563;
+  background-color: #e5e7eb;
 }
