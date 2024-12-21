@@ -7,6 +7,7 @@ import { SelectAutoComplete } from "../SelectAutoComplete/SelectAutoComplete"
 import { useState } from "react"
 import { Combobox } from "../Combobox/Combobox"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { InputField } from "../InputField/InputField"
 
 /**
  * @typedef {import ('../../js/types').Message} Message
@@ -138,6 +139,10 @@ export const UiPage = () => {
           <button type="button">Simple Button</button>
           <button className="w-56">Wide button</button>
         </div>
+        <h6>Inputs</h6>
+        <input value="Regular input"/>
+        <input value="Required input" required />
+        <input value="Disabled input" disabled />
       </div>
       <div className="mt-8">
         <h5>Custom Elements</h5>

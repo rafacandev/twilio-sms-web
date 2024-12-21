@@ -53,3 +53,17 @@ button:disabled {
   border-color: #d1d5db;
   background-color: #e5e7eb;
 }
+
+input {
+  padding: 0.375rem;
+  border-radius: 0.25rem;
+  border-width: 2px;
+  background-color: #ffffff;
+}
+
+input:disabled {
+  border-color: #D1D5DB;
+  border-style: dotted;
+  color: #4B5563;
+  background-color: #E5E7EB;
+}
