@@ -130,33 +130,48 @@ export const UiPage = () => {
   const [phoneNumber, setPhoneNumber] = useState("default")
   return (
     <Layout>
-      <h3>UI Page</h3>
-      <p className="italic">Display mocked UI elements for quick iteration</p>
-      <div className="mt-8">
-        <h5>Native Elements</h5>
-        <h6>Buttons</h6>
-        <div className="flex gap-3">
-          <button type="button">Simple Button</button>
-          <button className="w-56">Wide button</button>
-        </div>
-        <h6>Inputs</h6>
-        <input value="Regular input" />
-        <input value="Required input" required />
-        <input value="Disabled input" disabled />
+      <h1>UI Page</h1>
+      <p className="italic">Display UI elements for quick iteration</p>
+
+      <h2 className="mt-5">Native Elements</h2>
+      <p>Elements that are being natively inserted into the UI and don't rely on the UI framework.</p>
+      <h3>Typography</h3>
+      <p>
+        This is a regular paragraph with a lorem ipsum. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+        Aliquid minima, magni beatae ipsum tempora asperiores quaerat nam incidunt voluptatibus pariatur. Inventore
+        voluptatem eius ducimus error numquam vero, a esse aliquam!
+      </p>
+      <div>
+        <h1>Heading 1</h1>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 4</h4>
+        <h5>Heading 5</h5>
+        <h6>Heading 6</h6>
       </div>
-      <div className="mt-8">
-        <h5>Custom Elements</h5>
-        <h4>Combobox</h4>
-        <Combobox options={phoneNumbersOptions.map(o => o.val)} />
-        <h4>Error</h4>
-        <ErrorLabel error="Something terrible has happened." />
+
+      <h2 className="mt-5">Buttons</h2>
+      <div className="flex gap-3">
+        <button>Simple Button</button>
+        <button className="w-56">Wide button</button>
       </div>
-      <div className="mt-8">
-        <h5>Select with auto-complete</h5>
-        <div className="flex items-center gap-4 my-2">
-          <SelectAutoComplete options={phoneNumbersOptions} value="+15550000001" />
-          <SelectAutoComplete options={phoneNumbersOptions} value="default" loading="false" />
-        </div>
+
+      <h2 className="mt-5">Inputs</h2>
+      <input value="Regular input" />
+      <input value="Required input" required />
+      <input value="Disabled input" disabled />
+
+      <h2 className="mt-5">Custom Elements</h2>
+      <p>Elements that are created as a component and inserted into the UI and requires the UI framework.</p>
+      <h3>Combobox</h3>
+      <Combobox options={phoneNumbersOptions.map(o => o.val)} />
+      <h3>Error</h3>
+      <ErrorLabel error="Something terrible has happened." />
+
+      <h2 className="mt-5">Select with auto-complete</h2>
+      <div className="flex items-center gap-4 my-2">
+        <SelectAutoComplete options={phoneNumbersOptions} value="+15550000001" />
+        <SelectAutoComplete options={phoneNumbersOptions} value="default" loading="false" />
       </div>
 
       <p className="my-1">MessageRows with messages</p>
