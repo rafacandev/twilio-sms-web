@@ -29,12 +29,103 @@ code {
   font-family: source-code-pro, Monaco, Consolas, "Courier New", monospace;
 }
 
-.buttons-container {
-  display: flex;
-  justify-content: right;
+button {
+  background-color: #6d28d9;
+  border: #4c1d95 solid 2px;
+  border-radius: 6px;
+  padding: 8px 16px 8px 16px;
+  color: white;
 }
 
-.buttons-container button {
-  margin-left: 1.5em;
-  min-width: 8em;
+button:hover {
+  background-color: #8b5cf6;
+}
+
+button:active {
+  background-color: #4c1d95;
+}
+
+button:invalid {
+  border-color: #ef4444;
+}
+
+button:disabled {
+  border-color: #d1d5db;
+  background-color: #e5e7eb;
+}
+
+select,
+textarea,
+input {
+  padding: 0.375rem;
+  border-radius: 0.25rem;
+  border-width: 2px;
+  background-color: white;
+}
+
+select:disabled,
+textarea:disabled,
+input:disabled {
+  border-color: #d1d5db;
+  border-style: dotted;
+  color: #4b5563;
+  background-color: #e5e7eb;
+}
+
+select:invalid,
+textarea:invalid,
+input:invalid {
+  border-color: #b91c1c;
+  border-style: solid;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 800;
+  line-height: 1.375;
+}
+
+h2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 800;
+  line-height: 1.375;
+}
+
+h3 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 800;
+  line-height: 1.375;
+}
+
+h4 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 800;
+  line-height: 1.375;
+}
+
+h5 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 800;
+  line-height: 1.375;
+}
+h6 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 800;
+  line-height: 1.375;
+}
+label span {
+  font-size: 0.875rem;
+}
+a {
+  font-weight: 500;
+  color: #2563eb;
+}
+a:hover {
+  text-decoration: underline;
 }

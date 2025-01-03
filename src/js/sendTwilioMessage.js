@@ -1,7 +1,7 @@
 import axios from "axios"
 import { toCredentials, Authentication } from "../context/AuthenticationProvider"
 
-export const sendTwilioMessage = (authentication = new Authentication(), to = "", from = "", body = "") => {
+export const sendTwilioMessage = async (authentication = new Authentication(), to = "", from = "", body = "") => {
   const credentials = toCredentials(authentication)
 
   const data = new URLSearchParams()
@@ -10,11 +10,11 @@ export const sendTwilioMessage = (authentication = new Authentication(), to = ""
   data.append("Body", body)
 
   const url = `https://api.twilio.com/2010-04-01/Accounts/${authentication.accountSid}/Messages.json`
-  axios.post(url, data, {
+  const response = await axios.post(url, data, {
     auth: credentials,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   })
-  return Promise.resolve("sent")
+  return response.data.sid
 }

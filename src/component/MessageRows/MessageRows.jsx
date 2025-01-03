@@ -3,7 +3,8 @@ import { fromNow } from "../../js/util"
 import { isEmpty } from "lodash"
 import { MessageDirection } from "../../js/types"
 import { useHistory } from "react-router-dom"
-
+import { MediaViewer } from "../MediaViewer/MediaViewer"
+import { LoadingOutlined } from "@ant-design/icons"
 /**
  * @typedef {import("../../js/types").Message} Message
  */
@@ -38,9 +39,9 @@ const messageBody = message =>
  */
 const MessageIcon = ({ message }) =>
   MessageDirection.received === message.direction ? (
-    <InboxOutlined className="block text-[1.2rem] text-violet-900 w-8" />
+    <InboxOutlined className="block text-[1.2rem] text-purple-900 w-8" />
   ) : (
-    <SendOutlined className="block text-[1rem] text-violet-900 w-8" />
+    <SendOutlined className="block text-[1rem] text-purple-900 w-8" />
   )
 
 /**
@@ -50,7 +51,7 @@ const MessageRow = message => {
   const history = useHistory()
 
   const handleOnClick = () => {
-    history.push(`/conversation/${message.from}/${message.to}`)
+    history.push(`/message/${message.messageSid}`)
   }
 
   return (
@@ -59,11 +60,9 @@ const MessageRow = message => {
       onClick={handleOnClick}
       className={`flex
   ${isReadContent(message)}
-  border-violet-200 border-b-2
-  shadow-black
-  hover:bg-violet-100 hover:cursor-pointer hover:shadow-md hover:border-b-violet-400 hover:border-l-violet-400
-  active:bg-violet-200 h-24
-  `}
+  border-b-2 border-l-2 pr-1 min-h-32
+  hover:bg-purple-100 hover:cursor-pointer hover:border-l-purple-400
+  active:bg-purple-200`}
     >
       <div className="flex items-center justify-center">
         <MessageIcon message={message} />
@@ -83,14 +82,22 @@ const MessageRow = message => {
           </span>
         </div>
         <div className="line-clamp-3">{messageBody(message)}</div>
+        {message.media > 0 && (
+          <div className="flex justify-center mb-2">
+            <MediaViewer messageSid={message.messageSid} thumbnail="true" />
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
-/**
- * @param {{messages: Array<Message>}} messages
- */
-export const MessageRows = ({ messages }) => (
-  <div className="border-2 border-b-0 border-violet-200">{messages.map(MessageRow)}</div>
-)
+export const MessageRows = ({ loading = true, messages = [] }) => {
+  if (loading)
+    return (
+      <div className="text-center mt-16">
+        <LoadingOutlined className="text-6xl text-purple-900" />
+      </div>
+    )
+  return <div className="border-2 border-b-0 border-l-0">{messages.map(MessageRow)}</div>
+}

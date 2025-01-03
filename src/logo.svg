@@ -1,7 +1,0 @@
-<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
-  <defs></defs>
-  <path style="stroke-linecap: round; stroke-linejoin: bevel; stroke-width: 6px; stroke: rgb(9, 8, 68); fill: rgb(81, 78, 242);" d="M 148.185 234.737 L 18.278 139.167 L 17.16 90.017 C 17.313 51.86 45.072 40.382 81.516 52.756 L 198.153 79.009 L 148.185 234.737 Z"></path>
-  <path style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 6px; stroke: rgb(9, 8, 68); fill: rgb(81, 78, 242);" d="M 226.596 214.856 L 148.02 236.261 L 146.507 139.702 C 145.593 64.922 222.758 58.21 228.456 122.312 L 226.596 214.856 Z"></path>
-  <path style="stroke-linecap: round; stroke-linejoin: bevel; stroke-width: 9px; fill: rgb(9, 8, 68); stroke: rgb(9, 8, 68);" d="M 166.105 142.805 L 216.5 130.064"></path>
-  <path style="stroke-width: 0px; paint-order: stroke; stroke: rgb(77, 28, 28); fill: rgb(9, 8, 68);" d="M 91.07 18.113 L 89.951 46.328 L 114.589 45.417 L 106.75 121.872 L 120.188 127.334 C 120.188 127.334 129.149 33.586 130.267 33.586 C 131.386 33.586 94.429 18.113 91.07 18.113 Z"></path>
-</svg>

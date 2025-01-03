@@ -12,24 +12,16 @@ const Loading = () => (
   </div>
 )
 
-const MediaContent = ({ media = [] }) => (
-  <div className="message-viewer">
-    {media.map(m => (
-      <img className="message-viewer-content" key={m} src={m} alt="Attached media file (MMS)" />
-    ))}
-  </div>
-)
-
-export const MediaViewer = ({ messageSid = "" }) => {
+export const MediaViewer = ({ messageSid = "", thumbnail = false }) => {
   const [loading, setLoading] = useState(true)
   const [media, setMedia] = useState([])
   const isMounted = useIsMounted()
 
   useEffect(() => {
     getTwilioMedia(messageSid)
-      .then(m => isMounted() && setMedia(m))
+      .then(m => setMedia(m))
       .catch(err => console.log("TODO: Create a warning component for the user to know about the failure", err))
-      .then(() => isMounted() && setLoading(false))
+      .then(() => setLoading(false))
   }, [isMounted, messageSid, setMedia, setLoading])
 
   if (loading) {
@@ -40,5 +32,16 @@ export const MediaViewer = ({ messageSid = "" }) => {
     return null
   }
 
-  return <MediaContent media={media} />
+  return (
+    <>
+      {media.map(m => (
+        <img
+          className={`message-viewer-content ${thumbnail ? "thumbnail" : ""}`}
+          key={m}
+          src={m}
+          alt="Attached media file (MMS)"
+        />
+      ))}
+    </>
+  )
 }

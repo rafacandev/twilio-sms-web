@@ -1,28 +1,19 @@
-import "./AuthenticationMethodCard.css"
 import { AuthenticationMethod } from "../../context/AuthenticationProvider"
+import { emptyFn } from "../../js/types"
 
-export const AuthenticationMethodCard = ({ onChange = () => {} }) => (
-  <div className="text-center">
-    <div className="authentication-method-card-header">Choose your Twilio authentication method:</div>
-    <button
-      className="authentication-method-card-method-btn btn btn-secondary"
-      id="AUTHENTICATION-METHOD-AUTH-TOKEN"
-      onClick={e => onChange(AuthenticationMethod.AUTH_TOKEN)}
-    >
+export const AuthenticationMethodCard = ({ onChange = emptyFn }) => (
+  <div className="text-center mt-8">
+    <div className="authentication-method-card-header">Authenticate with Twilio:</div>
+    <button className="w-56 m-5" onClick={e => onChange(AuthenticationMethod.AUTH_TOKEN)}>
       AuthToken
     </button>
-
-    <div className="authentication-method-card-divider">
-      <hr />
+    <div className="flex items-center gap-2 justify-center m-3">
+      <hr className="w-40 border-t-2 border-gray-300" />
       or
-      <hr />
+      <hr className="w-40 border-t-2 border-gray-300" />
     </div>
 
-    <button
-      className="authentication-method-card-method-btn btn btn-primary"
-      id="AUTHENTICATION-METHOD-API-KEY"
-      onClick={e => onChange(AuthenticationMethod.API_KEY)}
-    >
+    <button className="w-56 m-5" onClick={e => onChange(AuthenticationMethod.API_KEY)}>
       Api Key
     </button>
   </div>

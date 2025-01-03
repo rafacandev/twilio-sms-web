@@ -1,7 +1,7 @@
 import { AuthenticationMethod } from "../../context/AuthenticationProvider"
 import { useHistory } from "react-router-dom"
-import { DefaultLayout } from "../DefaultLayout/DefaultLayout"
 import { AuthenticationMethodCard } from "../AuthenticationMethodCard/AuthenticationMethodCard"
+import { LayoutWithoutNavBar } from "../Layout/Layout"
 
 export const AuthenticationPage = () => {
   const history = useHistory()
@@ -15,9 +15,8 @@ export const AuthenticationPage = () => {
   }
 
   return (
-    <DefaultLayout>
-      <h4>Authentication</h4>
+    <LayoutWithoutNavBar>
       <AuthenticationMethodCard onChange={handleAuthMethod} />
-    </DefaultLayout>
+    </LayoutWithoutNavBar>
   )
 }
