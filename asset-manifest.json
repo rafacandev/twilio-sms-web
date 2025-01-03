@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/twilio-sms-web/static/css/main.e4e04896.css",
+    "main.js": "/twilio-sms-web/static/js/main.1dd8d80b.js",
+    "static/js/453.b882207e.chunk.js": "/twilio-sms-web/static/js/453.b882207e.chunk.js",
+    "index.html": "/twilio-sms-web/index.html",
+    "main.e4e04896.css.map": "/twilio-sms-web/static/css/main.e4e04896.css.map",
+    "main.1dd8d80b.js.map": "/twilio-sms-web/static/js/main.1dd8d80b.js.map",
+    "453.b882207e.chunk.js.map": "/twilio-sms-web/static/js/453.b882207e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e4e04896.css",
+    "static/js/main.1dd8d80b.js"
+  ]
+}
