@@ -1,0 +1,2 @@
+# When this value is populated, then Google Tag Manager is going to be enabled with this publicId, i.e: GTM-0000000
+VITE_GOOGLE_TAG_MANAGER_ID=GTM-PZFHWDT
