@@ -23,7 +23,7 @@ export const AuthenticationAuthTokenView = ({
         type="text"
         name="AccountSid"
         value={accountSid}
-        autoComplete="account-sid"
+        autoComplete="on"
         placeholder="Account SID located at your Twilio Console"
         required
         disabled={loading}
@@ -37,7 +37,7 @@ export const AuthenticationAuthTokenView = ({
         type="password"
         name="AuthToken"
         value={authToken}
-        autoComplete="auth-token"
+        autoComplete="on"
         placeholder="Aut Token located at your Twilio Console"
         required
         disabled={loading}

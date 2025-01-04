@@ -72,9 +72,9 @@ input:disabled {
   background-color: #e5e7eb;
 }
 
-select:invalid,
-textarea:invalid,
-input:invalid {
+select:user-invalid,
+textarea:user-invalid,
+input:user-invalid {
   border-color: #b91c1c;
   border-style: solid;
 }

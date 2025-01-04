@@ -25,7 +25,7 @@ export const AuthenticationApiKeyView = ({
         type="text"
         name="AccountSid"
         value={accountSid}
-        autoComplete="account-sid"
+        autoComplete="on"
         placeholder="Account SID located at your Twilio Console"
         required
         disabled={loading}
@@ -39,7 +39,7 @@ export const AuthenticationApiKeyView = ({
         type="text"
         name="ApiKey"
         value={apiKey}
-        autoComplete="api-key"
+        autoComplete="on"
         placeholder="API Key located at your Twilio Console"
         required
         disabled={loading}
@@ -53,7 +53,7 @@ export const AuthenticationApiKeyView = ({
         type="password"
         name="ApiSecret"
         value={apiSecret}
-        autoComplete="api-secret"
+        autoComplete="on"
         placeholder="API Secret for you API Key"
         required
         disabled={loading}
