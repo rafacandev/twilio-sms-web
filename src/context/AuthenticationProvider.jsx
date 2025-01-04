@@ -7,7 +7,7 @@ import React, { useContext, useState } from "react"
 export const AuthenticationMethod = {
   AUTH_TOKEN: "auth-token",
   API_KEY: "api-key",
-  NONE: "",
+  NONE: "none",
 }
 
 export class Authentication {
@@ -65,9 +65,20 @@ export const mapAuthenticationError = err => {
   }
 }
 
+const fromEnvironmentVariables = () => {
+  const accountSid = import.meta.env.VITE_AUTHENTICATION_ACCOUNT_SID
+  const apiKey = import.meta.env.VITE_AUTHENTICATION_API_KEY
+  const apiSecret = import.meta.env.VITE_AUTHENTICATION_API_SECRET
+  if (accountSid !== undefined && apiKey !== undefined && apiSecret !== undefined) {
+    console.log(`Setting authentication from environment variables for accountSid: ${accountSid}`)
+    return new Authentication(accountSid, undefined, apiKey, apiSecret, AuthenticationMethod.API_KEY)
+  }
+  return new Authentication()
+}
+
 const AuthenticationReadContext = React.createContext({})
 const AuthenticationWriteContext = React.createContext(p => {})
-let authenticationCache = new Authentication()
+let authenticationCache = fromEnvironmentVariables()
 
 export const getAuthentication = () => authenticationCache
 
@@ -81,8 +92,7 @@ export const useAuthentication = () => {
 }
 
 export const AuthenticationProvider = ({ children }) => {
-  authenticationCache = fromEnvironmentVariables()
-  const [value, setValue] = useState(fromEnvironmentVariables())
+  const [value, setValue] = useState(authenticationCache)
   return (
     <AuthenticationReadContext.Provider value={value}>
       <AuthenticationWriteContext.Provider
@@ -95,15 +105,4 @@ export const AuthenticationProvider = ({ children }) => {
       </AuthenticationWriteContext.Provider>
     </AuthenticationReadContext.Provider>
   )
-}
-
-const fromEnvironmentVariables = () => {
-  const accountSid = import.meta.env.VITE_AUTHENTICATION_ACCOUNT_SID
-  const apiKey = import.meta.env.VITE_AUTHENTICATION_API_KEY
-  const apiSecret = import.meta.env.VITE_AUTHENTICATION_API_SECRET
-  if (accountSid !== undefined && apiKey !== undefined && apiSecret !== undefined) {
-    console.log(`Setting authentication from environment variables for accountSid: ${accountSid}`)
-    return new Authentication(accountSid, undefined, apiKey, apiSecret, AuthenticationMethod.API_KEY)
-  }
-  return new Authentication()
 }

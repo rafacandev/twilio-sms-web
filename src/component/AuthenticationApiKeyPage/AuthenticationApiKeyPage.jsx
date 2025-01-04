@@ -8,7 +8,7 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { AuthenticationApiKeyView } from "./AuthenticationApiKeyPageView"
-import { hasPermissions } from "../../js/hasTwilioPermissions"
+import { validatePermission } from "../../js/validateTwilioPermission"
 import { LayoutWithoutNavBar } from "../Layout/Layout"
 
 export const AuthenticationApiKeyPage = () => {
@@ -40,7 +40,7 @@ export const AuthenticationApiKeyPage = () => {
   const handleSignIn = () => {
     setLoading(true)
     const auth = new Authentication(accountSid, "", apiKey, apiSecret, AuthenticationMethod.API_KEY)
-    hasPermissions(auth).then(handlePhoneNumbersSuccess).catch(handleError)
+    validatePermission(auth).then(handlePhoneNumbersSuccess).catch(handleError)
   }
 
   return (
