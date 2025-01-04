@@ -7,12 +7,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "cp .env-prod .env && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "vite build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "start": "vite",
-    "build:prod": "cp .env-prod .env && vite build",
     "format": "prettier . --write"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+    "gh-pages": "^6.3.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
     "tailwindcss": "^3.4.17",

@@ -8,7 +8,7 @@ import {
 } from "../../context/AuthenticationProvider"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
-import { hasPermissions } from "../../js/hasTwilioPermissions"
+import { validatePermission } from "../../js/validateTwilioPermission"
 import { LayoutWithoutNavBar } from "../Layout/Layout"
 
 export const AuthenticationAuthTokenPage = () => {
@@ -38,7 +38,7 @@ export const AuthenticationAuthTokenPage = () => {
   const handleSignIn = () => {
     setLoading(true)
     const auth = new Authentication(accountSid, authToken, "", "", AuthenticationMethod.AUTH_TOKEN)
-    hasPermissions(auth).then(handlePhoneNumbersSuccess).catch(handleError)
+    validatePermission(auth).then(handlePhoneNumbersSuccess).catch(handleError)
   }
 
   return (
