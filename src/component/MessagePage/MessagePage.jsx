@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { MessageInfo } from "../MessageInfo/MessageInfo"
 import { LoadingOutlined } from "@ant-design/icons"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
+import { Link } from "react-router-dom"
 
 export const MessagePage = () => {
   const { messageSid } = useParams()
@@ -25,9 +26,9 @@ export const MessagePage = () => {
       <ErrorLabel error={error} />
       <p className="my-4">
         More details for your message. You may also view all &nbsp;
-        <a href={`/#/conversation/${message.from}/${message.to}`}>
+        <Link to={`/conversation/${message.from}/${message.to}`}>
           messages between {message.from} and {message.to}
-        </a>
+        </Link>
       </p>
       {loading && (
         <p className="mt-10 text-purple-900 text-5xl text-center">

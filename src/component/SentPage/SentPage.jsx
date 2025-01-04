@@ -6,6 +6,7 @@ import { MessageInfo } from "../MessageInfo/MessageInfo"
 import { LoadingOutlined } from "@ant-design/icons"
 import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { CheckCircleFilled } from "@ant-design/icons"
+import { Link } from "react-router-dom"
 
 export const SentPage = () => {
   const { messageSid } = useParams()
@@ -28,9 +29,9 @@ export const SentPage = () => {
       <ErrorLabel error={error} />
       <p className="my-4">
         Your message has been sent. You may also view all &nbsp;
-        <a href={`/#/conversation/${message.from}/${message.to}`}>
+        <Link to={`/conversation/${message.from}/${message.to}`}>
           messages between {message.from} and {message.to}
-        </a>
+        </Link>
       </p>
       {loading && (
         <p className="mt-10 text-purple-900 text-5xl text-center">
