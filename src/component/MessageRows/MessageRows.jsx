@@ -2,9 +2,9 @@ import { InboxOutlined, SendOutlined } from "@ant-design/icons"
 import { fromNow } from "../../js/util"
 import { isEmpty } from "lodash"
 import { MessageDirection } from "../../js/types"
-import { useNavigate } from "react-router-dom"
 import { MediaViewer } from "../MediaViewer/MediaViewer"
 import { LoadingOutlined } from "@ant-design/icons"
+import { redirect } from "react-router"
 /**
  * @typedef {import("../../js/types").Message} Message
  */
@@ -48,10 +48,8 @@ const MessageIcon = ({ message }) =>
  * @param {Message} message
  */
 const MessageRow = message => {
-  const navigate = useNavigate()
-
   const handleOnClick = () => {
-    navigate(`/message/${message.messageSid}`)
+    redirect(`/message/${message.messageSid}`)
   }
 
   return (
