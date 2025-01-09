@@ -1,5 +1,5 @@
 import React from "react"
-import { HashRouter, Route, Switch } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 
 import { AuthenticationProvider } from "./context/AuthenticationProvider"
 import { ComposerProvider } from "./context/ComposerProvider"
@@ -21,23 +21,54 @@ export const App = () => {
       <AuthenticationProvider>
         <ComposerProvider>
           <HashRouter>
-            <Switch>
-              <Route exact path="/" component={AuthenticationPage} />
-              <Route path="/authentication" component={AuthenticationPage} />
-              <Route path="/authentication-token" component={AuthenticationAuthTokenPage} />
-              <Route path="/authentication-api-key" component={AuthenticationApiKeyPage} />
-              <AuthenticatedRoute path="/inbox" component={InboxPage} retirectTo="/authentication" />
-              <AuthenticatedRoute path="/message/:messageSid" component={MessagePage} retirectTo="/authentication" />
-              <AuthenticatedRoute path="/sent/:messageSid" component={SentPage} retirectTo="/authentication" />
-              <AuthenticatedRoute
-                path="/conversation/:from/:to"
-                component={ConversationPage}
-                retirectTo="/authentication"
+            <Routes>
+              <Route path="/" element={<AuthenticationPage />} />
+              <Route path="/authentication" element={<AuthenticationPage />} />
+              <Route path="/authentication-token" element={<AuthenticationAuthTokenPage />} />
+              <Route path="/authentication-api-key" element={<AuthenticationApiKeyPage />} />
+              <Route
+                path="/inbox"
+                element={
+                  <AuthenticatedRoute>
+                    <InboxPage />
+                  </AuthenticatedRoute>
+                }
               />
-              <AuthenticatedRoute path="/send" component={SendPage} retirectTo="/authentication" />
-              <Route path="/ui" component={UiPage} />
-              <Route path="*" component={NotFoundPage} />
-            </Switch>
+              <Route
+                path="/message/:messageSid"
+                element={
+                  <AuthenticatedRoute>
+                    <MessagePage />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route
+                path="/sent/:messageSid"
+                element={
+                  <AuthenticatedRoute>
+                    <SentPage />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route
+                path="/conversation/:from/:to"
+                element={
+                  <AuthenticatedRoute>
+                    <ConversationPage />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route
+                path="/send"
+                element={
+                  <AuthenticatedRoute>
+                    <SendPage />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route path="/ui" element={<UiPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
           </HashRouter>
         </ComposerProvider>
       </AuthenticationProvider>

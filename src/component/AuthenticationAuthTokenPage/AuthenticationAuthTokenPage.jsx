@@ -7,7 +7,7 @@ import {
   useAuthentication,
 } from "../../context/AuthenticationProvider"
 import { useState } from "react"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { validatePermission } from "../../js/validateTwilioPermission"
 import { LayoutWithoutNavBar } from "../Layout/Layout"
 
@@ -17,14 +17,14 @@ export const AuthenticationAuthTokenPage = () => {
   const [authToken, setAuthToken] = useState(authentication.authToken)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleError = err => {
     setError(mapAuthenticationError(err))
     setLoading(false)
   }
 
-  const handleCancel = () => history.push("/authentication")
+  const handleCancel = () => navigate("/authentication")
 
   const handlePhoneNumbersSuccess = () => {
     setAuthentication({
@@ -32,7 +32,7 @@ export const AuthenticationAuthTokenPage = () => {
       authToken,
       method: AuthenticationMethod.AUTH_TOKEN,
     })
-    history.push("/inbox")
+    navigate("/inbox")
   }
 
   const handleSignIn = () => {

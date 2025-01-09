@@ -1,5 +1,5 @@
 import { GithubOutlined, InboxOutlined, SendOutlined } from "@ant-design/icons"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const NavItem = ({ children, onClick = () => {} }) => (
   <div
@@ -11,14 +11,14 @@ const NavItem = ({ children, onClick = () => {} }) => (
 )
 
 const NavBar = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const navigateToInbox = () => {
-    history.push("/inbox")
+    navigate("/inbox")
   }
 
   const navigateToSend = () => {
-    history.push("/send")
+    navigate("/send")
   }
 
   return (

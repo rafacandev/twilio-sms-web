@@ -1,13 +1,12 @@
-import React from "react"
-import { Redirect, Route } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 
-export const AuthenticatedRoute = ({ component, path, retirectTo }) => {
+export const AuthenticatedRoute = ({ children }) => {
   const [authentication] = useAuthentication()
 
-  if (!authentication?.accountSid) {
-    return <Redirect to={retirectTo} />
+  if (!authentication.accountSid && !authentication.accountSid !== '') {
+    return <Navigate to="/authentication" replace />
   }
 
-  return <Route component={component} path={path} />
+  return children
 }

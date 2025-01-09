@@ -2,7 +2,7 @@ import { InboxOutlined, SendOutlined } from "@ant-design/icons"
 import { fromNow } from "../../js/util"
 import { isEmpty } from "lodash"
 import { MessageDirection } from "../../js/types"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { MediaViewer } from "../MediaViewer/MediaViewer"
 import { LoadingOutlined } from "@ant-design/icons"
 /**
@@ -48,10 +48,10 @@ const MessageIcon = ({ message }) =>
  * @param {Message} message
  */
 const MessageRow = message => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleOnClick = () => {
-    history.push(`/message/${message.messageSid}`)
+    navigate(`/message/${message.messageSid}`)
   }
 
   return (

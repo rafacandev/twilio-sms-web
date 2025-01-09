@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { sendTwilioMessage } from "../../js/sendTwilioMessage"
@@ -18,7 +18,7 @@ export const SendPage = () => {
   const [sendingMessage, setSendingMessage] = useState(false)
   const [error, setError] = useState(null)
   const [authentication] = useAuthentication()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   useEffect(() => {
     getTwilioPhoneNumbers()
@@ -38,7 +38,7 @@ export const SendPage = () => {
     setSendingMessage(true)
     sendTwilioMessage(authentication, to, from, message)
       .catch(setError)
-      .then(messageSid => history.push(`/sent/${messageSid}`))
+      .then(messageSid => navigate(`/sent/${messageSid}`))
       .finally(() => setSendingMessage(false))
   }
 
