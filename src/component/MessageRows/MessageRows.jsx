@@ -4,7 +4,7 @@ import { isEmpty } from "lodash"
 import { MessageDirection } from "../../js/types"
 import { MediaViewer } from "../MediaViewer/MediaViewer"
 import { LoadingOutlined } from "@ant-design/icons"
-import { redirect } from "react-router"
+import { useNavigate } from "react-router"
 /**
  * @typedef {import("../../js/types").Message} Message
  */
@@ -47,15 +47,11 @@ const MessageIcon = ({ message }) =>
 /**
  * @param {Message} message
  */
-const MessageRow = message => {
-  const handleOnClick = () => {
-    redirect(`/message/${message.messageSid}`)
-  }
-
+const MessageRow = (message, onClick) => {
   return (
     <div
       key={message.messageSid}
-      onClick={handleOnClick}
+      onClick={() => onClick(message)}
       className={`flex
   ${isReadContent(message)}
   border-b-2 border-l-2 pr-1 min-h-32
@@ -91,11 +87,20 @@ const MessageRow = message => {
 }
 
 export const MessageRows = ({ loading = true, messages = [] }) => {
+  const navigate = useNavigate()
+
+  const handleOnClick = message => {
+    navigate(`/message/${message.messageSid}`)
+  }
+
   if (loading)
     return (
       <div className="text-center mt-16">
         <LoadingOutlined className="text-6xl text-purple-900" />
       </div>
     )
-  return <div className="border-2 border-b-0 border-l-0">{messages.map(MessageRow)}</div>
+
+  return (
+    <div className="border-2 border-b-0 border-l-0">{messages.map(message => MessageRow(message, handleOnClick))}</div>
+  )
 }
