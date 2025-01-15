@@ -88,6 +88,8 @@ VITE_GOOGLE_TAG_MANAGER_ID=GTM-0000000
 VITE_AUTHENTICATION_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxx
 VITE_AUTHENTICATION_API_KEY=SKxxxxxxxxxxxxxxxxxxxx
 VITE_AUTHENTICATION_API_SECRET=xxxxxxxxxxxxxxxxxxxx
+VITE_TERMS_AND_CONDITIONS_URL=xxxxxxxxxxxxxxxxxxxx
+VITE_GITHUB_URL=xxxxxxxxxxxxxxxxxxxx
 ```
 
 `.env` files should be managed independently and they should not be pushed to the codebase repository.
