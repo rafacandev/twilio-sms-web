@@ -66,6 +66,14 @@ export const App = () => {
                   </AuthenticatedRoute>
                 }
               />
+              <Route
+                path="/send/:from/:to"
+                element={
+                  <AuthenticatedRoute>
+                    <SendPage />
+                  </AuthenticatedRoute>
+                }
+              />
               <Route path="/ui" element={<UiPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

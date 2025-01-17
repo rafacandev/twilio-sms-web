@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAuthentication } from "../../context/AuthenticationProvider"
 import { getTwilioPhoneNumbers } from "../../js/getTwilioPhoneNumbers"
 import { sendTwilioMessage } from "../../js/sendTwilioMessage"
@@ -10,9 +10,10 @@ import { ErrorLabel } from "../ErrorLabel/ErrorLabel"
 import { Loading3QuartersOutlined } from "@ant-design/icons"
 
 export const SendPage = () => {
+  const { from: fromParam, to: toParam } = useParams()
   const [phoneNumbers, setPhoneNumbers] = useState([])
-  const [from, setFrom] = useState("")
-  const [to, setTo] = useState("")
+  const [from, setFrom] = useState(fromParam ?? "")
+  const [to, setTo] = useState(toParam ?? "")
   const [message, setMessage] = useState("")
   const [loadingPhoneNumbers, setLoadingPhoneNumbers] = useState(true)
   const [sendingMessage, setSendingMessage] = useState(false)
@@ -59,6 +60,7 @@ export const SendPage = () => {
       <div className="flex items-center">
         <label className="w-14">From:</label>
         <PhoneCombobox
+          initial={from}
           options={phoneNumbers}
           onSelect={setFrom}
           loading={loadingPhoneNumbers}
