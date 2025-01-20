@@ -46,7 +46,7 @@ export const SendPage = () => {
   const isValid = () => {
     const isValidFrom = phoneNumbers.includes(from)
     const isValidTo = to.match(phonePattern) !== null
-    const isValidMessage = message.length >= 3 && message.length < 500
+    const isValidMessage = message.length > 0 && message.length < 500
     return !sendingMessage && isValidFrom && isValidTo && isValidMessage
   }
 
@@ -75,12 +75,12 @@ export const SendPage = () => {
         className="w-full mt-2 p-2"
         placeholder={hint}
         onChange={i => setMessage(i.target.value)}
-        minLength="3"
+        minLength="1"
         maxLength="500"
         disabled={sendingMessage}
         rows="5"
       ></textarea>
-      <p className="text-xs font-thin m-0">Messages must be between 3 and 500 characters.</p>
+      <p className="text-xs font-thin m-0">Messages must be between 1 and 500 characters.</p>
       <button className="float-right" onClick={handleSend} disabled={!isValid()}>
         {!sendingMessage && "Send"}
         {sendingMessage && <Loading3QuartersOutlined spin="true" />}
